@@ -1,0 +1,12 @@
+# Created by .ignore support plugin (hsz.mobi)
+.DS_Store
+.idea/
+Money-Management.iml
+account-service/account-service.iml
+auth-service/auth-service.iml
+config/config.iml
+gateway/gateway.iml
+monitoring/monitoring.iml
+notification-service/notification-service.iml
+registry/registry.iml
+statistics-service/statistics-service.iml
