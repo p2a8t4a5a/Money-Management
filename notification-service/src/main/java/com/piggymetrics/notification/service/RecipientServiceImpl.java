@@ -17,8 +17,12 @@ public class RecipientServiceImpl implements RecipientService {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
     private RecipientRepository repository;
+
+    @Autowired
+    public RecipientServiceImpl(RecipientRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Recipient findByAccountName(String accountName) {
@@ -39,7 +43,7 @@ public class RecipientServiceImpl implements RecipientService {
 
         repository.save(recipient);
 
-        log.info("recipient {} settings has been updated", recipient);
+        log.info("Recipient {} settings has been updated", recipient);
 
         return recipient;
     }
