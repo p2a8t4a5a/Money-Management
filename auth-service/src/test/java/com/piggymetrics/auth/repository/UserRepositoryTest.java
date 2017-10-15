@@ -14,19 +14,19 @@ import static org.junit.Assert.assertEquals;
 @SpringApplicationConfiguration(classes = AuthApplication.class)
 public class UserRepositoryTest {
 
-	@Autowired
-	private UserRepository repository;
+    @Autowired
+    private UserRepository repository;
 
-	@Test
-	public void shouldSaveAndFindUserByName() {
+    @Test
+    public void shouldSaveAndFindUserByName() {
 
-		User user = new User();
-		user.setUsername("name");
-		user.setPassword("password");
-		repository.save(user);
+        User user = new User();
+        user.setUsername("name");
+        user.setPassword("password");
+        repository.save(user);
 
-		User found = repository.findOne(user.getUsername());
-		assertEquals(user.getUsername(), found.getUsername());
-		assertEquals(user.getPassword(), found.getPassword());
-	}
+        User found = repository.findOne(user.getUsername());
+        assertEquals(user.getUsername(), found.getUsername());
+        assertEquals(user.getPassword(), found.getPassword());
+    }
 }

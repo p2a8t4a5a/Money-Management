@@ -11,18 +11,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class MongoUserDetailsService implements UserDetailsService {
 
-	@Autowired
-	private UserRepository repository;
+    private UserRepository repository;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    @Autowired
+    public MongoUserDetailsService(UserRepository repository) {
+        this.repository = repository;
+    }
 
-		User user = repository.findOne(username);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		if (user == null) {
-			throw new UsernameNotFoundException(username);
-		}
+        User user = repository.findOne(username);
 
-		return user;
-	}
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+
+        return user;
+    }
 }
