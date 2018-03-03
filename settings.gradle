@@ -1,0 +1,10 @@
+rootProject.name = 'money-management'
+
+include 'config'
+include 'monitoring'
+include 'registry'
+include 'gateway'
+include 'auth-service'
+include 'account-service'
+include 'statistics-service'
+include 'notification-service'

@@ -10,3 +10,4 @@ monitoring/monitoring.iml
 notification-service/notification-service.iml
 registry/registry.iml
 statistics-service/statistics-service.iml
+piggymetrics.iml

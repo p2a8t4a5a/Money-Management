@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 export CONFIG_SERVICE_PASSWORD="test123"
 export STATISTICS_SERVICE_PASSWORD="test123"
 export NOTIFICATION_SERVICE_PASSWORD="test123"

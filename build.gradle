@@ -1,0 +1,53 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id "org.sonarqube" version "2.6"
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "Money-Management"
+        property "sonar.projectKey", "com.money.management"
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'jacoco'
+    apply plugin: 'org.springframework.boot'
+
+    group 'com.clinical.management'
+    version '1.0-SNAPSHOT'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    ext {
+        springCloudVersion = 'Finchley.M7'
+    }
+
+    dependencies {
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+}
