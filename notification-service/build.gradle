@@ -15,8 +15,4 @@ dependencies {
 
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
     testCompile('com.jayway.jsonpath:json-path:2.2.0')
-} repositories {
-    maven {
-        url 'https://repo.spring.io/libs-milestone'
-    }
 }
