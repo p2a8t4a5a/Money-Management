@@ -1,5 +1,5 @@
 spring:
   data:
     mongodb:
-      database: piggymetrics
+      database: money-management
       port: 0

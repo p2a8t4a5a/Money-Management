@@ -13,7 +13,7 @@ spring:
       host: statistics-mongodb
       username: user
       password: ${MONGODB_PASSWORD}
-      database: piggymetrics
+      database: money-management
       port: 27017
 
 server:

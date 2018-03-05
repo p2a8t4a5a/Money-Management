@@ -1,20 +1,20 @@
 remind:
   cron: 0 0 0 * * *
   email:
-    text: "Hey, {0}! We''ve missed you here on PiggyMetrics. It''s time to check your budget statistics.\r\n\r\nCheers,\r\nPiggyMetrics team"
-    subject: PiggyMetrics reminder
+    text: "Hey, {0}! We''ve missed you here on Money Management. It''s time to check your budget statistics.\r\n\r\nCheers,\r\nMoney Management team"
+    subject: Money Management reminder
 
 backup:
   cron: 0 0 12 * * *
   email:
-    text: "Howdy, {0}. Your account backup is ready.\r\n\r\nCheers,\r\nPiggyMetrics team"
-    subject: PiggyMetrics account backup
+    text: "Howdy, {0}. Your account backup is ready.\r\n\r\nCheers,\r\nMoney Management team"
+    subject: Money Management account backup
     attachment: backup.json
 
 spring:
   data:
     mongodb:
-      database: piggymetrics
+      database: money-management
       port: 0
   mail:
     host: smtp.gmail.com
