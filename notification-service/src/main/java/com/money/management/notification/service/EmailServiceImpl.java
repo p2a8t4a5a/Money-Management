@@ -15,7 +15,6 @@ import org.springframework.util.StringUtils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
 import java.text.MessageFormat;
 
 @Service
@@ -28,13 +27,13 @@ public class EmailServiceImpl implements EmailService {
     private Environment env;
 
     @Autowired
-    private EmailServiceImpl(JavaMailSender mailSender, Environment env) {
+    public EmailServiceImpl(JavaMailSender mailSender, Environment env) {
         this.env = env;
         this.mailSender = mailSender;
     }
 
     @Override
-    public void send(NotificationType type, Recipient recipient, String attachment) throws MessagingException, IOException {
+    public void send(NotificationType type, Recipient recipient, String attachment) throws MessagingException {
 
         final String subject = env.getProperty(type.getSubject());
         final String text = MessageFormat.format(env.getProperty(type.getText()), recipient.getAccountName());

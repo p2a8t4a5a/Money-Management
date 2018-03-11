@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -29,67 +29,68 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = NotificationServiceApplication.class)
+@SpringBootTest(classes = NotificationServiceApplication.class)
 @WebAppConfiguration
 public class RecipientControllerTest {
 
-	private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
 
-	@InjectMocks
-	private RecipientController recipientController;
+    @InjectMocks
+    private RecipientController recipientController;
 
-	@Mock
-	private RecipientService recipientService;
+    @Mock
+    private RecipientService recipientService;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setup() {
-		initMocks(this);
-		this.mockMvc = MockMvcBuilders.standaloneSetup(recipientController).build();
-	}
+    @Before
+    public void setup() {
+        initMocks(this);
+        this.mockMvc = MockMvcBuilders.standaloneSetup(recipientController).build();
+    }
 
-	@Test
-	public void shouldSaveCurrentRecipientSettings() throws Exception {
+    @Test
+    public void shouldSaveCurrentRecipientSettings() throws Exception {
 
-		Recipient recipient = getStubRecipient();
-		String json = mapper.writeValueAsString(recipient);
+        Recipient recipient = getStubRecipient();
+        String json = mapper.writeValueAsString(recipient);
 
-		mockMvc.perform(put("/recipients/current").principal(new UserPrincipal(recipient.getAccountName())).contentType(MediaType.APPLICATION_JSON).content(json))
-				.andExpect(status().isOk());
-	}
+        mockMvc.perform(put("/recipients/current").principal(new UserPrincipal(recipient.getAccountName())).
+                contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk());
+    }
 
-	@Test
-	public void shouldGetCurrentRecipientSettings() throws Exception {
+    @Test
+    public void shouldGetCurrentRecipientSettings() throws Exception {
 
-		Recipient recipient = getStubRecipient();
-		when(recipientService.findByAccountName(recipient.getAccountName())).thenReturn(recipient);
+        Recipient recipient = getStubRecipient();
+        when(recipientService.findByAccountName(recipient.getAccountName())).thenReturn(recipient);
 
-		mockMvc.perform(get("/recipients/current").principal(new UserPrincipal(recipient.getAccountName())))
-				.andExpect(jsonPath("$.accountName").value(recipient.getAccountName()))
-				.andExpect(status().isOk());
-	}
+        mockMvc.perform(get("/recipients/current").principal(new UserPrincipal(recipient.getAccountName())))
+                .andExpect(jsonPath("$.accountName").value(recipient.getAccountName()))
+                .andExpect(status().isOk());
+    }
 
-	private Recipient getStubRecipient() {
+    private Recipient getStubRecipient() {
 
-		NotificationSettings remind = new NotificationSettings();
-		remind.setActive(true);
-		remind.setFrequency(Frequency.WEEKLY);
-		remind.setLastNotified(null);
+        NotificationSettings remind = new NotificationSettings();
+        remind.setActive(true);
+        remind.setFrequency(Frequency.WEEKLY);
+        remind.setLastNotified(null);
 
-		NotificationSettings backup = new NotificationSettings();
-		backup.setActive(false);
-		backup.setFrequency(Frequency.MONTHLY);
-		backup.setLastNotified(null);
+        NotificationSettings backup = new NotificationSettings();
+        backup.setActive(false);
+        backup.setFrequency(Frequency.MONTHLY);
+        backup.setLastNotified(null);
 
-		Recipient recipient = new Recipient();
-		recipient.setAccountName("test");
-		recipient.setEmail("test@test.com");
-		recipient.setScheduledNotifications(ImmutableMap.of(
-				NotificationType.BACKUP, backup,
-				NotificationType.REMIND, remind
-		));
+        Recipient recipient = new Recipient();
+        recipient.setAccountName("test");
+        recipient.setEmail("test@test.com");
+        recipient.setScheduledNotifications(ImmutableMap.of(
+                NotificationType.BACKUP, backup,
+                NotificationType.REMIND, remind
+        ));
 
-		return recipient;
-	}
+        return recipient;
+    }
 }
