@@ -4,9 +4,6 @@ buildscript {
     }
     repositories {
         mavenCentral()
-        maven {
-            url 'https://repo.spring.io/libs-milestone'
-        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -39,13 +36,11 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven {
-            url 'https://repo.spring.io/libs-milestone'
-        }
+        maven { url "https://repo.spring.io/milestone" }
     }
 
     ext {
-        springCloudVersion = 'Finchley.M7'
+        springCloudVersion = 'Finchley.M8'
     }
 
     dependencies {
