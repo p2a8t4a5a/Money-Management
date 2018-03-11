@@ -1,15 +1,11 @@
 package com.money.management.statistics.service;
 
 import com.google.common.collect.ImmutableMap;
-import com.money.management.statistics.domain.Account;
-import com.money.management.statistics.domain.Currency;
-import com.money.management.statistics.domain.Item;
-import com.money.management.statistics.domain.TimePeriod;
+import com.money.management.statistics.domain.*;
 import com.money.management.statistics.domain.timeseries.DataPoint;
 import com.money.management.statistics.domain.timeseries.DataPointId;
 import com.money.management.statistics.domain.timeseries.ItemMetric;
 import com.money.management.statistics.repository.DataPointRepository;
-import com.piggymetrics.statistics.domain.*;
 import com.money.management.statistics.domain.timeseries.StatisticMetric;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

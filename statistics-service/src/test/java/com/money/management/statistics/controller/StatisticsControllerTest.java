@@ -2,18 +2,18 @@ package com.money.management.statistics.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
-import com.piggymetrics.statistics.StatisticsApplication;
-import com.piggymetrics.statistics.domain.*;
-import com.piggymetrics.statistics.domain.timeseries.DataPoint;
-import com.piggymetrics.statistics.domain.timeseries.DataPointId;
-import com.piggymetrics.statistics.service.StatisticsService;
+import com.money.management.statistics.StatisticsApplication;
+import com.money.management.statistics.domain.*;
+import com.money.management.statistics.domain.timeseries.DataPoint;
+import com.money.management.statistics.domain.timeseries.DataPointId;
+import com.money.management.statistics.service.StatisticsService;
 import com.sun.security.auth.UserPrincipal;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = StatisticsApplication.class)
+@SpringBootTest(classes = StatisticsApplication.class)
 @WebAppConfiguration
 public class StatisticsControllerTest {
 
