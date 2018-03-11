@@ -29,7 +29,6 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldFindByAccountName() {
-
         NotificationSettings remind = new NotificationSettings();
         remind.setActive(true);
         remind.setFrequency(Frequency.WEEKLY);
@@ -71,7 +70,6 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldFindReadyForRemindWhenFrequencyIsWeeklyAndLastNotifiedWas8DaysAgo() {
-
         NotificationSettings remind = new NotificationSettings();
         remind.setActive(true);
         remind.setFrequency(Frequency.WEEKLY);
@@ -92,7 +90,6 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldNotFindReadyForRemindWhenFrequencyIsWeeklyAndLastNotifiedWasYesterday() {
-
         NotificationSettings remind = new NotificationSettings();
         remind.setActive(true);
         remind.setFrequency(Frequency.WEEKLY);
@@ -113,7 +110,6 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldNotFindReadyForRemindWhenNotificationIsNotActive() {
-
         NotificationSettings remind = new NotificationSettings();
         remind.setActive(false);
         remind.setFrequency(Frequency.WEEKLY);
@@ -134,7 +130,6 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldNotFindReadyForBackupWhenFrequencyIsQuaterly() {
-
         NotificationSettings remind = new NotificationSettings();
         remind.setActive(true);
         remind.setFrequency(Frequency.QUARTERLY);
