@@ -24,14 +24,12 @@ public class ExchangeRatesClientTest {
 
     @Test
     public void shouldRetrieveExchangeRates() {
-
         ExchangeRatesContainer container = client.getRates(Currency.getBase());
 
         assertEquals(container.getDate(), LocalDate.now());
         assertEquals(container.getBase(), Currency.getBase());
 
         assertNotNull(container.getRates().get(Currency.USD.name()));
-        assertNotNull(container.getRates().get(Currency.EUR.name()));
     }
 
 }

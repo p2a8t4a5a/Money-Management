@@ -55,7 +55,7 @@ public class ExchangeRatesServiceImplTest {
     }
 
     @Test
-    public void shouldNotRequestRatesWhenTodaysContainerAlreadyExists() {
+    public void shouldNotRequestRatesWhenTodayContainerAlreadyExists() {
 
         ExchangeRatesContainer container = new ExchangeRatesContainer();
         container.setRates(ImmutableMap.of(
@@ -82,11 +82,11 @@ public class ExchangeRatesServiceImplTest {
         when(client.getRates(Currency.getBase())).thenReturn(container);
 
         final BigDecimal amount = new BigDecimal(100);
-        final BigDecimal expectedConvertionResult = new BigDecimal("1.25");
+        final BigDecimal expectedConversion = new BigDecimal("80.00");
 
-        BigDecimal result = ratesService.convert(Currency.EUR, Currency.USD, amount);
+        BigDecimal result = ratesService.convert(Currency.USD, Currency.EUR, amount);
 
-        assertTrue(expectedConvertionResult.compareTo(result) == 0);
+        assertTrue(expectedConversion.compareTo(result) == 0);
     }
 
     @Test(expected = IllegalArgumentException.class)

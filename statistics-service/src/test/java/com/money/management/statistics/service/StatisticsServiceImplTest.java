@@ -115,13 +115,13 @@ public class StatisticsServiceImplTest {
 
         DataPoint dataPoint = statisticsService.save("test", account);
 
-        final BigDecimal expectedExpensesAmount = new BigDecimal("17.8861");
+        final BigDecimal expectedExpensesAmount = new BigDecimal("511.6361");
         final BigDecimal expectedIncomesAmount = new BigDecimal("298.9802");
         final BigDecimal expectedSavingAmount = new BigDecimal("1250");
 
         final BigDecimal expectedNormalizedSalaryAmount = new BigDecimal("298.9802");
         final BigDecimal expectedNormalizedVacationAmount = new BigDecimal("11.6361");
-        final BigDecimal expectedNormalizedGroceryAmount = new BigDecimal("6.25");
+        final BigDecimal expectedNormalizedGroceryAmount = new BigDecimal("500.00");
 
         assertEquals(dataPoint.getId().getAccount(), "test");
         assertEquals(dataPoint.getId().getDate(), Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
