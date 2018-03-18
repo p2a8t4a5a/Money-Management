@@ -9,7 +9,7 @@ addons:
   sonarcloud:
     organization: "daniel194-github"
     token:
-      secure: "bKqUY4abPuSIn3PeuQj/MpUoN/pJGtqAQcF+nCtZ0BSxXRR5ikVwyt5e4Gsmo/6lCzKiZlLJo8BFR1oGvYiH633/7LYJiApeCeiWLznSZTbMv4Vj6j/CCehTc58d1nDcUfNw1RLMdJCkUlV++1FpAE9+J2axcyH4zYaRs6NRCnOAmzAxydaO4uLO7NWiuu2Cd2AhhbgI4FvyAsEWxuCNSEj9LLrvqtWRWP5BhOd+DbX8SUE7umR0Vjp4YgVGx4zHK4G97kadFEHhEghhxg6VH5YICK/LUqnnC+Zi2kqwjzHhidHVs7yjoL1xiW/SXYuaawMzbaVWaHo7yYjS+hUpDdcqm3e5DEi+BbQ/FThNnCn/QnWuhU1jDi95JJ6lA2TvenqlqZRUY7Qj0woXQr3WcVqkh3Dm4g3TWpGIUP+aBESsNYxwUa4SRjiqrUo6dqNiVScQ13kzsdWmLkXd593N2nm6hRfwV6GBDcDWoWPb92zkEYs5uFjVDqSVdirla0iSkFNIKl41dssXZj8gekk1pLGEhrTjVJLg4XTJsqhEeT6XZizv6WJA7PInw4d3184K7Xu3DihtQb9twNVWn/CQhxfjnEIZFGfDh5has9QeNbPDSYK9ZGxrz52/g/FG8L7gJaXK4oUu/1Y0vIfJjVmemmrwQVVuf0X7bQDqiQN5XRA="
+      secure: $SONAR_TOKEN
 
 jdk:
   - oraclejdk8
