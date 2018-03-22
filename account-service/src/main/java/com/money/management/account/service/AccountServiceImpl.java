@@ -35,30 +35,17 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findByName(String accountName) {
-        Assert.hasLength(accountName);
+        Assert.hasLength(accountName, "Account name is empty !");
         return repository.findByName(accountName);
     }
 
     @Override
     public Account create(User user) {
-
         Account existing = repository.findByName(user.getUsername());
         Assert.isNull(existing, "Account already exists: " + user.getUsername());
 
         authClient.createUser(user);
-
-        Saving saving = new Saving();
-        saving.setAmount(new BigDecimal(0));
-        saving.setCurrency(Currency.getDefault());
-        saving.setInterest(new BigDecimal(0));
-        saving.setDeposit(false);
-        saving.setCapitalization(false);
-
-        Account account = new Account();
-        account.setName(user.getUsername());
-        account.setLastSeen(new Date());
-        account.setSaving(saving);
-
+        Account account = createAccount(user);
         repository.save(account);
 
         log.info("New account has been created: " + account.getName());
@@ -68,19 +55,43 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void saveChanges(String name, Account update) {
-
         Account account = repository.findByName(name);
         Assert.notNull(account, "Can't find account with name " + name);
 
-        account.setIncomes(update.getIncomes());
-        account.setExpenses(update.getExpenses());
-        account.setSaving(update.getSaving());
-        account.setNote(update.getNote());
-        account.setLastSeen(new Date());
+        updateAccount(account, update);
         repository.save(account);
 
         log.debug("Account {} changes has been saved", name);
 
         statisticsClient.updateStatistics(name, account);
     }
+
+    private Saving getDefaultSaving() {
+        Saving saving = new Saving();
+        saving.setAmount(new BigDecimal(0));
+        saving.setCurrency(Currency.getDefault());
+        saving.setInterest(new BigDecimal(0));
+        saving.setDeposit(false);
+        saving.setCapitalization(false);
+
+        return saving;
+    }
+
+    private Account createAccount(User user) {
+        Account account = new Account();
+        account.setName(user.getUsername());
+        account.setLastSeen(new Date());
+        account.setSaving(getDefaultSaving());
+
+        return account;
+    }
+
+    private void updateAccount(Account account, Account update) {
+        account.setIncomes(update.getIncomes());
+        account.setExpenses(update.getExpenses());
+        account.setSaving(update.getSaving());
+        account.setNote(update.getNote());
+        account.setLastSeen(new Date());
+    }
+
 }
