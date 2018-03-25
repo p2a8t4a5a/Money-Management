@@ -5,6 +5,8 @@ import com.money.management.account.client.AuthServiceClient;
 import com.money.management.account.client.StatisticsServiceClient;
 import com.money.management.account.domain.*;
 import com.money.management.account.repository.AccountRepository;
+import com.money.management.account.util.AccountUtil;
+import com.money.management.account.util.ItemUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -46,8 +47,7 @@ public class AccountServiceTest {
 
     @Test
     public void shouldFindByName() {
-
-        final Account account = new Account();
+        Account account = new Account();
         account.setName("test");
 
         when(accountService.findByName(account.getName())).thenReturn(account);
@@ -63,7 +63,6 @@ public class AccountServiceTest {
 
     @Test
     public void shouldCreateAccountWithGivenUser() {
-
         User user = new User();
         user.setUsername("test");
 
@@ -83,36 +82,8 @@ public class AccountServiceTest {
 
     @Test
     public void shouldSaveChangesWhenUpdatedAccountGiven() {
-
-        Item grocery = new Item();
-        grocery.setTitle("Grocery");
-        grocery.setAmount(new BigDecimal(10));
-        grocery.setCurrency(Currency.USD);
-        grocery.setPeriod(TimePeriod.DAY);
-        grocery.setIcon("meal");
-
-        Item salary = new Item();
-        salary.setTitle("Salary");
-        salary.setAmount(new BigDecimal(9100));
-        salary.setCurrency(Currency.USD);
-        salary.setPeriod(TimePeriod.MONTH);
-        salary.setIcon("wallet");
-
-        Saving saving = new Saving();
-        saving.setAmount(new BigDecimal(1500));
-        saving.setCurrency(Currency.USD);
-        saving.setInterest(new BigDecimal("3.32"));
-        saving.setDeposit(true);
-        saving.setCapitalization(false);
-
-        final Account update = new Account();
-        update.setName("test");
-        update.setNote("test note");
-        update.setIncomes(Arrays.asList(salary));
-        update.setExpenses(Arrays.asList(grocery));
-        update.setSaving(saving);
-
-        final Account account = new Account();
+        Account update = AccountUtil.getAccount(ItemUtil.getGrocery());
+        Account account = new Account();
 
         when(accountService.findByName("test")).thenReturn(account);
         accountService.saveChanges("test", update);
@@ -147,9 +118,9 @@ public class AccountServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldFailWhenNoAccountsExistedWithGivenName() {
-        final Account update = new Account();
-        update.setIncomes(Arrays.asList(new Item()));
-        update.setExpenses(Arrays.asList(new Item()));
+        Account update = new Account();
+        update.setIncomes(Collections.singletonList(new Item()));
+        update.setExpenses(Collections.singletonList(new Item()));
 
         when(accountService.findByName("test")).thenReturn(null);
         accountService.saveChanges("test", update);
