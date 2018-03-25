@@ -19,25 +19,13 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 
 import java.util.*;
 
-/**
- * By default, it designed to return only user details. This class provides {@link #getRequest(Map)} method, which
- * returns clientId and scope of calling service. This information used in controller's security checks.
- */
-
 public class CustomUserInfoTokenServices implements ResourceServerTokenServices {
-
     private final Log logger = LogFactory.getLog(getClass());
-
     private static final String[] PRINCIPAL_KEYS = new String[]{"user", "username", "userid", "user_id", "login", "id", "name"};
-
     private final String userInfoEndpointUrl;
-
     private final String clientId;
-
     private OAuth2RestOperations restTemplate;
-
     private String tokenType = DefaultOAuth2AccessToken.BEARER_TYPE;
-
     private AuthoritiesExtractor authoritiesExtractor = new FixedAuthoritiesExtractor();
 
     public CustomUserInfoTokenServices(String userInfoEndpointUrl, String clientId) {
@@ -108,20 +96,33 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
         try {
             OAuth2RestOperations restTemplate = this.restTemplate;
             if (restTemplate == null) {
-                BaseOAuth2ProtectedResourceDetails resource = new BaseOAuth2ProtectedResourceDetails();
-                resource.setClientId(this.clientId);
-                restTemplate = new OAuth2RestTemplate(resource);
+                restTemplate = createRestTemplate();
             }
             OAuth2AccessToken existingToken = restTemplate.getOAuth2ClientContext().getAccessToken();
-            if (existingToken == null || !accessToken.equals(existingToken.getValue())) {
-                DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(accessToken);
-                token.setTokenType(this.tokenType);
-                restTemplate.getOAuth2ClientContext().setAccessToken(token);
+            if (isNoToken(existingToken, accessToken)) {
+                setAccessToken(restTemplate, accessToken);
             }
             return restTemplate.getForEntity(path, Map.class).getBody();
         } catch (Exception ex) {
             this.logger.info("Could not fetch user details: " + ex.getClass() + ", " + ex.getMessage());
-            return Collections.<String, Object>singletonMap("error", "Could not fetch user details");
+            return Collections.singletonMap("error", "Could not fetch user details");
         }
     }
+
+    private OAuth2RestTemplate createRestTemplate() {
+        BaseOAuth2ProtectedResourceDetails resource = new BaseOAuth2ProtectedResourceDetails();
+        resource.setClientId(this.clientId);
+        return new OAuth2RestTemplate(resource);
+    }
+
+    private void setAccessToken(OAuth2RestOperations restTemplate, String accessToken) {
+        DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(accessToken);
+        token.setTokenType(this.tokenType);
+        restTemplate.getOAuth2ClientContext().setAccessToken(token);
+    }
+
+    private boolean isNoToken(OAuth2AccessToken existingToken, String accessToken) {
+        return existingToken == null || !accessToken.equals(existingToken.getValue());
+    }
+
 }
