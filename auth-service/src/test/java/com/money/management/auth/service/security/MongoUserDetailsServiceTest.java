@@ -37,8 +37,7 @@ public class MongoUserDetailsServiceTest {
 
     @Test
     public void shouldLoadByUsernameWhenUserExists() {
-
-        final User user = new User();
+        User user = new User();
 
         when(repository.findUsersByUsername(any())).thenReturn(user);
         UserDetails loaded = service.loadUserByUsername("name");

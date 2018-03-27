@@ -27,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AuthApplication.class)
 @WebAppConfiguration
 public class UserControllerTest {
-
     private static final ObjectMapper mapper = new ObjectMapper();
 
     @InjectMocks
@@ -46,8 +45,7 @@ public class UserControllerTest {
 
     @Test
     public void shouldCreateNewUser() throws Exception {
-
-        final User user = new User();
+        User user = new User();
         user.setUsername("test");
         user.setPassword("password");
 
@@ -59,8 +57,7 @@ public class UserControllerTest {
 
     @Test
     public void shouldFailWhenUserIsNotValid() throws Exception {
-
-        final User user = new User();
+        User user = new User();
         user.setUsername("t");
         user.setPassword("p");
 
