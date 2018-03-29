@@ -1,5 +1,6 @@
 package com.money.management.notification.service;
 
+import com.money.management.notification.domain.NotificationSettings;
 import com.money.management.notification.domain.NotificationType;
 import com.money.management.notification.repository.RecipientRepository;
 import com.money.management.notification.domain.Recipient;
@@ -14,7 +15,6 @@ import java.util.List;
 
 @Service
 public class RecipientServiceImpl implements RecipientService {
-
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private RecipientRepository repository;
@@ -26,20 +26,14 @@ public class RecipientServiceImpl implements RecipientService {
 
     @Override
     public Recipient findByAccountName(String accountName) {
-        Assert.hasLength(accountName);
+        Assert.hasLength(accountName, "Account Name is required");
         return repository.findByAccountName(accountName);
     }
 
     @Override
     public Recipient save(String accountName, Recipient recipient) {
-
         recipient.setAccountName(accountName);
-        recipient.getScheduledNotifications().values()
-                .forEach(settings -> {
-                    if (settings.getLastNotified() == null) {
-                        settings.setLastNotified(new Date());
-                    }
-                });
+        recipient.getScheduledNotifications().values().forEach(this::setSettings);
 
         repository.save(recipient);
 
@@ -65,4 +59,11 @@ public class RecipientServiceImpl implements RecipientService {
         recipient.getScheduledNotifications().get(type).setLastNotified(new Date());
         repository.save(recipient);
     }
+
+    private void setSettings(NotificationSettings settings) {
+        if (settings.getLastNotified() == null) {
+            settings.setLastNotified(new Date());
+        }
+    }
+
 }

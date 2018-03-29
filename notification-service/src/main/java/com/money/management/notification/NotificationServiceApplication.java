@@ -58,8 +58,7 @@ public class NotificationServiceApplication {
 
         @Bean
         public CustomConversions customConversions() {
-            return new CustomConversions(Arrays.asList(new FrequencyReaderConverter(),
-                    new FrequencyWriterConverter()));
+            return new CustomConversions(Arrays.asList(new FrequencyReaderConverter(), new FrequencyWriterConverter()));
         }
     }
 }

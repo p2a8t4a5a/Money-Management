@@ -20,7 +20,6 @@ import java.text.MessageFormat;
 @Service
 @RefreshScope
 public class EmailServiceImpl implements EmailService {
-
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private JavaMailSender mailSender;
@@ -34,9 +33,8 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void send(NotificationType type, Recipient recipient, String attachment) throws MessagingException {
-
-        final String subject = env.getProperty(type.getSubject());
-        final String text = MessageFormat.format(env.getProperty(type.getText()), recipient.getAccountName());
+        String subject = env.getProperty(type.getSubject());
+        String text = MessageFormat.format(env.getProperty(type.getText()), recipient.getAccountName());
 
         MimeMessage message = mailSender.createMimeMessage();
 

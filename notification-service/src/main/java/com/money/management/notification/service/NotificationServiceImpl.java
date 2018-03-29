@@ -14,7 +14,6 @@ import java.util.concurrent.CompletableFuture;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
-
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private AccountServiceClient client;
@@ -31,39 +30,42 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Scheduled(cron = "${backup.cron}")
     public void sendBackupNotifications() {
-
-        final NotificationType type = NotificationType.BACKUP;
+        NotificationType type = NotificationType.BACKUP;
 
         List<Recipient> recipients = recipientService.findReadyToNotify(type);
         log.info("Found {} recipients for backup notification", recipients.size());
 
-        recipients.forEach(recipient -> CompletableFuture.runAsync(() -> {
-            try {
-                String attachment = client.getAccount(recipient.getAccountName());
-                emailService.send(type, recipient, attachment);
-                recipientService.markNotified(type, recipient);
-            } catch (Throwable t) {
-                log.error("An error during backup notification for {}", recipient, t);
-            }
-        }));
+        recipients.forEach(recipient -> CompletableFuture.runAsync(() -> sendEmailWithAttachment(type, recipient)));
     }
 
     @Override
     @Scheduled(cron = "${remind.cron}")
     public void sendRemindNotifications() {
-
-        final NotificationType type = NotificationType.REMIND;
+        NotificationType type = NotificationType.REMIND;
 
         List<Recipient> recipients = recipientService.findReadyToNotify(type);
         log.info("Found {} recipients for remind notification", recipients.size());
 
-        recipients.forEach(recipient -> CompletableFuture.runAsync(() -> {
-            try {
-                emailService.send(type, recipient, null);
-                recipientService.markNotified(type, recipient);
-            } catch (Throwable t) {
-                log.error("An error during remind notification for {}", recipient, t);
-            }
-        }));
+        recipients.forEach(recipient -> CompletableFuture.runAsync(() -> sendEmail(type, recipient)));
     }
+
+    private void sendEmail(NotificationType type, Recipient recipient) {
+        try {
+            emailService.send(type, recipient, null);
+            recipientService.markNotified(type, recipient);
+        } catch (Throwable t) {
+            log.error("An error during remind notification for {}", recipient, t);
+        }
+    }
+
+    private void sendEmailWithAttachment(NotificationType type, Recipient recipient) {
+        try {
+            String attachment = client.getAccount(recipient.getAccountName());
+            emailService.send(type, recipient, attachment);
+            recipientService.markNotified(type, recipient);
+        } catch (Throwable t) {
+            log.error("An error during backup notification for {}", recipient, t);
+        }
+    }
+
 }
