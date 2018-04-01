@@ -3,11 +3,10 @@ package com.money.management.notification.service;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.money.management.notification.NotificationServiceApplication;
-import com.money.management.notification.domain.Frequency;
-import com.money.management.notification.domain.NotificationSettings;
 import com.money.management.notification.domain.NotificationType;
 import com.money.management.notification.domain.Recipient;
 import com.money.management.notification.repository.RecipientRepository;
+import com.money.management.notification.util.NotificationUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -60,22 +58,11 @@ public class RecipientServiceImplTest {
 
     @Test
     public void shouldSaveRecipient() {
-
-        NotificationSettings remind = new NotificationSettings();
-        remind.setActive(true);
-        remind.setFrequency(Frequency.WEEKLY);
-        remind.setLastNotified(null);
-
-        NotificationSettings backup = new NotificationSettings();
-        backup.setActive(false);
-        backup.setFrequency(Frequency.MONTHLY);
-        backup.setLastNotified(new Date());
-
         Recipient recipient = new Recipient();
         recipient.setEmail("test@test.com");
         recipient.setScheduledNotifications(ImmutableMap.of(
-                NotificationType.BACKUP, backup,
-                NotificationType.REMIND, remind
+                NotificationType.BACKUP, NotificationUtil.getBackup(),
+                NotificationType.REMIND, NotificationUtil.getRemind(null)
         ));
 
         Recipient saved = recipientService.save("test", recipient);
@@ -87,7 +74,7 @@ public class RecipientServiceImplTest {
 
     @Test
     public void shouldFindReadyToNotifyWhenNotificationTypeIsBackup() {
-        final List<Recipient> recipients = ImmutableList.of(new Recipient());
+        List<Recipient> recipients = ImmutableList.of(new Recipient());
         when(repository.findReadyForBackup()).thenReturn(recipients);
 
         List<Recipient> found = recipientService.findReadyToNotify(NotificationType.BACKUP);
@@ -96,7 +83,7 @@ public class RecipientServiceImplTest {
 
     @Test
     public void shouldFindReadyToNotifyWhenNotificationTypeIsRemind() {
-        final List<Recipient> recipients = ImmutableList.of(new Recipient());
+        List<Recipient> recipients = ImmutableList.of(new Recipient());
         when(repository.findReadyForRemind()).thenReturn(recipients);
 
         List<Recipient> found = recipientService.findReadyToNotify(NotificationType.REMIND);
@@ -105,17 +92,11 @@ public class RecipientServiceImplTest {
 
     @Test
     public void shouldMarkAsNotified() {
-
-        NotificationSettings remind = new NotificationSettings();
-        remind.setActive(true);
-        remind.setFrequency(Frequency.WEEKLY);
-        remind.setLastNotified(null);
-
         Recipient recipient = new Recipient();
         recipient.setAccountName("test");
         recipient.setEmail("test@test.com");
         recipient.setScheduledNotifications(ImmutableMap.of(
-                NotificationType.REMIND, remind
+                NotificationType.REMIND, NotificationUtil.getRemind(null)
         ));
 
         recipientService.markNotified(NotificationType.REMIND, recipient);

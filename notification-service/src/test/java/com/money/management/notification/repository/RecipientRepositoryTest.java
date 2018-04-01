@@ -6,6 +6,7 @@ import com.money.management.notification.domain.NotificationSettings;
 import com.money.management.notification.domain.NotificationType;
 import com.money.management.notification.NotificationServiceApplication;
 import com.money.management.notification.domain.Recipient;
+import com.money.management.notification.util.NotificationUtil;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,22 +30,12 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldFindByAccountName() {
-        NotificationSettings remind = new NotificationSettings();
-        remind.setActive(true);
-        remind.setFrequency(Frequency.WEEKLY);
-        remind.setLastNotified(new Date(0));
-
-        NotificationSettings backup = new NotificationSettings();
-        backup.setActive(false);
-        backup.setFrequency(Frequency.MONTHLY);
-        backup.setLastNotified(new Date());
-
         Recipient recipient = new Recipient();
         recipient.setAccountName("test");
         recipient.setEmail("test@test.com");
         recipient.setScheduledNotifications(ImmutableMap.of(
-                NotificationType.BACKUP, backup,
-                NotificationType.REMIND, remind
+                NotificationType.BACKUP, NotificationUtil.getBackup(),
+                NotificationType.REMIND, NotificationUtil.getRemind(new Date(0))
         ));
 
         repository.save(recipient);
@@ -70,16 +61,11 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldFindReadyForRemindWhenFrequencyIsWeeklyAndLastNotifiedWas8DaysAgo() {
-        NotificationSettings remind = new NotificationSettings();
-        remind.setActive(true);
-        remind.setFrequency(Frequency.WEEKLY);
-        remind.setLastNotified(DateUtils.addDays(new Date(), -8));
-
         Recipient recipient = new Recipient();
         recipient.setAccountName("test");
         recipient.setEmail("test@test.com");
         recipient.setScheduledNotifications(ImmutableMap.of(
-                NotificationType.REMIND, remind
+                NotificationType.REMIND, NotificationUtil.getRemind(DateUtils.addDays(new Date(), -8))
         ));
 
         repository.save(recipient);
@@ -90,16 +76,11 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldNotFindReadyForRemindWhenFrequencyIsWeeklyAndLastNotifiedWasYesterday() {
-        NotificationSettings remind = new NotificationSettings();
-        remind.setActive(true);
-        remind.setFrequency(Frequency.WEEKLY);
-        remind.setLastNotified(DateUtils.addDays(new Date(), -1));
-
         Recipient recipient = new Recipient();
         recipient.setAccountName("test");
         recipient.setEmail("test@test.com");
         recipient.setScheduledNotifications(ImmutableMap.of(
-                NotificationType.REMIND, remind
+                NotificationType.REMIND, NotificationUtil.getRemind(DateUtils.addDays(new Date(), -1))
         ));
 
         repository.save(recipient);
@@ -110,10 +91,8 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldNotFindReadyForRemindWhenNotificationIsNotActive() {
-        NotificationSettings remind = new NotificationSettings();
+        NotificationSettings remind = NotificationUtil.getRemind(DateUtils.addDays(new Date(), -30));
         remind.setActive(false);
-        remind.setFrequency(Frequency.WEEKLY);
-        remind.setLastNotified(DateUtils.addDays(new Date(), -30));
 
         Recipient recipient = new Recipient();
         recipient.setAccountName("test");
@@ -130,10 +109,8 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldNotFindReadyForBackupWhenFrequencyIsQuaterly() {
-        NotificationSettings remind = new NotificationSettings();
-        remind.setActive(true);
+        NotificationSettings remind = NotificationUtil.getRemind(DateUtils.addDays(new Date(), -91));
         remind.setFrequency(Frequency.QUARTERLY);
-        remind.setLastNotified(DateUtils.addDays(new Date(), -91));
 
         Recipient recipient = new Recipient();
         recipient.setAccountName("test");

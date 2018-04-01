@@ -8,6 +8,7 @@ import com.money.management.notification.domain.NotificationType;
 import com.money.management.notification.NotificationServiceApplication;
 import com.money.management.notification.domain.Recipient;
 import com.money.management.notification.service.RecipientService;
+import com.money.management.notification.util.NotificationUtil;
 import com.sun.security.auth.UserPrincipal;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +52,6 @@ public class RecipientControllerTest {
 
     @Test
     public void shouldSaveCurrentRecipientSettings() throws Exception {
-
         Recipient recipient = getStubRecipient();
         String json = mapper.writeValueAsString(recipient);
 
@@ -62,7 +62,6 @@ public class RecipientControllerTest {
 
     @Test
     public void shouldGetCurrentRecipientSettings() throws Exception {
-
         Recipient recipient = getStubRecipient();
         when(recipientService.findByAccountName(recipient.getAccountName())).thenReturn(recipient);
 
@@ -72,23 +71,12 @@ public class RecipientControllerTest {
     }
 
     private Recipient getStubRecipient() {
-
-        NotificationSettings remind = new NotificationSettings();
-        remind.setActive(true);
-        remind.setFrequency(Frequency.WEEKLY);
-        remind.setLastNotified(null);
-
-        NotificationSettings backup = new NotificationSettings();
-        backup.setActive(false);
-        backup.setFrequency(Frequency.MONTHLY);
-        backup.setLastNotified(null);
-
         Recipient recipient = new Recipient();
         recipient.setAccountName("test");
         recipient.setEmail("test@test.com");
         recipient.setScheduledNotifications(ImmutableMap.of(
-                NotificationType.BACKUP, backup,
-                NotificationType.REMIND, remind
+                NotificationType.BACKUP, NotificationUtil.getBackup(),
+                NotificationType.REMIND, NotificationUtil.getRemind(null)
         ));
 
         return recipient;

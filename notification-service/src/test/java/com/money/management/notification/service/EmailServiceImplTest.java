@@ -72,11 +72,10 @@ public class EmailServiceImplTest {
 
         MimeMessage message = captor.getValue();
         assertEquals(subject, message.getSubject());
-        // TODO check other fields
     }
 
     @Test
-    public void shouldSendRemindEmail() throws MessagingException, IOException {
+    public void shouldSendRemindEmail() throws MessagingException {
 
         final String subject = "subject";
         final String text = "text";
@@ -94,6 +93,5 @@ public class EmailServiceImplTest {
 
         MimeMessage message = captor.getValue();
         assertEquals(subject, message.getSubject());
-        // TODO check other fields
     }
 }
