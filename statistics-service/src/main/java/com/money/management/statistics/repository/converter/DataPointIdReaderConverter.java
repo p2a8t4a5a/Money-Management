@@ -12,7 +12,6 @@ public class DataPointIdReaderConverter implements Converter<DBObject, DataPoint
 
 	@Override
 	public DataPointId convert(DBObject object) {
-
 		Date date = (Date) object.get("date");
 		String account = (String) object.get("account");
 

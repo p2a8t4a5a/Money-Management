@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
-
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private DataPointRepository repository;
@@ -40,13 +39,12 @@ public class StatisticsServiceImpl implements StatisticsService {
 
     @Override
     public List<DataPoint> findByAccountName(String accountName) {
-        Assert.hasLength(accountName);
+        Assert.hasLength(accountName, "Account Name can't be empty !");
         return repository.findByIdAccount(accountName);
     }
 
     @Override
     public DataPoint save(String accountName, Account account) {
-
         Instant instant = LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
         DataPointId pointId = new DataPointId(accountName, Date.from(instant));
 
@@ -67,7 +65,6 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     private Map<StatisticMetric, BigDecimal> createStatisticMetrics(Set<ItemMetric> incomes, Set<ItemMetric> expenses, Saving saving) {
-
         BigDecimal savingAmount = ratesService.convert(saving.getCurrency(), Currency.getBase(), saving.getAmount());
         BigDecimal expensesAmount = expenses.stream().map(ItemMetric::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal incomesAmount = incomes.stream().map(ItemMetric::getAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -84,7 +81,6 @@ public class StatisticsServiceImpl implements StatisticsService {
      * {@link TimePeriod#getBase()} time period
      */
     private ItemMetric createItemMetric(Item item) {
-
         BigDecimal amount = ratesService.convert(item.getCurrency(), Currency.getBase(), item.getAmount())
                 .divide(item.getPeriod().getBaseRatio(), 4, RoundingMode.HALF_UP);
 

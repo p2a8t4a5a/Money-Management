@@ -30,7 +30,6 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
 
     @Override
     public Map<Currency, BigDecimal> getCurrentRates() {
-
         if (container == null || !container.getDate().equals(LocalDate.now())) {
             container = client.getRates(Currency.getBase());
             log.info("exchange rates has been updated: {}", container);
@@ -44,8 +43,7 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
 
     @Override
     public BigDecimal convert(Currency from, Currency to, BigDecimal amount) {
-
-        Assert.notNull(amount);
+        Assert.notNull(amount, "Amount can't be null");
 
         Map<Currency, BigDecimal> rates = getCurrentRates();
         BigDecimal ratio = rates.get(to).divide(rates.get(from), 4, RoundingMode.HALF_UP);
