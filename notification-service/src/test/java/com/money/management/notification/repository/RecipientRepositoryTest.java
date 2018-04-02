@@ -7,6 +7,7 @@ import com.money.management.notification.domain.NotificationType;
 import com.money.management.notification.NotificationServiceApplication;
 import com.money.management.notification.domain.Recipient;
 import com.money.management.notification.util.NotificationUtil;
+import com.money.management.notification.util.RecipientUtil;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,10 +31,7 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldFindByAccountName() {
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
-        recipient.setEmail("test@test.com");
-        recipient.setScheduledNotifications(ImmutableMap.of(
+        Recipient recipient = RecipientUtil.getRecipient(ImmutableMap.of(
                 NotificationType.BACKUP, NotificationUtil.getBackup(),
                 NotificationType.REMIND, NotificationUtil.getRemind(new Date(0))
         ));
@@ -61,10 +59,7 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldFindReadyForRemindWhenFrequencyIsWeeklyAndLastNotifiedWas8DaysAgo() {
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
-        recipient.setEmail("test@test.com");
-        recipient.setScheduledNotifications(ImmutableMap.of(
+        Recipient recipient = RecipientUtil.getRecipient(ImmutableMap.of(
                 NotificationType.REMIND, NotificationUtil.getRemind(DateUtils.addDays(new Date(), -8))
         ));
 
@@ -76,10 +71,7 @@ public class RecipientRepositoryTest {
 
     @Test
     public void shouldNotFindReadyForRemindWhenFrequencyIsWeeklyAndLastNotifiedWasYesterday() {
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
-        recipient.setEmail("test@test.com");
-        recipient.setScheduledNotifications(ImmutableMap.of(
+        Recipient recipient = RecipientUtil.getRecipient(ImmutableMap.of(
                 NotificationType.REMIND, NotificationUtil.getRemind(DateUtils.addDays(new Date(), -1))
         ));
 
@@ -94,10 +86,7 @@ public class RecipientRepositoryTest {
         NotificationSettings remind = NotificationUtil.getRemind(DateUtils.addDays(new Date(), -30));
         remind.setActive(false);
 
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
-        recipient.setEmail("test@test.com");
-        recipient.setScheduledNotifications(ImmutableMap.of(
+        Recipient recipient = RecipientUtil.getRecipient(ImmutableMap.of(
                 NotificationType.REMIND, remind
         ));
 
@@ -112,10 +101,7 @@ public class RecipientRepositoryTest {
         NotificationSettings remind = NotificationUtil.getRemind(DateUtils.addDays(new Date(), -91));
         remind.setFrequency(Frequency.QUARTERLY);
 
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
-        recipient.setEmail("test@test.com");
-        recipient.setScheduledNotifications(ImmutableMap.of(
+        Recipient recipient = RecipientUtil.getRecipient(ImmutableMap.of(
                 NotificationType.BACKUP, remind
         ));
 

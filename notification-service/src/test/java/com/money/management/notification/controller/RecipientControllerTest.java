@@ -2,13 +2,12 @@ package com.money.management.notification.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
-import com.money.management.notification.domain.Frequency;
-import com.money.management.notification.domain.NotificationSettings;
 import com.money.management.notification.domain.NotificationType;
 import com.money.management.notification.NotificationServiceApplication;
 import com.money.management.notification.domain.Recipient;
 import com.money.management.notification.service.RecipientService;
 import com.money.management.notification.util.NotificationUtil;
+import com.money.management.notification.util.RecipientUtil;
 import com.sun.security.auth.UserPrincipal;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,14 +70,9 @@ public class RecipientControllerTest {
     }
 
     private Recipient getStubRecipient() {
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
-        recipient.setEmail("test@test.com");
-        recipient.setScheduledNotifications(ImmutableMap.of(
+        return RecipientUtil.getRecipient(ImmutableMap.of(
                 NotificationType.BACKUP, NotificationUtil.getBackup(),
                 NotificationType.REMIND, NotificationUtil.getRemind(null)
         ));
-
-        return recipient;
     }
 }

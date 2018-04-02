@@ -3,6 +3,7 @@ package com.money.management.notification.service;
 import com.money.management.notification.NotificationServiceApplication;
 import com.money.management.notification.domain.NotificationType;
 import com.money.management.notification.domain.Recipient;
+import com.money.management.notification.util.RecipientUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
-import java.io.IOException;
 import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
@@ -31,6 +31,9 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @SpringBootTest(classes = NotificationServiceApplication.class)
 @WebAppConfiguration
 public class EmailServiceImplTest {
+    private final String subject = "subject";
+    private final String text = "text";
+    private final Recipient recipient = RecipientUtil.getRecipient(null);
 
     @InjectMocks
     private EmailServiceImpl emailService;
@@ -52,15 +55,8 @@ public class EmailServiceImplTest {
     }
 
     @Test
-    public void shouldSendBackupEmail() throws MessagingException, IOException {
-
-        final String subject = "subject";
-        final String text = "text";
-        final String attachment = "attachment.json";
-
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
-        recipient.setEmail("test@test.com");
+    public void shouldSendBackupEmail() throws MessagingException {
+        String attachment = "attachment.json";
 
         when(env.getProperty(NotificationType.BACKUP.getSubject())).thenReturn(subject);
         when(env.getProperty(NotificationType.BACKUP.getText())).thenReturn(text);
@@ -76,14 +72,6 @@ public class EmailServiceImplTest {
 
     @Test
     public void shouldSendRemindEmail() throws MessagingException {
-
-        final String subject = "subject";
-        final String text = "text";
-
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
-        recipient.setEmail("test@test.com");
-
         when(env.getProperty(NotificationType.REMIND.getSubject())).thenReturn(subject);
         when(env.getProperty(NotificationType.REMIND.getText())).thenReturn(text);
 

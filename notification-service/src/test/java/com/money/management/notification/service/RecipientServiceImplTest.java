@@ -7,6 +7,7 @@ import com.money.management.notification.domain.NotificationType;
 import com.money.management.notification.domain.Recipient;
 import com.money.management.notification.repository.RecipientRepository;
 import com.money.management.notification.util.NotificationUtil;
+import com.money.management.notification.util.RecipientUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,8 +43,7 @@ public class RecipientServiceImplTest {
 
     @Test
     public void shouldFindByAccountName() {
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
+        Recipient recipient = RecipientUtil.getRecipient(null);
 
         when(repository.findByAccountName(recipient.getAccountName())).thenReturn(recipient);
         Recipient found = recipientService.findByAccountName(recipient.getAccountName());
@@ -58,12 +58,11 @@ public class RecipientServiceImplTest {
 
     @Test
     public void shouldSaveRecipient() {
-        Recipient recipient = new Recipient();
-        recipient.setEmail("test@test.com");
-        recipient.setScheduledNotifications(ImmutableMap.of(
+        Recipient recipient = RecipientUtil.getRecipient(ImmutableMap.of(
                 NotificationType.BACKUP, NotificationUtil.getBackup(),
                 NotificationType.REMIND, NotificationUtil.getRemind(null)
         ));
+        recipient.setAccountName(null);
 
         Recipient saved = recipientService.save("test", recipient);
 
@@ -92,10 +91,7 @@ public class RecipientServiceImplTest {
 
     @Test
     public void shouldMarkAsNotified() {
-        Recipient recipient = new Recipient();
-        recipient.setAccountName("test");
-        recipient.setEmail("test@test.com");
-        recipient.setScheduledNotifications(ImmutableMap.of(
+        Recipient recipient = RecipientUtil.getRecipient(ImmutableMap.of(
                 NotificationType.REMIND, NotificationUtil.getRemind(null)
         ));
 

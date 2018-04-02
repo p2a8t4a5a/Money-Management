@@ -5,6 +5,7 @@ import com.money.management.notification.NotificationServiceApplication;
 import com.money.management.notification.client.AccountServiceClient;
 import com.money.management.notification.domain.NotificationType;
 import com.money.management.notification.domain.Recipient;
+import com.money.management.notification.util.RecipientUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.mail.MessagingException;
-import java.io.IOException;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -24,6 +24,8 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @SpringBootTest(classes = NotificationServiceApplication.class)
 @WebAppConfiguration
 public class NotificationServiceImplTest {
+    private final Recipient withError = RecipientUtil.getRecipientWithError();
+    private final Recipient withNoError = RecipientUtil.getRecipientWithNoError();
 
     @InjectMocks
     private NotificationServiceImpl notificationService;
@@ -43,14 +45,8 @@ public class NotificationServiceImplTest {
     }
 
     @Test
-    public void shouldSendBackupNotificationsEvenWhenErrorsOccursForSomeRecipients() throws IOException, MessagingException {
+    public void shouldSendBackupNotificationsEvenWhenErrorsOccursForSomeRecipients() throws MessagingException {
         final String attachment = "json";
-
-        Recipient withError = new Recipient();
-        withError.setAccountName("with-error");
-
-        Recipient withNoError = new Recipient();
-        withNoError.setAccountName("with-no-error");
 
         when(client.getAccount(withError.getAccountName())).thenThrow(new RuntimeException());
         when(client.getAccount(withNoError.getAccountName())).thenReturn(attachment);
@@ -66,13 +62,7 @@ public class NotificationServiceImplTest {
     }
 
     @Test
-    public void shouldSendRemindNotificationsEvenWhenErrorsOccursForSomeRecipients() throws IOException, MessagingException {
-        Recipient withError = new Recipient();
-        withError.setAccountName("with-error");
-
-        Recipient withNoError = new Recipient();
-        withNoError.setAccountName("with-no-error");
-
+    public void shouldSendRemindNotificationsEvenWhenErrorsOccursForSomeRecipients() throws MessagingException {
         when(recipientService.findReadyToNotify(NotificationType.REMIND)).thenReturn(ImmutableList.of(withNoError, withError));
         doThrow(new RuntimeException()).when(emailService).send(NotificationType.REMIND, withError, null);
 
