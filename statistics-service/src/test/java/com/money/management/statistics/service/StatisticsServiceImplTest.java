@@ -8,6 +8,9 @@ import com.money.management.statistics.domain.timeseries.DataPoint;
 import com.money.management.statistics.domain.timeseries.ItemMetric;
 import com.money.management.statistics.domain.timeseries.StatisticMetric;
 import com.money.management.statistics.repository.DataPointRepository;
+import com.money.management.statistics.util.AccountUtil;
+import com.money.management.statistics.util.ItemUtil;
+import com.money.management.statistics.util.SavingUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,41 +72,16 @@ public class StatisticsServiceImplTest {
 
     @Test
     public void shouldSaveDataPoint() {
-        Item salary = new Item();
-        salary.setTitle("Salary");
-        salary.setAmount(new BigDecimal(9100));
-        salary.setCurrency(Currency.USD);
-        salary.setPeriod(TimePeriod.MONTH);
-
-        Item grocery = new Item();
-        grocery.setTitle("Grocery");
-        grocery.setAmount(new BigDecimal(500));
-        grocery.setCurrency(Currency.USD);
-        grocery.setPeriod(TimePeriod.DAY);
-
-        Item vacation = new Item();
-        vacation.setTitle("Vacation");
-        vacation.setAmount(new BigDecimal(3400));
-        vacation.setCurrency(Currency.EUR);
-        vacation.setPeriod(TimePeriod.YEAR);
-
-        Saving saving = new Saving();
-        saving.setAmount(new BigDecimal(1000));
-        saving.setCurrency(Currency.EUR);
-        saving.setInterest(new BigDecimal(3.2));
-        saving.setDeposit(true);
-        saving.setCapitalization(false);
-
-        Account account = new Account();
-        account.setIncomes(ImmutableList.of(salary));
-        account.setExpenses(ImmutableList.of(grocery, vacation));
-        account.setSaving(saving);
+        Item salary = ItemUtil.getItemSalary();
+        Item grocery = ItemUtil.getItemGrocery();
+        Item vacation = ItemUtil.getItemVacation();
+        Saving saving = SavingUtil.getSaving();
+        Account account = AccountUtil.getAccount(saving, salary, grocery, vacation);
 
         final Map<Currency, BigDecimal> rates = ImmutableMap.of(
                 Currency.EUR, new BigDecimal("0.8"),
                 Currency.USD, BigDecimal.ONE
         );
-
 
         when(ratesService.convert(any(Currency.class), any(Currency.class), any(BigDecimal.class)))
                 .then(i -> ((BigDecimal) i.getArgument(2))

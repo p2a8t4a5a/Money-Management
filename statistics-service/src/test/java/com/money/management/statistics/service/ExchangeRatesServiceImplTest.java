@@ -38,7 +38,6 @@ public class ExchangeRatesServiceImplTest {
 
     @Test
     public void shouldReturnCurrentRatesWhenContainerIsEmptySoFar() {
-
         ExchangeRatesContainer container = new ExchangeRatesContainer();
         container.setRates(ImmutableMap.of(
                 Currency.EUR.name(), new BigDecimal("0.8"),
@@ -56,7 +55,6 @@ public class ExchangeRatesServiceImplTest {
 
     @Test
     public void shouldNotRequestRatesWhenTodayContainerAlreadyExists() {
-
         ExchangeRatesContainer container = new ExchangeRatesContainer();
         container.setRates(ImmutableMap.of(
                 Currency.EUR.name(), new BigDecimal("0.8"),

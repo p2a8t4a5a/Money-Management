@@ -7,6 +7,9 @@ import com.money.management.statistics.domain.*;
 import com.money.management.statistics.domain.timeseries.DataPoint;
 import com.money.management.statistics.domain.timeseries.DataPointId;
 import com.money.management.statistics.service.StatisticsService;
+import com.money.management.statistics.util.AccountUtil;
+import com.money.management.statistics.util.ItemUtil;
+import com.money.management.statistics.util.SavingUtil;
 import com.sun.security.auth.UserPrincipal;
 import org.junit.Before;
 import org.junit.Test;
@@ -55,8 +58,7 @@ public class StatisticsControllerTest {
 
     @Test
     public void shouldGetStatisticsByAccountName() throws Exception {
-
-        final DataPoint dataPoint = new DataPoint();
+        DataPoint dataPoint = new DataPoint();
         dataPoint.setId(new DataPointId("test", new Date()));
 
         when(statisticsService.findByAccountName(dataPoint.getId().getAccount())).thenReturn(ImmutableList.of(dataPoint));
@@ -68,8 +70,7 @@ public class StatisticsControllerTest {
 
     @Test
     public void shouldGetCurrentAccountStatistics() throws Exception {
-
-        final DataPoint dataPoint = new DataPoint();
+        DataPoint dataPoint = new DataPoint();
         dataPoint.setId(new DataPointId("test", new Date()));
 
         when(statisticsService.findByAccountName(dataPoint.getId().getAccount())).thenReturn(ImmutableList.of(dataPoint));
@@ -81,34 +82,15 @@ public class StatisticsControllerTest {
 
     @Test
     public void shouldSaveAccountStatistics() throws Exception {
-
-        Saving saving = new Saving();
-        saving.setAmount(new BigDecimal(1500));
-        saving.setCurrency(Currency.USD);
-        saving.setInterest(new BigDecimal("3.32"));
-        saving.setDeposit(true);
-        saving.setCapitalization(false);
-
-        Item grocery = new Item();
-        grocery.setTitle("Grocery");
-        grocery.setAmount(new BigDecimal(10));
-        grocery.setCurrency(Currency.USD);
-        grocery.setPeriod(TimePeriod.DAY);
-
-        Item salary = new Item();
-        salary.setTitle("Salary");
-        salary.setAmount(new BigDecimal(9100));
-        salary.setCurrency(Currency.USD);
-        salary.setPeriod(TimePeriod.MONTH);
-
-        final Account account = new Account();
-        account.setSaving(saving);
-        account.setExpenses(ImmutableList.of(grocery));
-        account.setIncomes(ImmutableList.of(salary));
+        Saving saving = SavingUtil.getSaving();
+        Item grocery = ItemUtil.getItemGrocery();
+        Item salary = ItemUtil.getItemSalary();
+        Account account = AccountUtil.getAccount(saving, salary, grocery);
 
         String json = mapper.writeValueAsString(account);
 
-        mockMvc.perform(put("/test").contentType(MediaType.APPLICATION_JSON).content(json)).andExpect(status().isOk());
+        mockMvc.perform(put("/test").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk());
 
         verify(statisticsService, times(1)).save(anyString(), any(Account.class));
     }

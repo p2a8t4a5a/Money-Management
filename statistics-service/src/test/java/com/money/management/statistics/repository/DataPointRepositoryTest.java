@@ -28,7 +28,6 @@ public class DataPointRepositoryTest {
 
 	@Test
 	public void shouldSaveDataPoint() {
-
 		ItemMetric salary = new ItemMetric("salary", new BigDecimal(20_000));
 
 		ItemMetric grocery = new ItemMetric("grocery", new BigDecimal(1_000));
