@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -60,9 +59,8 @@ public class ExchangeRatesServiceImplTest {
                 Currency.EUR.name(), new BigDecimal("0.8"),
                 Currency.USD.name(), new BigDecimal("80")
         ));
-        when(client.getRates(Currency.getBase())).thenReturn(container);
 
-        ratesService.getCurrentRates();
+        when(client.getRates(Currency.getBase())).thenReturn(container);
 
         ratesService.getCurrentRates();
 
@@ -79,12 +77,12 @@ public class ExchangeRatesServiceImplTest {
 
         when(client.getRates(Currency.getBase())).thenReturn(container);
 
-        final BigDecimal amount = new BigDecimal(100);
-        final BigDecimal expectedConversion = new BigDecimal("80.00");
+        BigDecimal amount = new BigDecimal(100);
+        BigDecimal expectedConversion = new BigDecimal("80.00");
 
         BigDecimal result = ratesService.convert(Currency.USD, Currency.EUR, amount);
 
-        assertTrue(expectedConversion.compareTo(result) == 0);
+        assertEquals(expectedConversion.compareTo(result), 0);
     }
 
     @Test(expected = IllegalArgumentException.class)

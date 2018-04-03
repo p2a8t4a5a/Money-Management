@@ -7,6 +7,7 @@ import com.money.management.statistics.domain.timeseries.DataPoint;
 import com.money.management.statistics.domain.timeseries.DataPointId;
 import com.money.management.statistics.domain.timeseries.ItemMetric;
 import com.money.management.statistics.domain.timeseries.StatisticMetric;
+import com.money.management.statistics.util.DataPointUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,65 +24,50 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest(classes = StatisticsApplication.class)
 public class DataPointRepositoryTest {
 
-	@Autowired
-	private DataPointRepository repository;
+    @Autowired
+    private DataPointRepository repository;
 
-	@Test
-	public void shouldSaveDataPoint() {
-		ItemMetric salary = new ItemMetric("salary", new BigDecimal(20_000));
+    @Test
+    public void shouldSaveDataPoint() {
+        ItemMetric salary = new ItemMetric("salary", new BigDecimal(20_000));
+        ItemMetric grocery = new ItemMetric("grocery", new BigDecimal(1_000));
+        ItemMetric vacation = new ItemMetric("vacation", new BigDecimal(2_000));
 
-		ItemMetric grocery = new ItemMetric("grocery", new BigDecimal(1_000));
-		ItemMetric vacation = new ItemMetric("vacation", new BigDecimal(2_000));
+        DataPoint point = DataPointUtil.getDataPoint(ImmutableMap.of(
+                StatisticMetric.SAVING_AMOUNT, new BigDecimal(400_000),
+                StatisticMetric.INCOMES_AMOUNT, new BigDecimal(20_000),
+                StatisticMetric.EXPENSES_AMOUNT, new BigDecimal(3_000)
+        ), salary, grocery, vacation);
 
-		DataPointId pointId = new DataPointId("test-account", new Date(0));
+        repository.save(point);
 
-		DataPoint point = new DataPoint();
-		point.setId(pointId);
-		point.setIncomes(Sets.newHashSet(salary));
-		point.setExpenses(Sets.newHashSet(grocery, vacation));
-		point.setStatistics(ImmutableMap.of(
-				StatisticMetric.SAVING_AMOUNT, new BigDecimal(400_000),
-				StatisticMetric.INCOMES_AMOUNT, new BigDecimal(20_000),
-				StatisticMetric.EXPENSES_AMOUNT, new BigDecimal(3_000)
-		));
+        List<DataPoint> points = repository.findByIdAccount(point.getId().getAccount());
+        assertEquals(1, points.size());
+        assertEquals(point.getId().getDate(), points.get(0).getId().getDate());
+        assertEquals(point.getStatistics().size(), points.get(0).getStatistics().size());
+        assertEquals(point.getIncomes().size(), points.get(0).getIncomes().size());
+        assertEquals(point.getExpenses().size(), points.get(0).getExpenses().size());
+    }
 
-		repository.save(point);
+    @Test
+    public void shouldRewriteDataPointWithinADay() {
+        BigDecimal lateAmount = new BigDecimal(200);
 
-		List<DataPoint> points = repository.findByIdAccount(pointId.getAccount());
-		assertEquals(1, points.size());
-		assertEquals(pointId.getDate(), points.get(0).getId().getDate());
-		assertEquals(point.getStatistics().size(), points.get(0).getStatistics().size());
-		assertEquals(point.getIncomes().size(), points.get(0).getIncomes().size());
-		assertEquals(point.getExpenses().size(), points.get(0).getExpenses().size());
-	}
+        DataPoint earlier = DataPointUtil.getDataPoint(ImmutableMap.of(
+                StatisticMetric.SAVING_AMOUNT, new BigDecimal(100)
+        ), null);
 
-	@Test
-	public void shouldRewriteDataPointWithinADay() {
+        repository.save(earlier);
 
-		final BigDecimal earlyAmount = new BigDecimal(100);
-		final BigDecimal lateAmount = new BigDecimal(200);
+        DataPoint later = DataPointUtil.getDataPoint(ImmutableMap.of(
+                StatisticMetric.SAVING_AMOUNT, lateAmount
+        ), null);
 
-		DataPointId pointId = new DataPointId("test-account", new Date(0));
+        repository.save(later);
 
-		DataPoint earlier = new DataPoint();
-		earlier.setId(pointId);
-		earlier.setStatistics(ImmutableMap.of(
-				StatisticMetric.SAVING_AMOUNT, earlyAmount
-		));
+        List<DataPoint> points = repository.findByIdAccount(later.getId().getAccount());
 
-		repository.save(earlier);
-
-		DataPoint later = new DataPoint();
-		later.setId(pointId);
-		later.setStatistics(ImmutableMap.of(
-				StatisticMetric.SAVING_AMOUNT, lateAmount
-		));
-
-		repository.save(later);
-
-		List<DataPoint> points = repository.findByIdAccount(pointId.getAccount());
-
-		assertEquals(1, points.size());
-		assertEquals(lateAmount, points.get(0).getStatistics().get(StatisticMetric.SAVING_AMOUNT));
-	}
+        assertEquals(1, points.size());
+        assertEquals(lateAmount, points.get(0).getStatistics().get(StatisticMetric.SAVING_AMOUNT));
+    }
 }
