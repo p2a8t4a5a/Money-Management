@@ -1,10 +1,8 @@
 package com.money.management.statistics.repository;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Sets;
 import com.money.management.statistics.StatisticsApplication;
 import com.money.management.statistics.domain.timeseries.DataPoint;
-import com.money.management.statistics.domain.timeseries.DataPointId;
 import com.money.management.statistics.domain.timeseries.ItemMetric;
 import com.money.management.statistics.domain.timeseries.StatisticMetric;
 import com.money.management.statistics.util.DataPointUtil;
@@ -15,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
