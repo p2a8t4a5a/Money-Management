@@ -48,7 +48,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = createAccount(user);
         repository.save(account);
 
-        log.info("New account has been created: " + account.getName());
+        log.info("New account has been created: {}", account.getName());
 
         return account;
     }
