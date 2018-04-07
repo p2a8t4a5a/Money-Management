@@ -37,7 +37,7 @@ public class AuthApplication {
 
     @Configuration
     @EnableWebSecurity
-    protected static class webSecurityConfig extends WebSecurityConfigurerAdapter {
+    protected static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
         private MongoUserDetailsService userDetailsService;
@@ -66,6 +66,9 @@ public class AuthApplication {
     @Configuration
     @EnableAuthorizationServer
     protected static class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
+        private static final String REFRESH_TOKEN = "refresh_token";
+        private static final String CLIENT_CREDENTIAL = "client_credentials";
+        private static final String SERVER = "server";
 
         private TokenStore tokenStore = new InMemoryTokenStore();
 
@@ -83,23 +86,23 @@ public class AuthApplication {
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients.inMemory()
                     .withClient("browser")
-                    .authorizedGrantTypes("refresh_token", "password")
+                    .authorizedGrantTypes(REFRESH_TOKEN, "password")
                     .scopes("ui")
                     .and()
                     .withClient("account-service")
                     .secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
-                    .authorizedGrantTypes("client_credentials", "refresh_token")
-                    .scopes("server")
+                    .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
+                    .scopes(SERVER)
                     .and()
                     .withClient("statistics-service")
                     .secret(env.getProperty("STATISTICS_SERVICE_PASSWORD"))
-                    .authorizedGrantTypes("client_credentials", "refresh_token")
-                    .scopes("server")
+                    .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
+                    .scopes(SERVER)
                     .and()
                     .withClient("notification-service")
                     .secret(env.getProperty("NOTIFICATION_SERVICE_PASSWORD"))
-                    .authorizedGrantTypes("client_credentials", "refresh_token")
-                    .scopes("server");
+                    .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
+                    .scopes(SERVER);
         }
 
         @Override
