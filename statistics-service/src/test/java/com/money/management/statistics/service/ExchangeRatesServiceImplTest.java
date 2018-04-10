@@ -82,7 +82,7 @@ public class ExchangeRatesServiceImplTest {
 
         BigDecimal result = ratesService.convert(Currency.USD, Currency.EUR, amount);
 
-        assertEquals(expectedConversion.compareTo(result), 0);
+        assertEquals(0,expectedConversion.compareTo(result));
     }
 
     @Test(expected = IllegalArgumentException.class)

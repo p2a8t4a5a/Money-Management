@@ -28,6 +28,7 @@ import java.util.*;
 
 public class CustomUserInfoTokenServices implements ResourceServerTokenServices {
     private static final String[] PRINCIPAL_KEYS = new String[]{"user", "username", "userid", "user_id", "login", "id", "name"};
+    private static final String ERROR = "error";
 
     private final Log logger = LogFactory.getLog(getClass());
     private final String userInfoEndpointUrl;
@@ -55,10 +56,10 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
     }
 
     @Override
-    public OAuth2Authentication loadAuthentication(String accessToken) throws AuthenticationException, InvalidTokenException {
+    public OAuth2Authentication loadAuthentication(String accessToken) {
         Map<String, Object> map = getMap(this.userInfoEndpointUrl, accessToken);
-        if (map.containsKey("error")) {
-            this.logger.debug("Userinfo returned error: " + map.get("error"));
+        if (map.containsKey(ERROR)) {
+            this.logger.debug("Userinfo returned error: " + map.get(ERROR));
             throw new InvalidTokenException(accessToken);
         }
         return extractAuthentication(map);
@@ -86,11 +87,11 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
     private OAuth2Request getRequest(Map<String, Object> map) {
         Map<String, Object> request = (Map<String, Object>) map.get("oauth2Request");
 
-        String clientId = (String) request.get("clientId");
+        String requestClientId = (String) request.get("clientId");
         Set<String> scope = new LinkedHashSet<>(request.containsKey("scope") ? (Collection<String>) request.get("scope")
                 : Collections.<String>emptySet());
 
-        return new OAuth2Request(null, clientId, null, true, new HashSet<>(scope),
+        return new OAuth2Request(null, requestClientId, null, true, new HashSet<>(scope),
                 null, null, null, null);
     }
 
@@ -103,18 +104,18 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
     private Map<String, Object> getMap(String path, String accessToken) {
         this.logger.debug("Getting user info from: " + path);
         try {
-            OAuth2RestOperations restTemplate = this.restTemplate;
-            if (restTemplate == null) {
-                restTemplate = createRestTemplate();
+            OAuth2RestOperations restOperations = this.restTemplate;
+            if (restOperations == null) {
+                restOperations = createRestTemplate();
             }
-            OAuth2AccessToken existingToken = restTemplate.getOAuth2ClientContext().getAccessToken();
+            OAuth2AccessToken existingToken = restOperations.getOAuth2ClientContext().getAccessToken();
             if (isNoToken(existingToken, accessToken)) {
-                setAccessToken(restTemplate, accessToken);
+                setAccessToken(restOperations, accessToken);
             }
-            return restTemplate.getForEntity(path, Map.class).getBody();
+            return restOperations.getForEntity(path, Map.class).getBody();
         } catch (Exception ex) {
             this.logger.info("Could not fetch user details: " + ex.getClass() + ", " + ex.getMessage());
-            return Collections.singletonMap("error", "Could not fetch user details");
+            return Collections.singletonMap(ERROR, "Could not fetch user details");
         }
     }
 

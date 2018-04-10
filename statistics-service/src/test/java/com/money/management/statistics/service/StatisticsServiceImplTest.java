@@ -100,12 +100,12 @@ public class StatisticsServiceImplTest {
         BigDecimal expectedNormalizedVacationAmount = new BigDecimal("11.6361");
         BigDecimal expectedNormalizedGroceryAmount = new BigDecimal("500.00");
 
-        assertEquals(dataPoint.getId().getAccount(), "test");
+        assertEquals("test", dataPoint.getId().getAccount());
         assertEquals(dataPoint.getId().getDate(), Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 
-        assertEquals(expectedExpensesAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.EXPENSES_AMOUNT)), 0);
-        assertEquals(expectedIncomesAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.INCOMES_AMOUNT)), 0);
-        assertEquals(expectedSavingAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.SAVING_AMOUNT)), 0);
+        assertEquals(0,expectedExpensesAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.EXPENSES_AMOUNT)));
+        assertEquals(0,expectedIncomesAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.INCOMES_AMOUNT)));
+        assertEquals(0,expectedSavingAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.SAVING_AMOUNT)));
 
         ItemMetric salaryItemMetric = dataPoint.getIncomes().stream()
                 .filter(i -> i.getTitle().equals(salary.getTitle()))
@@ -119,9 +119,9 @@ public class StatisticsServiceImplTest {
                 .filter(i -> i.getTitle().equals(grocery.getTitle()))
                 .findFirst().get();
 
-        assertEquals(expectedNormalizedSalaryAmount.compareTo(salaryItemMetric.getAmount()), 0);
-        assertEquals(expectedNormalizedVacationAmount.compareTo(vacationItemMetric.getAmount()), 0);
-        assertEquals(expectedNormalizedGroceryAmount.compareTo(groceryItemMetric.getAmount()), 0);
+        assertEquals(0,expectedNormalizedSalaryAmount.compareTo(salaryItemMetric.getAmount()));
+        assertEquals(0,expectedNormalizedVacationAmount.compareTo(vacationItemMetric.getAmount()));
+        assertEquals(0,expectedNormalizedGroceryAmount.compareTo(groceryItemMetric.getAmount()));
 
         assertEquals(rates, dataPoint.getRates());
 
