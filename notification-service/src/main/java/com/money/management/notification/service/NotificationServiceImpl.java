@@ -53,8 +53,8 @@ public class NotificationServiceImpl implements NotificationService {
         try {
             emailService.send(type, recipient, null);
             recipientService.markNotified(type, recipient);
-        } catch (Throwable t) {
-            log.error("An error during remind notification for {}", recipient, t);
+        } catch (Exception e) {
+            log.error("An error during remind notification for {}", recipient, e);
         }
     }
 
@@ -63,8 +63,8 @@ public class NotificationServiceImpl implements NotificationService {
             String attachment = client.getAccount(recipient.getAccountName());
             emailService.send(type, recipient, attachment);
             recipientService.markNotified(type, recipient);
-        } catch (Throwable t) {
-            log.error("An error during backup notification for {}", recipient, t);
+        } catch (Exception e) {
+            log.error("An error during backup notification for {}", recipient, e);
         }
     }
 
