@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -37,11 +38,7 @@ public class ExchangeRatesServiceImplTest {
 
     @Test
     public void shouldReturnCurrentRatesWhenContainerIsEmptySoFar() {
-        ExchangeRatesContainer container = new ExchangeRatesContainer();
-        container.setRates(ImmutableMap.of(
-                Currency.EUR.name(), new BigDecimal("0.8"),
-                Currency.USD.name(), new BigDecimal("80")
-        ));
+        ExchangeRatesContainer container = getExchangeRatesContainer();
 
         when(client.getRates(Currency.getBase())).thenReturn(container);
 
@@ -54,13 +51,7 @@ public class ExchangeRatesServiceImplTest {
 
     @Test
     public void shouldNotRequestRatesWhenTodayContainerAlreadyExists() {
-        ExchangeRatesContainer container = new ExchangeRatesContainer();
-        container.setRates(ImmutableMap.of(
-                Currency.EUR.name(), new BigDecimal("0.8"),
-                Currency.USD.name(), new BigDecimal("80")
-        ));
-
-        when(client.getRates(Currency.getBase())).thenReturn(container);
+        when(client.getRates(Currency.getBase())).thenReturn(getExchangeRatesContainer());
 
         ratesService.getCurrentRates();
 
@@ -69,24 +60,30 @@ public class ExchangeRatesServiceImplTest {
 
     @Test
     public void shouldConvertCurrency() {
-        ExchangeRatesContainer container = new ExchangeRatesContainer();
-        container.setRates(ImmutableMap.of(
-                Currency.EUR.name(), new BigDecimal("0.8"),
-                Currency.USD.name(), new BigDecimal("80")
-        ));
-
-        when(client.getRates(Currency.getBase())).thenReturn(container);
+        when(client.getRates(Currency.getBase())).thenReturn(getExchangeRatesContainer());
 
         BigDecimal amount = new BigDecimal(100);
         BigDecimal expectedConversion = new BigDecimal("80.00");
 
         BigDecimal result = ratesService.convert(Currency.USD, Currency.EUR, amount);
 
-        assertEquals(0,expectedConversion.compareTo(result));
+        assertEquals(0, expectedConversion.compareTo(result));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldFailToConvertWhenAmountIsNull() {
         ratesService.convert(Currency.EUR, Currency.USD, null);
     }
+
+    private ExchangeRatesContainer getExchangeRatesContainer() {
+        ExchangeRatesContainer container = new ExchangeRatesContainer();
+        container.setRates(ImmutableMap.of(
+                Currency.EUR.name(), new BigDecimal("0.8"),
+                Currency.USD.name(), new BigDecimal("80")
+        ));
+        container.setDate(LocalDate.now());
+        container.setBase(Currency.EUR);
+        return container;
+    }
+
 }
