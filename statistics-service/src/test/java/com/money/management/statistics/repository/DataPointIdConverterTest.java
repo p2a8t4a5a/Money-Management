@@ -48,7 +48,7 @@ public class DataPointIdConverterTest {
         DBObject object = new BasicDBObject(2);
 
         object.put("date", new Date());
-        object.put("account", 1);
+        object.put("account", "1");
 
         return object;
     }
