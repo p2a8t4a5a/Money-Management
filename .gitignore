@@ -10,3 +10,21 @@ monitoring/monitoring.iml
 notification-service/notification-service.iml
 registry/registry.iml
 statistics-service/statistics-service.iml
+
+# compiled output
+user-interface/dist
+user-interface/dist-server
+user-interface/tmp
+user-interface/out-tsc
+
+# dependencies
+user-interface/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
