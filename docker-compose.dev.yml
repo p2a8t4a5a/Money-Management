@@ -57,3 +57,8 @@ services:
 
   monitoring:
     build: monitoring
+
+  user-interface:
+    build: user-interface
+    ports:
+      - 4200:4200
