@@ -14,8 +14,6 @@ eureka:
   instance:
     prefer-ip-address: true
   client:
-    healthcheck:
-      enabled: true
     serviceUrl:
       defaultZone: http://registry:8761/eureka/
 

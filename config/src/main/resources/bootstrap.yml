@@ -1,7 +1,10 @@
 spring:
+  application:
+    name: config
   security:
     user:
       password: ${CONFIG_SERVICE_PASSWORD:}
+      name: user
   cloud:
     config:
       server:
