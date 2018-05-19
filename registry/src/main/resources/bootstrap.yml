@@ -14,7 +14,5 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://registry:8761/eureka/
   server:
     waitTimeInMsWhenSyncEmpty: 0
