@@ -3,7 +3,7 @@ spring:
     name: config
   security:
     user:
-      password: ${CONFIG_SERVICE_PASSWORD:}
+      password: ${CONFIG_SERVICE_PASSWORD}
       name: user
   cloud:
     config:
