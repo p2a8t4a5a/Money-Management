@@ -1,6 +1,5 @@
 rootProject.name = 'money-management'
 
-include 'monitoring'
 include 'registry'
 include 'gateway'
 include 'auth-service'

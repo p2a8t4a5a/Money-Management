@@ -50,9 +50,6 @@ services:
     ports:
       - 28000:27017
 
-  monitoring:
-    build: monitoring
-
   user-interface:
     build: user-interface
     ports:
