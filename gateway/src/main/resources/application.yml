@@ -1,14 +1,8 @@
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 20000
-
-ribbon:
-  ReadTimeout: 20000
-  ConnectTimeout: 20000
+spring:
+  application:
+    name: gateway
+  rabbitmq:
+    host: rabbitmq
 
 zuul:
   ignoredServices: '*'
@@ -43,3 +37,14 @@ zuul:
 
 server:
   port: 4000
+
+logging:
+  level:
+    org.springframework.security: INFO
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://registry:8761/eureka/

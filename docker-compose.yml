@@ -10,16 +10,6 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  config:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    image: daniel194/money-management-config
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
-
   registry:
     environment:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
