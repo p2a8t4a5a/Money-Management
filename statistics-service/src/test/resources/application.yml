@@ -13,4 +13,4 @@ spring:
       port: 0
 
 rates:
-  url: http://api.fixer.io
+  url: http://data.fixer.io/api/latest?access_key=3d07e82c993b66c9c2a85c1312e9105c
