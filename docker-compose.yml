@@ -15,9 +15,6 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: daniel194/money-management-registry
     restart: always
-    depends_on:
-      config:
-        condition: service_healthy
     ports:
       - 8761:8761
     logging:
@@ -30,9 +27,6 @@ services:
       CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
     image: daniel194/money-management-gateway
     restart: always
-    depends_on:
-      config:
-        condition: service_healthy
     ports:
       - 80:4000
     logging:
@@ -49,9 +43,6 @@ services:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: daniel194/money-management-auth-service
     restart: always
-    depends_on:
-      config:
-        condition: service_healthy
     logging:
       options:
         max-size: "10m"
@@ -74,9 +65,6 @@ services:
       MONGODB_PASSWORD: $MONGODB_PASSWORD
     image: daniel194/money-management-account-service
     restart: always
-    depends_on:
-      config:
-        condition: service_healthy
     logging:
       options:
         max-size: "10m"
@@ -100,9 +88,6 @@ services:
       STATISTICS_SERVICE_PASSWORD: $STATISTICS_SERVICE_PASSWORD
     image: daniel194/money-management-statistics-service
     restart: always
-    depends_on:
-      config:
-        condition: service_healthy
     logging:
       options:
         max-size: "10m"
@@ -125,9 +110,6 @@ services:
       NOTIFICATION_SERVICE_PASSWORD: $NOTIFICATION_SERVICE_PASSWORD
     image: daniel194/money-management-notification-service
     restart: always
-    depends_on:
-      config:
-        condition: service_healthy
     logging:
       options:
         max-size: "10m"
@@ -148,9 +130,6 @@ services:
       links:
         - gateway
       restart: always
-      depends_on:
-        config:
-          condition: service_healthy
       logging:
         options:
           max-size: "10m"
