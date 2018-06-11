@@ -1,10 +1,13 @@
 package com.money.management.auth.domain;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,8 +15,12 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
+    @Email
+    @Length(min = 3, max = 64)
     private String username;
 
+    @NotNull
+    @Length(min = 6, max = 40)
     private String password;
 
     @Override
