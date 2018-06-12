@@ -3,7 +3,9 @@ package com.money.management.auth.service;
 import com.money.management.auth.AuthApplication;
 import com.money.management.auth.repository.UserRepository;
 import com.money.management.auth.domain.User;
+import com.money.management.auth.util.UserUtil;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,27 +28,22 @@ public class UserServiceTest {
     @Mock
     private UserRepository repository;
 
+    private User user;
+
     @Before
     public void setup() {
+        this.user = UserUtil.getUser();
         initMocks(this);
     }
 
     @Test
     public void shouldCreateUser() {
-        User user = new User();
-        user.setUsername("name");
-        user.setPassword("password");
-
         userService.create(user);
         verify(repository, times(1)).save(user);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldFailWhenUserAlreadyExists() {
-        User user = new User();
-        user.setUsername("name");
-        user.setPassword("password");
-
         when(repository.findUsersByUsername(user.getUsername())).thenReturn(new User());
         userService.create(user);
     }

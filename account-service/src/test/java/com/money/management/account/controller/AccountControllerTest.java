@@ -96,12 +96,12 @@ public class AccountControllerTest {
     @Test
     public void shouldRegisterNewAccount() throws Exception {
         User user = new User();
-        user.setUsername("test");
+        user.setUsername("test@test.com");
         user.setPassword("password");
 
         String json = mapper.writeValueAsString(user);
 
-        mockMvc.perform(post("/").principal(new UserPrincipal("test"))
+        mockMvc.perform(post("/create").principal(new UserPrincipal("test"))
                 .contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
     }
@@ -113,7 +113,7 @@ public class AccountControllerTest {
 
         String json = mapper.writeValueAsString(user);
 
-        mockMvc.perform(post("/").principal(new UserPrincipal("test"))
+        mockMvc.perform(post("/create").principal(new UserPrincipal("test"))
                 .contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
     }

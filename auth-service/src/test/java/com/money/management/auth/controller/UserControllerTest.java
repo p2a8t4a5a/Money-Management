@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.money.management.auth.AuthApplication;
 import com.money.management.auth.domain.User;
 import com.money.management.auth.service.UserService;
+import com.money.management.auth.util.UserUtil;
 import com.sun.security.auth.UserPrincipal;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,13 +46,11 @@ public class UserControllerTest {
 
     @Test
     public void shouldCreateNewUser() throws Exception {
-        User user = new User();
-        user.setUsername("test");
-        user.setPassword("password");
+        User user = UserUtil.getUser();
 
         String json = mapper.writeValueAsString(user);
 
-        mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post("/users/create").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
     }
 
@@ -61,7 +60,7 @@ public class UserControllerTest {
         user.setUsername("t");
         user.setPassword("p");
 
-        mockMvc.perform(post("/users"))
+        mockMvc.perform(post("/users/create"))
                 .andExpect(status().isBadRequest());
     }
 

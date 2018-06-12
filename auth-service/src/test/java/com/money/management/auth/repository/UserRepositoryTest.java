@@ -2,6 +2,7 @@ package com.money.management.auth.repository;
 
 import com.money.management.auth.AuthApplication;
 import com.money.management.auth.domain.User;
+import com.money.management.auth.util.UserUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,8 @@ public class UserRepositoryTest {
 
     @Test
     public void shouldSaveAndFindUserByName() {
-        User user = new User();
-        user.setUsername("name");
-        user.setPassword("password");
+        User user = UserUtil.getUser();
+
         repository.save(user);
 
         User found = repository.findUsersByUsername(user.getUsername());
