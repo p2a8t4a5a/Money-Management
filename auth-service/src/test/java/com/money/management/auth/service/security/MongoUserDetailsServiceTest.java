@@ -25,7 +25,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class MongoUserDetailsServiceTest {
 
     @InjectMocks
-    private MongoUserDetailsService service;
+    private UserDetailsServiceImpl service;
 
     @Mock
     private UserRepository repository;

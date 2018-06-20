@@ -1,6 +1,6 @@
 package com.money.management.auth;
 
-import com.money.management.auth.service.security.MongoUserDetailsService;
+import com.money.management.auth.service.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +16,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -24,6 +26,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootApplication
 @EnableResourceServer
@@ -40,7 +45,7 @@ public class AuthApplication {
     protected static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
-        private MongoUserDetailsService userDetailsService;
+        private UserDetailsServiceImpl userDetailsService;
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -77,10 +82,13 @@ public class AuthApplication {
         private AuthenticationManager authenticationManager;
 
         @Autowired
-        private MongoUserDetailsService userDetailsService;
+        private UserDetailsServiceImpl userDetailsService;
 
         @Autowired
         private Environment env;
+
+        @Autowired
+        private PasswordEncoder passwordEncoder;
 
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -90,17 +98,17 @@ public class AuthApplication {
                     .scopes("ui")
                     .and()
                     .withClient("account-service")
-                    .secret(env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
+                    .secret(passwordEncoder.encode(env.getProperty("ACCOUNT_SERVICE_PASSWORD")))
                     .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
                     .scopes(SERVER)
                     .and()
                     .withClient("statistics-service")
-                    .secret(env.getProperty("STATISTICS_SERVICE_PASSWORD"))
+                    .secret(passwordEncoder.encode(env.getProperty("STATISTICS_SERVICE_PASSWORD")))
                     .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
                     .scopes(SERVER)
                     .and()
                     .withClient("notification-service")
-                    .secret(env.getProperty("NOTIFICATION_SERVICE_PASSWORD"))
+                    .secret(passwordEncoder.encode(env.getProperty("NOTIFICATION_SERVICE_PASSWORD")))
                     .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
                     .scopes(SERVER);
         }
@@ -120,4 +128,13 @@ public class AuthApplication {
                     .checkTokenAccess("isAuthenticated()");
         }
     }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        String idForEncode = "bcrypt";
+        Map<String, PasswordEncoder> encoderMap = new HashMap<>();
+        encoderMap.put(idForEncode, new BCryptPasswordEncoder());
+        return new DelegatingPasswordEncoder(idForEncode, encoderMap);
+    }
+
 }
