@@ -22,7 +22,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = AuthApplication.class)
 @WebAppConfiguration
-public class MongoUserDetailsServiceTest {
+public class UserDetailsServiceImplTest {
 
     @InjectMocks
     private UserDetailsServiceImpl service;
