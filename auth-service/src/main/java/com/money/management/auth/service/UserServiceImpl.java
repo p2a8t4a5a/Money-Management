@@ -5,19 +5,21 @@ import com.money.management.auth.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     private final Logger log = LoggerFactory.getLogger(getClass());
+
+    private PasswordEncoder encoder;
     private UserRepository repository;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository) {
+    public UserServiceImpl(UserRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.encoder = encoder;
     }
 
     @Override

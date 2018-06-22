@@ -1,6 +1,5 @@
 package com.money.management.auth;
 
-import com.money.management.auth.service.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +14,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -41,7 +42,12 @@ public class AuthApplication {
     protected static class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Autowired
-        private UserDetailsServiceImpl userDetailsService;
+        private UserDetailsService userDetailsService;
+
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+            return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        }
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
@@ -54,7 +60,7 @@ public class AuthApplication {
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userDetailsService)
-                    .passwordEncoder(new BCryptPasswordEncoder());
+                    .passwordEncoder(passwordEncoder());
         }
 
         @Override
@@ -74,11 +80,14 @@ public class AuthApplication {
         private TokenStore tokenStore = new InMemoryTokenStore();
 
         @Autowired
-        @Qualifier("authenticationManagerBean")
-        private AuthenticationManager authenticationManager;
+        private UserDetailsService userDetailsService;
 
         @Autowired
-        private UserDetailsServiceImpl userDetailsService;
+        private PasswordEncoder passwordEncoder;
+
+        @Autowired
+        @Qualifier("authenticationManagerBean")
+        private AuthenticationManager authenticationManager;
 
         @Autowired
         private Environment env;
@@ -91,17 +100,17 @@ public class AuthApplication {
                     .scopes("ui")
                     .and()
                     .withClient("account-service")
-                    .secret("{noop}" + env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
+                    .secret(passwordEncoder.encode(env.getProperty("ACCOUNT_SERVICE_PASSWORD")))
                     .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
                     .scopes(SERVER)
                     .and()
                     .withClient("statistics-service")
-                    .secret("{noop}" + env.getProperty("STATISTICS_SERVICE_PASSWORD"))
+                    .secret(passwordEncoder.encode(env.getProperty("STATISTICS_SERVICE_PASSWORD")))
                     .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
                     .scopes(SERVER)
                     .and()
                     .withClient("notification-service")
-                    .secret("{noop}" + env.getProperty("NOTIFICATION_SERVICE_PASSWORD"))
+                    .secret(passwordEncoder.encode(env.getProperty("NOTIFICATION_SERVICE_PASSWORD")))
                     .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
                     .scopes(SERVER);
         }
@@ -121,5 +130,4 @@ public class AuthApplication {
                     .checkTokenAccess("isAuthenticated()");
         }
     }
-
 }
