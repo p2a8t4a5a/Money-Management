@@ -83,9 +83,6 @@ public class AuthApplication {
         private UserDetailsService userDetailsService;
 
         @Autowired
-        private PasswordEncoder passwordEncoder;
-
-        @Autowired
         @Qualifier("authenticationManagerBean")
         private AuthenticationManager authenticationManager;
 
@@ -100,17 +97,17 @@ public class AuthApplication {
                     .scopes("ui")
                     .and()
                     .withClient("account-service")
-                    .secret(passwordEncoder.encode(env.getProperty("ACCOUNT_SERVICE_PASSWORD")))
+                    .secret("{noop}" + env.getProperty("ACCOUNT_SERVICE_PASSWORD"))
                     .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
                     .scopes(SERVER)
                     .and()
                     .withClient("statistics-service")
-                    .secret(passwordEncoder.encode(env.getProperty("STATISTICS_SERVICE_PASSWORD")))
+                    .secret("{noop}" + env.getProperty("STATISTICS_SERVICE_PASSWORD"))
                     .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
                     .scopes(SERVER)
                     .and()
                     .withClient("notification-service")
-                    .secret(passwordEncoder.encode(env.getProperty("NOTIFICATION_SERVICE_PASSWORD")))
+                    .secret("{noop}" + env.getProperty("NOTIFICATION_SERVICE_PASSWORD"))
                     .authorizedGrantTypes(CLIENT_CREDENTIAL, REFRESH_TOKEN)
                     .scopes(SERVER);
         }
