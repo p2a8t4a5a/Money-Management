@@ -89,15 +89,12 @@ public class AuthApplication {
         @Autowired
         private Environment env;
 
-        @Autowired
-        private PasswordEncoder passwordEncoder;
-
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients.inMemory()
                     .withClient("browser")
                     .authorizedGrantTypes(REFRESH_TOKEN, "password")
-                    .secret(passwordEncoder.encode("test123"))
+                    .secret("{noop}")
                     .scopes("ui")
                     .and()
                     .withClient("account-service")
