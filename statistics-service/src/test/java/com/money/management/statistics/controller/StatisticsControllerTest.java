@@ -58,11 +58,12 @@ public class StatisticsControllerTest {
     @Test
     public void shouldGetStatisticsByAccountName() throws Exception {
         DataPoint dataPoint = new DataPoint();
-        dataPoint.setId(new DataPointId("test", new Date()));
+        dataPoint.setId(new DataPointId("test@test.com", new Date()));
 
         when(statisticsService.findByAccountName(dataPoint.getId().getAccount())).thenReturn(ImmutableList.of(dataPoint));
 
-        mockMvc.perform(get("/test").principal(new UserPrincipal(dataPoint.getId().getAccount())))
+        mockMvc.perform(get("/find?name=test@test.com")
+                .principal(new UserPrincipal(dataPoint.getId().getAccount())))
                 .andExpect(jsonPath("$[0].id.account").value(dataPoint.getId().getAccount()))
                 .andExpect(status().isOk());
     }
@@ -88,8 +89,8 @@ public class StatisticsControllerTest {
 
         String json = mapper.writeValueAsString(account);
 
-        mockMvc.perform(put("/test").contentType(MediaType.APPLICATION_JSON).content(json))
-                .andExpect(status().isOk());
+        mockMvc.perform(put("/find?name=test@test.com").contentType(MediaType.APPLICATION_JSON)
+                .content(json)).andExpect(status().isOk());
 
         verify(statisticsService, times(1)).save(anyString(), any(Account.class));
     }

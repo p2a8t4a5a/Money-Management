@@ -27,14 +27,14 @@ public class StatisticsController {
     }
 
     @PreAuthorize("#oauth2.hasScope('server') or #accountName.equals('demo')")
-    @RequestMapping(value = "/{accountName}", method = RequestMethod.GET)
-    public List<DataPoint> getStatisticsByAccountName(@PathVariable String accountName) {
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public List<DataPoint> getStatisticsByAccountName(@RequestParam("name") String accountName) {
         return statisticsService.findByAccountName(accountName);
     }
 
     @PreAuthorize("#oauth2.hasScope('server')")
-    @RequestMapping(value = "/{accountName}", method = RequestMethod.PUT)
-    public void saveAccountStatistics(@PathVariable String accountName, @Valid @RequestBody Account account) {
+    @RequestMapping(value = "/find", method = RequestMethod.PUT)
+    public void saveAccountStatistics(@RequestParam("name") String accountName, @Valid @RequestBody Account account) {
         statisticsService.save(accountName, account);
     }
 }
