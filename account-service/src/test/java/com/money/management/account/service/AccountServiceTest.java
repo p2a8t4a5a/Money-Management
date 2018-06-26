@@ -48,7 +48,7 @@ public class AccountServiceTest {
     @Test
     public void shouldFindByName() {
         Account account = new Account();
-        account.setName("test");
+        account.setName("test@test.com");
 
         when(accountService.findByName(account.getName())).thenReturn(account);
         Account found = accountService.findByName(account.getName());
@@ -64,7 +64,7 @@ public class AccountServiceTest {
     @Test
     public void shouldCreateAccountWithGivenUser() {
         User user = new User();
-        user.setUsername("test");
+        user.setUsername("test@test.com");
 
         Account account = accountService.create(user);
 
@@ -85,8 +85,8 @@ public class AccountServiceTest {
         Account update = AccountUtil.getAccount(ItemUtil.getGrocery());
         Account account = new Account();
 
-        when(accountService.findByName("test")).thenReturn(account);
-        accountService.saveChanges("test", update);
+        when(accountService.findByName("test@test.com")).thenReturn(account);
+        accountService.saveChanges("test@test.com", update);
 
         assertEquals(update.getNote(), account.getNote());
         assertNotNull(account.getLastSeen());
@@ -113,7 +113,7 @@ public class AccountServiceTest {
         assertEquals(update.getIncomes().get(0).getIcon(), account.getIncomes().get(0).getIcon());
 
         verify(repository, times(1)).save(account);
-        verify(statisticsClient, times(1)).updateStatistics("test", account);
+        verify(statisticsClient, times(1)).updateStatistics("test@test.com", account);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -122,7 +122,7 @@ public class AccountServiceTest {
         update.setIncomes(Collections.singletonList(new Item()));
         update.setExpenses(Collections.singletonList(new Item()));
 
-        when(accountService.findByName("test")).thenReturn(null);
-        accountService.saveChanges("test", update);
+        when(accountService.findByName("test@test.com")).thenReturn(null);
+        accountService.saveChanges("test@test.com", update);
     }
 }

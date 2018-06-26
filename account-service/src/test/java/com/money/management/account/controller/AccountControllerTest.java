@@ -49,11 +49,11 @@ public class AccountControllerTest {
     @Test
     public void shouldGetAccountByName() throws Exception {
         Account account = new Account();
-        account.setName("test");
+        account.setName("test@test.com");
 
         when(accountService.findByName(account.getName())).thenReturn(account);
 
-        mockMvc.perform(get("/" + account.getName()))
+        mockMvc.perform(get("/find?name=" + account.getName()))
                 .andExpect(jsonPath("$.name").value(account.getName()))
                 .andExpect(status().isOk());
     }
@@ -61,7 +61,7 @@ public class AccountControllerTest {
     @Test
     public void shouldGetCurrentAccount() throws Exception {
         Account account = new Account();
-        account.setName("test");
+        account.setName("test@test.com");
 
         when(accountService.findByName(account.getName())).thenReturn(account);
 
@@ -84,7 +84,7 @@ public class AccountControllerTest {
     @Test
     public void shouldFailOnValidationTryingToSaveCurrentAccount() throws Exception {
         Account account = new Account();
-        account.setName("test");
+        account.setName("test@test.com");
 
         String json = mapper.writeValueAsString(account);
 

@@ -11,7 +11,7 @@ public class AccountUtil {
 
     public static Account getAccount(Item... expenses) {
         Account account = new Account();
-        account.setName("test");
+        account.setName("test@test.com");
         account.setNote("test note");
         account.setLastSeen(new Date());
         account.setSaving(SavingUtil.getSaving());

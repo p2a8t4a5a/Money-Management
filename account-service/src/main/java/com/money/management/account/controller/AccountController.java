@@ -21,8 +21,8 @@ public class AccountController {
     }
 
     @PreAuthorize("#oauth2.hasScope('server') or #name.equals('demo')")
-    @RequestMapping(path = "/{name}", method = RequestMethod.GET)
-    public Account getAccountByName(@PathVariable String name) {
+    @RequestMapping(path = "/find", method = RequestMethod.GET)
+    public Account getAccountByName(@RequestParam("name") String name) {
         return accountService.findByName(name);
     }
 
