@@ -42,10 +42,6 @@ import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent
-    ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -87,6 +83,10 @@ import {CommonModule} from "@angular/common";
         RouterModule.forRoot([
             {path: 'login', component: LoginComponent}
         ])
+    ],
+    declarations: [
+        AppComponent,
+        LoginComponent
     ],
     providers: [CookieService],
     bootstrap: [AppComponent]
