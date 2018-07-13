@@ -1,19 +1,51 @@
-<div>
-  <mat-card>
-    <mat-card-title>Login</mat-card-title>
-    <form (ngSubmit)="login()" #loginForm="ngForm" class="form-component">
-      <mat-form-field>
-        <input matInput type="email" placeholder="Email" [(ngModel)]="loginData.username" required name="email">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="password" placeholder="Password" [(ngModel)]="loginData.password" required
-               name="password">
-      </mat-form-field>
-      <mat-card-actions>
-        <button mat-button type="submit" class="btn" [disabled]="!loginForm.form.valid">Login
-        </button>
-        <button mat-button (click)="createAccount()" type="submit">Create Account</button>
-      </mat-card-actions>
-    </form>
-  </mat-card>
+<div [@animation]="state">
+    <mat-card *ngIf="state == 'login'">
+        <mat-card-title>Login</mat-card-title>
+        <form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm" class="form-component">
+            <mat-form-field>
+                <input matInput type="email" placeholder="Email" [(ngModel)]="loginData.username" required name="email">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Password" [(ngModel)]="loginData.password" required
+                       name="password">
+            </mat-form-field>
+            <mat-card-actions>
+                <button mat-button type="submit" class="btn" [disabled]="!loginForm.form.valid">Login
+                </button>
+                <button mat-button (click)="createAccount()" type="submit">Create Account</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+    <mat-card *ngIf="state == 'createAccount'">
+        <mat-card-title>Create Account</mat-card-title>
+
+        <form (ngSubmit)="onSubmitCreateAccount()" #accountForm="ngForm" class="form-component">
+            <mat-form-field>
+                <input matInput placeholder="First Name" required name="firstName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Last Name" required name="lastName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="email" placeholder="Email" required name="email">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Password" required
+                       name="password">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Repeat Password" required
+                       name="repeatPassword">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Phone Number" required
+                       name="phoneNumber">
+            </mat-form-field>
+            <mat-card-actions>
+                <button mat-button type="submit" class="btn" [disabled]="!accountForm.form.valid">Submit
+                </button>
+                <button mat-button (click)="login()" type="submit">Login</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
 </div>

@@ -81,7 +81,7 @@ import {CommonModule} from "@angular/common";
         HttpClientModule,
         CommonModule,
         RouterModule.forRoot([
-            {path: 'login', component: LoginComponent}
+            {path: '', component: LoginComponent}
         ])
     ],
     declarations: [
