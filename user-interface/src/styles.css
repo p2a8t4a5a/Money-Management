@@ -289,12 +289,12 @@ header {
 }
 
 .header-info {
-    position: absolute;
+    margin-top: 20%;
     bottom: 0;
     width: 100%;
     left: 0;
     right: 0;
-    margin-left: 0px;
+    margin-left: 0;
     margin-bottom: 12%;
 }
 
@@ -407,23 +407,8 @@ hr.line {
     max-width: 440px;
 }
 
-#invite {
+#sing-up {
     background: #f2f2f2;
-}
-
-.fa-envelope-o {
-    color: #4ec3cd;
-    font-size: 22px;
-    display: block;
-    padding-top: 15px;
-    width: 60px;
-    height: 60px;
-    border: 2px solid #4ec3cd;
-    -moz-border-radius: 30px;
-    -o-border-radius: 30px;
-    -webkit-border-radius: 30px;
-    border-radius: 30px;
-    margin: auto;
 }
 
 .news-container {

@@ -19,7 +19,7 @@
     padding:0 10px;
 }
 
-.fa {
+.fa-social {
     padding: 20px;
     font-size: 30px;
     width: 65px;
@@ -47,4 +47,17 @@
 .fa-instagram:hover {
     background: #125688;
     color: white;
+}
+
+.fa-main-info {
+    font-size: 40px;
+    display: block;
+    padding-top: 15px;
+    width: 60px;
+    height: 60px;
+    -moz-border-radius: 30px;
+    -o-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    border-radius: 30px;
+    margin: auto;
 }
