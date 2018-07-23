@@ -6,18 +6,22 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
     animations: [
-        trigger('animation', [
-            transition('createAccount <=> login', [
-                style({transform: 'rotateY(180deg)'}),
-                animate(500)
-            ])
+        trigger('flipState', [
+            state('active', style({
+                transform: 'rotateY(179.9deg)'
+            })),
+            state('inactive', style({
+                transform: 'rotateY(0)'
+            })),
+            transition('active => inactive', animate('1000ms ease-out')),
+            transition('inactive => active', animate('1000ms ease-in'))
         ])
     ]
 })
 export class LoginComponent implements OnInit {
     public loginData = {username: '', password: ''};
 
-    public state = 'login';
+    flip: string = 'inactive';
 
     constructor() {
     }
@@ -33,12 +37,8 @@ export class LoginComponent implements OnInit {
         //TODO
     }
 
-    login() {
-        this.state = 'login';
-    }
-
-    createAccount() {
-        this.state = 'createAccount';
+    toggleFlip() {
+        this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
     }
 
 }

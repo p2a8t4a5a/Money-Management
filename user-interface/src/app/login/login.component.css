@@ -15,8 +15,8 @@
 }
 
 .middle-text span {
-    background:#f2f2f2;
-    padding:0 10px;
+    background: #f2f2f2;
+    padding: 0 10px;
 }
 
 .fa-social {
@@ -60,4 +60,40 @@
     -webkit-border-radius: 30px;
     border-radius: 30px;
     margin: auto;
+}
+
+#flipper {
+    position: relative;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transform: transform 1s;
+    -ms-transform: transform 1s;
+    transform: transform 1s;
+}
+
+.front-card, .back-card {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.front-card {
+    -webkit-transform : rotateY(0deg);
+    -ms-transform     : rotateY(0deg);
+    transform         : rotateY(0deg);
+}
+
+.back-card {
+    -webkit-transform : rotateY(-180deg);
+    -ms-transform     : rotateY(-180deg);
+    transform         : rotateY(-180deg);
 }

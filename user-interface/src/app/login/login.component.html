@@ -179,9 +179,7 @@
                     <li class="features last btn btn-secondary btn-wide"><a href="#">Get Started</a></li>
                 </ul>
             </div>
-
         </div>
-
     </div>
 </section>
 
@@ -190,8 +188,8 @@
     <div class="container login-container">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2 text-center wow fadeInUp" data-wow-delay="0.5s">
-                <div [@animation]="state">
-                    <div *ngIf="state == 'login'">
+                <div id="flipper" [@flipState]="flip">
+                    <div class="front-card">
                         <h2 class="black">Login</h2>
                         <br/>
                         <div class="row">
@@ -204,10 +202,10 @@
                                                [(ngModel)]="loginData.password" placeholder="Password" required>
                                     </div>
                                     <div class="space">
-                                        <button type="submit" (click)="login()" class="btn btn-primary btn-lg"
+                                        <button type="submit" class="btn btn-primary btn-lg"
                                                 [disabled]="!loginForm.form.valid">Login
                                         </button>
-                                        <button (click)="createAccount()" class="btn btn-primary btn-lg">Create Account
+                                        <button (click)="toggleFlip()" class="btn btn-primary btn-lg">Create Account
                                         </button>
                                     </div>
                                 </form>
@@ -215,7 +213,7 @@
                         </div>
                     </div>
 
-                    <div *ngIf="state == 'createAccount'">
+                    <div class="back-card">
                         <h2 class="black">Create Account</h2>
                         <br/>
                         <div class="row">
@@ -227,14 +225,14 @@
                                         <input type="password" class="form-control" name="password"
                                                [(ngModel)]="loginData.password" placeholder="Password" required>
                                         <input type="password" class="form-control" name="repeatPassword"
-                                               [(ngModel)]="loginData.repeatPassword" placeholder="Repeat Password"
+                                                placeholder="Repeat Password"
                                                required>
                                     </div>
                                     <div class="space">
                                         <button type="submit" class="btn btn-primary btn-lg"
                                                 [disabled]="!accountForm.form.valid">Submit
                                         </button>
-                                        <button (click)="login()" class="btn btn-primary btn-lg">Login</button>
+                                        <button (click)="toggleFlip()" class="btn btn-primary btn-lg">Login</button>
                                     </div>
                                 </form>
                             </div>
