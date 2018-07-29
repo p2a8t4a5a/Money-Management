@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChildren} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {User} from '../domain/User';
+import {MatSnackBar} from "@angular/material/typings/esm5/snack-bar";
 
 @Component({
     selector: 'app-login',
@@ -19,26 +21,36 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ]
 })
 export class LoginComponent implements OnInit {
-    public loginData = {username: '', password: ''};
+    private re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    flip: string = 'inactive';
+    public user: User;
+    public repeatPassword: String;
 
-    constructor() {
+    flip: String = 'inactive';
+
+    constructor(public snackBar: MatSnackBar) {
+        this.user = new User();
+        this.repeatPassword = '';
     }
 
     ngOnInit() {
     }
 
     onSubmitCreateAccount() {
-        //TODO
+        // TODO
     }
 
     onSubmitLogin() {
-        //TODO
+        let regexp = new RegExp(this.re);
+
+        if (!regexp.test(this.user.userName.toString())) {
+            this.snackBar.open("Invalid email address !", "OK");
+        }
+
     }
 
     toggleFlip() {
-        this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
+        this.flip = (this.flip === 'inactive') ? 'active' : 'inactive';
     }
 
 }

@@ -40,6 +40,19 @@ import {MatStepperModule} from "@angular/material/typings/stepper";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
+import {MatFormFieldModule} from "@angular/material/typings/esm5/form-field";
+
+const MATERIAL_MODULES = [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule
+];
 
 @NgModule({
     imports: [

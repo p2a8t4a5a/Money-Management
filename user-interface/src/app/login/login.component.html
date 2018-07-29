@@ -197,9 +197,9 @@
                                 <form role="form" (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
                                     <div class="form-group space">
                                         <input type="email" class="form-control" name="email"
-                                               [(ngModel)]="loginData.username" placeholder="Email" required>
+                                               [(ngModel)]="user.userName" placeholder="Email" required>
                                         <input type="password" class="form-control" name="password"
-                                               [(ngModel)]="loginData.password" placeholder="Password" required>
+                                               [(ngModel)]="user.password" placeholder="Password" required>
                                     </div>
                                     <div class="space">
                                         <button type="submit" class="btn btn-primary btn-lg"
@@ -221,11 +221,11 @@
                                 <form (ngSubmit)="onSubmitCreateAccount()" #accountForm="ngForm">
                                     <div class="form-group space">
                                         <input type="email" class="form-control" name="email"
-                                               [(ngModel)]="loginData.username" placeholder="Email" required>
+                                               [(ngModel)]="user.userName" placeholder="Email" required>
                                         <input type="password" class="form-control" name="password"
-                                               [(ngModel)]="loginData.password" placeholder="Password" required>
+                                               [(ngModel)]="user.password" placeholder="Password" required>
                                         <input type="password" class="form-control" name="repeatPassword"
-                                                placeholder="Repeat Password"
+                                               placeholder="Repeat Password" [(ngModel)]="repeatPassword"
                                                required>
                                     </div>
                                     <div class="space">
