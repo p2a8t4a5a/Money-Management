@@ -194,16 +194,33 @@
                         <br/>
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                                <form role="form" (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
-                                    <div class="form-group space">
-                                        <input type="email" class="form-control" name="email"
-                                               [(ngModel)]="user.userName" placeholder="Email" required>
-                                        <input type="password" class="form-control" name="password"
-                                               [(ngModel)]="user.password" placeholder="Password" required>
+                                <form (ngSubmit)="onSubmitLogin()" [formGroup]="loginForm">
+                                    <div class="form-group">
+                                        <mat-form-field class="form-field">
+                                            <mat-icon matPrefix>email</mat-icon>
+                                            <input matInput placeholder="Email" formControlName="email" type="email"
+                                                   class="form-control">
+                                            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                                                This is required.
+                                            </mat-error>
+                                            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+                                                Please enter a valid email address.
+                                            </mat-error>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="form-field">
+                                            <mat-icon matPrefix>vpn_key</mat-icon>
+                                            <input matInput placeholder="Password" formControlName="password" [type]="hidePassword ? 'password': 'text'"
+                                                   class="form-control">
+                                            <button mat-icon-button matSuffix [matTooltip]="(hidePassword ? 'Show' : 'Hide') + ' Password'" (click)="hidePassword = !hidePassword">
+                                                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                            </button>
+                                            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">This is required.</mat-error>
+                                        </mat-form-field>
                                     </div>
                                     <div class="space">
                                         <button type="submit" class="btn btn-primary btn-lg"
-                                                [disabled]="!loginForm.form.valid">Login
+                                                [disabled]="loginForm.invalid">Login
                                         </button>
                                         <button (click)="toggleFlip()" class="btn btn-primary btn-lg">Create Account
                                         </button>

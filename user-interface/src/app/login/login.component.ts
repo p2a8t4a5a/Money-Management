@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChildren} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../domain/User';
-import {MatSnackBar} from "@angular/material/typings/esm5/snack-bar";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     selector: 'app-login',
@@ -21,16 +21,22 @@ import {MatSnackBar} from "@angular/material/typings/esm5/snack-bar";
     ]
 })
 export class LoginComponent implements OnInit {
-    private re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
     public user: User;
     public repeatPassword: String;
+    public hidePassword: Boolean;
+    public flip: String;
+    public loginForm: FormGroup;
 
-    flip: String = 'inactive';
-
-    constructor(public snackBar: MatSnackBar) {
+    constructor(private fb: FormBuilder) {
         this.user = new User();
         this.repeatPassword = '';
+        this.flip = 'inactive';
+        this.hidePassword = true;
+
+        this.loginForm = fb.group({
+            email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
+            password: ['', Validators.required, Validators.minLength(6), Validators.maxLength(40)]
+        });
     }
 
     ngOnInit() {
@@ -41,12 +47,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmitLogin() {
-        let regexp = new RegExp(this.re);
-
-        if (!regexp.test(this.user.userName.toString())) {
-            this.snackBar.open("Invalid email address !", "OK");
-        }
-
+        // TODO
     }
 
     toggleFlip() {
