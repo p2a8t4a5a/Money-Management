@@ -206,6 +206,9 @@
                                             <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
                                                 Please enter a valid email address.
                                             </mat-error>
+                                            <mat-error *ngIf="loginForm.get('email')?.hasError('maxlength')">
+                                                The email must be maximum 64 characters long.
+                                            </mat-error>
                                         </mat-form-field>
 
                                         <mat-form-field class="form-field">
@@ -216,6 +219,12 @@
                                                 <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                                             </button>
                                             <mat-error *ngIf="loginForm.get('password')?.hasError('required')">This is required.</mat-error>
+                                            <mat-error *ngIf="loginForm.get('password')?.hasError('maxlength')">
+                                                The password must be maximum 40 characters long.
+                                            </mat-error>
+                                            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+                                                The password must be at least 6 characters long.
+                                            </mat-error>
                                         </mat-form-field>
                                     </div>
                                     <div class="space">
