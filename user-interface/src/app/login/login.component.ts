@@ -23,19 +23,30 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class LoginComponent implements OnInit {
     public user: User;
     public repeatPassword: String;
-    public hidePassword: Boolean;
+    public hidePassword1: Boolean;
+    public hidePassword2: Boolean;
+    public hidePassword3: Boolean;
     public flip: String;
     public loginForm: FormGroup;
+    public createAccountForm: FormGroup;
 
     constructor(private fb: FormBuilder) {
         this.user = new User();
         this.repeatPassword = '';
         this.flip = 'inactive';
-        this.hidePassword = true;
+        this.hidePassword1 = true;
+        this.hidePassword2 = true;
+        this.hidePassword3 = true;
 
         this.loginForm = fb.group({
             email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
             password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]]
+        });
+
+        this.createAccountForm = fb.group({
+            email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
+            password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
+            repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]]
         });
     }
 
