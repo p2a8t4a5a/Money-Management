@@ -194,7 +194,7 @@
                         <br/>
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                                <form (ngSubmit)="onSubmitLogin()" [formGroup]="loginForm">
+                                <form (ngSubmit)="onSubmitLogin()" [formGroup]="loginForm" autocomplete="off">
                                     <div class="form-group">
                                         <mat-form-field class="form-field">
                                             <mat-icon matPrefix>email</mat-icon>
@@ -213,12 +213,17 @@
 
                                         <mat-form-field class="form-field">
                                             <mat-icon matPrefix>vpn_key</mat-icon>
-                                            <input matInput placeholder="Password" formControlName="password" [type]="hidePassword1 ? 'password': 'text'"
+                                            <input matInput placeholder="Password" formControlName="password"
+                                                   [type]="hidePassword1 ? 'password': 'text'"
                                                    class="form-control" autocomplete="off">
-                                            <button mat-icon-button matSuffix [matTooltip]="(hidePassword1 ? 'Show' : 'Hide') + ' Password'" (click)="hidePassword1 = !hidePassword1">
+                                            <button mat-icon-button matSuffix
+                                                    [matTooltip]="(hidePassword1 ? 'Show' : 'Hide') + ' Password'"
+                                                    (click)="hidePassword1 = !hidePassword1">
                                                 <mat-icon>{{hidePassword1 ? 'visibility_off' : 'visibility'}}</mat-icon>
                                             </button>
-                                            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">This is required.</mat-error>
+                                            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">This is
+                                                required.
+                                            </mat-error>
                                             <mat-error *ngIf="loginForm.get('password')?.hasError('maxlength')">
                                                 The password must be maximum 40 characters long.
                                             </mat-error>
@@ -244,7 +249,8 @@
                         <br/>
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                                <form (ngSubmit)="onSubmitCreateAccount()" [formGroup]="createAccountForm">
+                                <form (ngSubmit)="onSubmitCreateAccount()" [formGroup]="createAccountForm"
+                                      autocomplete="off">
                                     <div class="form-group">
                                         <mat-form-field class="form-field">
                                             <mat-icon matPrefix>email</mat-icon>
@@ -263,12 +269,17 @@
 
                                         <mat-form-field class="form-field">
                                             <mat-icon matPrefix>vpn_key</mat-icon>
-                                            <input matInput placeholder="Password" formControlName="password" [type]="hidePassword2 ? 'password': 'text'"
+                                            <input matInput placeholder="Password" formControlName="password"
+                                                   [type]="hidePassword2 ? 'password': 'text'"
                                                    class="form-control" autocomplete="off">
-                                            <button mat-icon-button matSuffix [matTooltip]="(hidePassword2 ? 'Show' : 'Hide') + ' Password'" (click)="hidePassword2 = !hidePassword2">
+                                            <button mat-icon-button matSuffix
+                                                    [matTooltip]="(hidePassword2 ? 'Show' : 'Hide') + ' Password'"
+                                                    (click)="hidePassword2 = !hidePassword2">
                                                 <mat-icon>{{hidePassword2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                                             </button>
-                                            <mat-error *ngIf="createAccountForm.get('password')?.hasError('required')">This is required.</mat-error>
+                                            <mat-error *ngIf="createAccountForm.get('password')?.hasError('required')">
+                                                This is required.
+                                            </mat-error>
                                             <mat-error *ngIf="createAccountForm.get('password')?.hasError('maxlength')">
                                                 The password must be maximum 40 characters long.
                                             </mat-error>
@@ -279,16 +290,25 @@
 
                                         <mat-form-field class="form-field">
                                             <mat-icon matPrefix>vpn_key</mat-icon>
-                                            <input matInput placeholder="Repeat Password" formControlName="repeatPassword" [type]="hidePassword3 ? 'password': 'text'"
+                                            <input matInput placeholder="Repeat Password"
+                                                   formControlName="repeatPassword"
+                                                   [type]="hidePassword3 ? 'password': 'text'"
                                                    class="form-control" autocomplete="off">
-                                            <button mat-icon-button matSuffix [matTooltip]="(hidePassword3 ? 'Show' : 'Hide') + ' Password'" (click)="hidePassword3 = !hidePassword3">
+                                            <button mat-icon-button matSuffix
+                                                    [matTooltip]="(hidePassword3 ? 'Show' : 'Hide') + ' Password'"
+                                                    (click)="hidePassword3 = !hidePassword3">
                                                 <mat-icon>{{hidePassword3 ? 'visibility_off' : 'visibility'}}</mat-icon>
                                             </button>
-                                            <mat-error *ngIf="createAccountForm.get('repeatPassword')?.hasError('required')">This is required.</mat-error>
-                                            <mat-error *ngIf="createAccountForm.get('repeatPassword')?.hasError('maxlength')">
+                                            <mat-error
+                                                    *ngIf="createAccountForm.get('repeatPassword')?.hasError('required')">
+                                                This is required.
+                                            </mat-error>
+                                            <mat-error
+                                                    *ngIf="createAccountForm.get('repeatPassword')?.hasError('maxlength')">
                                                 The password must be maximum 40 characters long.
                                             </mat-error>
-                                            <mat-error *ngIf="createAccountForm.get('repeatPassword')?.hasError('minlength')">
+                                            <mat-error
+                                                    *ngIf="createAccountForm.get('repeatPassword')?.hasError('minlength')">
                                                 The password must be at least 6 characters long.
                                             </mat-error>
                                         </mat-form-field>

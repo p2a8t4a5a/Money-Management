@@ -672,3 +672,8 @@ footer {
 .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start {
     border-color: #70cbce;
 }
+
+input.mat-input-element {
+   margin-top: 1px;
+    margin-bottom: 2px;
+}
