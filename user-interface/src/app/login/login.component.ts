@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../domain/User';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material";
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 
 @Component({
     selector: 'app-login',
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
     public loginForm: FormGroup;
     public createAccountForm: FormGroup;
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private snackbar: MatSnackBar) {
         this.user = new User();
         this.repeatPassword = '';
         this.flip = 'inactive';
@@ -54,7 +56,10 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmitCreateAccount() {
-        // TODO
+        this.snackbar.openFromComponent(SnackBarComponent, {
+            horizontalPosition: "start",
+            panelClass: ['mat-elevation-z3']
+        });
     }
 
     onSubmitLogin() {

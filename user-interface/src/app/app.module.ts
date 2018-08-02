@@ -8,6 +8,7 @@ import {MaterialModule} from "./material.modules";
 import {AppRouting} from "./app.routing";
 import {LoginComponent} from "./login/login.component";
 import {CookieService} from "ngx-cookie-service";
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
 
 @NgModule({
     imports: [
@@ -20,11 +21,13 @@ import {CookieService} from "ngx-cookie-service";
     ],
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        SnackBarComponent
     ],
     bootstrap: [AppComponent],
     providers: [CookieService],
     entryComponents: [
+        SnackBarComponent
     ]
 })
 export class AppModule { }
