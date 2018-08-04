@@ -293,7 +293,8 @@
                                             <input matInput placeholder="Repeat Password"
                                                    formControlName="repeatPassword"
                                                    [type]="hidePassword3 ? 'password': 'text'"
-                                                   class="form-control" autocomplete="off">
+                                                   class="form-control" autocomplete="off"
+                                                   [errorStateMatcher]="matcher">
                                             <button mat-icon-button matSuffix
                                                     [matTooltip]="(hidePassword3 ? 'Show' : 'Hide') + ' Password'"
                                                     (click)="hidePassword3 = !hidePassword3">
@@ -310,6 +311,9 @@
                                             <mat-error
                                                     *ngIf="createAccountForm.get('repeatPassword')?.hasError('minlength')">
                                                 The password must be at least 6 characters long.
+                                            </mat-error>
+                                            <mat-error *ngIf="createAccountForm.hasError('notSame')">
+                                                Passwords do not match
                                             </mat-error>
                                         </mat-form-field>
 
