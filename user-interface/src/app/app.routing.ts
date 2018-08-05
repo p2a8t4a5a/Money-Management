@@ -1,8 +1,8 @@
 import {RouterModule, Routes} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
-import {LoginComponent} from "./login/login.component";
+import {FrontPageComponent} from "./front-page/front-page.component";
 
 const APP_ROUTES: Routes = [
-    {path: '', component: LoginComponent}
+    {path: '', component: FrontPageComponent}
 ];
 export const AppRouting: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
