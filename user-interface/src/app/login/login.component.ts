@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         this.createAccountForm = fb.group({
             email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
             password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
-            repeatPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]]
+            repeatPassword: ['']
         }, {validator: this.checkPasswords});
     }
 

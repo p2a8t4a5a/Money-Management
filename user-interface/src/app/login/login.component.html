@@ -300,18 +300,6 @@
                                                     (click)="hidePassword3 = !hidePassword3">
                                                 <mat-icon>{{hidePassword3 ? 'visibility_off' : 'visibility'}}</mat-icon>
                                             </button>
-                                            <mat-error
-                                                    *ngIf="createAccountForm.get('repeatPassword')?.hasError('required')">
-                                                This is required.
-                                            </mat-error>
-                                            <mat-error
-                                                    *ngIf="createAccountForm.get('repeatPassword')?.hasError('maxlength')">
-                                                The password must be maximum 40 characters long.
-                                            </mat-error>
-                                            <mat-error
-                                                    *ngIf="createAccountForm.get('repeatPassword')?.hasError('minlength')">
-                                                The password must be at least 6 characters long.
-                                            </mat-error>
                                             <mat-error *ngIf="createAccountForm.hasError('notSame')">
                                                 Passwords do not match
                                             </mat-error>
