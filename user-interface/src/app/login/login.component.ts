@@ -24,7 +24,6 @@ import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 })
 export class LoginComponent implements OnInit {
     public user: User;
-    public repeatPassword: String;
     public hidePassword1: Boolean;
     public hidePassword2: Boolean;
     public hidePassword3: Boolean;
@@ -35,7 +34,6 @@ export class LoginComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private snackbar: MatSnackBar) {
         this.user = new User();
-        this.repeatPassword = '';
         this.flip = 'inactive';
         this.hidePassword1 = true;
         this.hidePassword2 = true;
