@@ -30,19 +30,19 @@
 
     <div class="row header-info">
       <div class="col-sm-10 col-sm-offset-1 text-center">
-        <h1 [@showMessage1]>A free landing page theme</h1>
+        <h1 [@showMessage1]="headerState">A free landing page theme</h1>
         <br/>
-        <p class="lead" [@showMessage2]>Lorem ipsum dolor sit amet, consectetur adipis. <br>
+        <p class="lead" [@showMessage2]="headerState">Lorem ipsum dolor sit amet, consectetur adipis. <br>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit sit dol mi arlna.</p>
         <br/>
 
         <div class="row">
           <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
             <div class="row">
-              <div class="col-xs-6 text-right" [@showLearnMore]>
+              <div class="col-xs-6 text-right" [@showLearnMore]="headerState">
                 <a href="#be-the-first" class="btn btn-secondary btn-lg scroll">Learn More</a>
               </div>
-              <div class="col-xs-6 text-left" [@showSingUp]>
+              <div class="col-xs-6 text-left" [@showSingUp]="headerState">
                 <a href="#sing-up" class="btn btn-primary btn-lg scroll">Sing up</a>
               </div>
             </div>
