@@ -29,6 +29,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ]
 })
 export class FrontPageComponent implements OnInit, AfterViewInit {
+    private windowHeight: number;
 
     public headerState: String = "hide";
 
@@ -36,6 +37,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
+        this.windowHeight = window.innerHeight;
     }
 
     ngAfterViewInit(): void {
@@ -48,11 +50,16 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
         this.showHeader();
     }
 
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.windowHeight = window.innerHeight;
+        this.showHeader();
+    }
+
     showHeader() {
-        const componentPosition = this.el.nativeElement.offsetTop;
         const scrollPosition = window.pageYOffset;
 
-        if (scrollPosition == componentPosition) {
+        if (scrollPosition < this.windowHeight * 0.5) {
             this.headerState = 'show'
         }
     }
