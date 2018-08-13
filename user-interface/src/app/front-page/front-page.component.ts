@@ -50,6 +50,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
     public headerState: String = "hide";
     public beTheFirstSection: String = "hide";
     public mainInfoSection: String = "hide";
+    public pricingSection: String = "hide";
 
     constructor(private cdr: ChangeDetectorRef) {
     }
@@ -64,6 +65,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
         this.showHeader();
         this.showBeTheFirstSection();
         this.showMainInfoSection();
+        this.showPricingSection();
 
         this.cdr.detectChanges();
     }
@@ -75,6 +77,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
         this.showHeader();
         this.showBeTheFirstSection();
         this.showMainInfoSection();
+        this.showPricingSection();
     }
 
     @HostListener('window:resize', ['$event'])
@@ -85,6 +88,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
         this.showHeader();
         this.showBeTheFirstSection();
         this.showMainInfoSection();
+        this.showPricingSection();
     }
 
     private showHeader() {
@@ -102,6 +106,12 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
     private showMainInfoSection() {
         if (this.isScrollPositionBetweenWindowSeize(1.5, 2.5)) {
             this.mainInfoSection = 'show';
+        }
+    }
+
+    private showPricingSection() {
+        if (this.isScrollPositionBetweenWindowSeize(3, 4)) {
+            this.pricingSection = 'show';
         }
     }
 

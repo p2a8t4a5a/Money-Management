@@ -126,7 +126,7 @@
 
         <div class="row margin-50">
 
-            <div class="col-sm-4 pricing-container wow fadeInUp" data-wow-delay="1s">
+            <div class="col-sm-4 pricing-container" [@showSection4]="pricingSection">
                 <br/>
                 <ul class="list-unstyled pricing-table text-center">
                     <li class="headline"><h5 class="white">Personal</h5></li>
@@ -144,7 +144,7 @@
                 </ul>
             </div>
 
-            <div class="col-sm-4 pricing-container wow fadeInUp" data-wow-delay="0.4s">
+            <div class="col-sm-4 pricing-container" [@showSection3]="pricingSection">
                 <ul class="list-unstyled pricing-table active text-center">
                     <li class="headline"><h5 class="white">Professional</h5></li>
                     <li class="price">
@@ -162,7 +162,7 @@
                 </ul>
             </div>
 
-            <div class="col-sm-4 pricing-container wow fadeInUp" data-wow-delay="1.3s">
+            <div class="col-sm-4 pricing-container" [@showSection5]="pricingSection">
                 <br/>
                 <ul class="list-unstyled pricing-table text-center">
                     <li class="headline"><h5 class="white">Business</h5></li>
