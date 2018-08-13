@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
@@ -19,12 +19,27 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
         trigger('showSection1', [
             state('show', style({opacity: 1, transform: 'translateY(0%)'})),
             state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
-            transition('hide => show', animate('1.5s 1.5s ease-in'))
+            transition('hide => show', animate('1s 1.5s ease-in'))
         ]),
         trigger('showSection2', [
             state('show', style({opacity: 1, transform: 'translateY(0%)'})),
             state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
-            transition('hide => show', animate('1.5s 2s ease-in'))
+            transition('hide => show', animate('1s 2s ease-in'))
+        ]),
+        trigger('showSection3', [
+            state('show', style({opacity: 1, transform: 'translateY(0%)'})),
+            state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
+            transition('hide => show', animate('1s 0.5s ease-in'))
+        ]),
+        trigger('showSection4', [
+            state('show', style({opacity: 1, transform: 'translateY(0%)'})),
+            state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
+            transition('hide => show', animate('1s 1s ease-in'))
+        ]),
+        trigger('showSection5', [
+            state('show', style({opacity: 1, transform: 'translateY(0%)'})),
+            state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
+            transition('hide => show', animate('1s 2s ease-in'))
         ])
     ]
 })
@@ -34,6 +49,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
 
     public headerState: String = "hide";
     public beTheFirstSection: String = "hide";
+    public mainInfoSection: String = "hide";
 
     constructor(private cdr: ChangeDetectorRef) {
     }
@@ -47,6 +63,7 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
 
         this.showHeader();
         this.showBeTheFirstSection();
+        this.showMainInfoSection();
 
         this.cdr.detectChanges();
     }
@@ -57,27 +74,39 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
 
         this.showHeader();
         this.showBeTheFirstSection();
+        this.showMainInfoSection();
     }
 
     @HostListener('window:resize', ['$event'])
-    onResize(event) {
+    onResize() {
         this.scrollPosition = window.pageYOffset;
         this.windowHeight = window.innerHeight;
 
         this.showHeader();
         this.showBeTheFirstSection();
+        this.showMainInfoSection();
     }
 
     private showHeader() {
-        if (this.scrollPosition < this.windowHeight * 0.5) {
+        if (this.isScrollPositionBetweenWindowSeize(0.0, 0.5)) {
             this.headerState = 'show';
         }
     }
 
     private showBeTheFirstSection() {
-        if (this.windowHeight * 0.5 < this.scrollPosition && this.scrollPosition < this.windowHeight * 1.5) {
+        if (this.isScrollPositionBetweenWindowSeize(0.5, 1.5)) {
             this.beTheFirstSection = 'show';
         }
+    }
+
+    private showMainInfoSection() {
+        if (this.isScrollPositionBetweenWindowSeize(1.5, 2.5)) {
+            this.mainInfoSection = 'show';
+        }
+    }
+
+    private isScrollPositionBetweenWindowSeize(ratio1: number, ratio2: number): boolean {
+        return this.windowHeight * ratio1 <= this.scrollPosition && this.scrollPosition <= this.windowHeight * ratio2;
     }
 
 }
