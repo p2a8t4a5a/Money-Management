@@ -18,27 +18,27 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
         ]),
         trigger('showSection1', [
             state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
+            state('hide', style({opacity: 0, transform: 'translateY(50%)'})),
             transition('hide => show', animate('1s 1.5s ease-in'))
         ]),
         trigger('showSection2', [
             state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
+            state('hide', style({opacity: 0, transform: 'translateY(50%)'})),
             transition('hide => show', animate('1s 2s ease-in'))
         ]),
         trigger('showSection3', [
             state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
+            state('hide', style({opacity: 0, transform: 'translateY(25%)'})),
             transition('hide => show', animate('1s 0.5s ease-in'))
         ]),
         trigger('showSection4', [
             state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
+            state('hide', style({opacity: 0, transform: 'translateY(25%)'})),
             transition('hide => show', animate('1s 1s ease-in'))
         ]),
         trigger('showSection5', [
             state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(100%)'})),
+            state('hide', style({opacity: 0, transform: 'translateY(25%)'})),
             transition('hide => show', animate('1s 2s ease-in'))
         ])
     ]
