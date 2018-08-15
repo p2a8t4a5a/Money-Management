@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {Observable} from "rxjs/internal/Observable";
+import {User} from "../domain/User";
 
 @Injectable({
     providedIn: 'root'
@@ -10,12 +11,13 @@ import {Observable} from "rxjs/internal/Observable";
 export class AuthenticationService {
     private tokenRequest = 'api/uaa/oauth/token';
     private currentAccount = 'api/accounts/current';
+    private createUserUrl = "api/accounts/create";
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
     }
 
-    public obtainAccessToken(loginData) {
-        let data = "scope=ui&grant_type=password&username=" + loginData.username + "&password=" + loginData.password;
+    public obtainAccessToken(user: User) {
+        let data = "scope=ui&grant_type=password&username=" + user.userName + "&password=" + user.password;
 
         let headers = new HttpHeaders({
             'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
@@ -27,7 +29,7 @@ export class AuthenticationService {
 
         this.http.post(this.tokenRequest, data, options)
             .subscribe(
-                data => this.saveCredentials(data, loginData.username))
+                data => this.saveCredentials(data, user.userName))
     }
 
     public getCurrentAccount(): Observable<Account> {
@@ -39,6 +41,10 @@ export class AuthenticationService {
         };
 
         return this.http.get<Account>(this.currentAccount, options);
+    }
+
+    public createUser(user: User): Observable<Object> {
+        return this.http.post<Object>(this.createUserUrl, user);
     }
 
     public getOauthToken(): string {

@@ -4,6 +4,7 @@ import {User} from '../domain/User';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import {ErrorStateMatcher, MatSnackBar} from "@angular/material";
 import {SnackBarComponent} from "../snack-bar/snack-bar.component";
+import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
     selector: 'app-login',
@@ -38,8 +39,6 @@ import {SnackBarComponent} from "../snack-bar/snack-bar.component";
     ]
 })
 export class LoginComponent implements OnInit, AfterViewInit {
-    public user: User;
-
     public hidePassword1: Boolean;
     public hidePassword2: Boolean;
     public hidePassword3: Boolean;
@@ -56,8 +55,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private windowHeight: number;
     private scrollPosition: number;
 
-    constructor(private fb: FormBuilder, private snackbar: MatSnackBar, private cdr: ChangeDetectorRef) {
-        this.user = new User();
+    constructor(private fb: FormBuilder, private snackbar: MatSnackBar, private cdr: ChangeDetectorRef,
+                private authService: AuthenticationService) {
+
         this.flip = 'inactive';
         this.hidePassword1 = true;
         this.hidePassword2 = true;
@@ -101,10 +101,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     onSubmitCreateAccount() {
-        this.snackbar.openFromComponent(SnackBarComponent, {
-            horizontalPosition: "start",
-            panelClass: ['mat-elevation-z3']
-        });
+        let user = new User();
+        user.userName = this.createAccountForm.controls.email.value;
+        user.password = this.createAccountForm.controls.password.value;
+
+        this.authService.createUser(user).subscribe(
+            data => this.authService.obtainAccessToken(user),
+            () => this.displayMessage("Email address " + user.userName + " is already registered !"));
+
     }
 
     onSubmitLogin() {
@@ -126,6 +130,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (this.windowHeight * 4.5 <= this.scrollPosition) {
             this.showSection = true;
         }
+    }
+
+    private displayMessage(message: String) {
+        //TODO
+        this.snackbar.openFromComponent(SnackBarComponent, {
+            horizontalPosition: "start",
+            panelClass: ['mat-elevation-z3']
+        });
     }
 
 }
