@@ -30,19 +30,19 @@
 
         <div class="row header-info">
             <div class="col-sm-10 col-sm-offset-1 text-center">
-                <h1 [@showMessage1]="headerState">A free landing page theme</h1>
+                <h1 [@showMessage1]="showHeaderSection">A free landing page theme</h1>
                 <br/>
-                <p class="lead" [@showMessage2]="headerState">Lorem ipsum dolor sit amet, consectetur adipis. <br>
+                <p class="lead" [@showMessage2]="showHeaderSection">Lorem ipsum dolor sit amet, consectetur adipis. <br>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit sit dol mi arlna.</p>
                 <br/>
 
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                         <div class="row">
-                            <div class="col-xs-6 text-right" [@showSection1]="headerState">
+                            <div class="col-xs-6 text-right" [@showSection1]="showHeaderSection">
                                 <a href="#be-the-first" class="btn btn-secondary btn-lg scroll">Learn More</a>
                             </div>
-                            <div class="col-xs-6 text-left" [@showSection2]="headerState">
+                            <div class="col-xs-6 text-left" [@showSection2]="showHeaderSection">
                                 <a href="#sing-up" class="btn btn-primary btn-lg scroll">Sing up</a>
                             </div>
                         </div>
@@ -61,13 +61,13 @@
 <section id="be-the-first" class="pad-xl">
     <div class="container">
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center margin-30" [@showMessage1]="beTheFirstSection">
+            <div class="col-sm-8 col-sm-offset-2 text-center margin-30" [@showMessage1]="showBeTheFirstSection">
                 <h2>Be the first</h2>
                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipis.</p>
             </div>
         </div>
 
-        <div class="iphone" [@showSection1]="beTheFirstSection">
+        <div class="iphone" [@showSection1]="showBeTheFirstSection">
             <img src="../../assets/img/iphone.png">
         </div>
     </div>
@@ -76,7 +76,7 @@
 <section id="main-info" class="pad-xl">
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 text-center" [@showSection3]="mainInfoSection">
+            <div class="col-sm-4 text-center" [@showSection3]="showMainInfoSection">
                 <i class="fa fa-search fa-main-info margin-40 purple"></i>
                 <h2 class="black">Get the invite</h2>
                 <hr class="line purple">
@@ -84,7 +84,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut est facilisis, eu
                     elementum mi volutpat. Pellentesque ac tristique nisi.</p>
             </div>
-            <div class="col-sm-4 text-center" [@showSection4]="mainInfoSection">
+            <div class="col-sm-4 text-center" [@showSection4]="showMainInfoSection">
                 <i class="fa fa-money fa-main-info margin-40 blue"></i>
                 <h2 class="black">Get the invite</h2>
                 <hr class="line blue">
@@ -92,7 +92,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut est facilisis, eu
                     elementum mi volutpat. Pellentesque ac tristique nisi.</p>
             </div>
-            <div class="col-sm-4 text-center" [@showSection5]="mainInfoSection">
+            <div class="col-sm-4 text-center" [@showSection5]="showMainInfoSection">
                 <i class="fa fa-lock fa-main-info margin-40 yellow"></i>
                 <h2 class="black">Get the invite</h2>
                 <hr class="line yellow">
@@ -126,7 +126,7 @@
 
         <div class="row margin-50">
 
-            <div class="col-sm-4 pricing-container" [@showSection4]="pricingSection">
+            <div class="col-sm-4 pricing-container" [@showSection4]="showPricingSection">
                 <br/>
                 <ul class="list-unstyled pricing-table text-center">
                     <li class="headline"><h5 class="white">Personal</h5></li>
@@ -144,7 +144,7 @@
                 </ul>
             </div>
 
-            <div class="col-sm-4 pricing-container" [@showSection3]="pricingSection">
+            <div class="col-sm-4 pricing-container" [@showSection3]="showPricingSection">
                 <ul class="list-unstyled pricing-table active text-center">
                     <li class="headline"><h5 class="white">Professional</h5></li>
                     <li class="price">
@@ -162,7 +162,7 @@
                 </ul>
             </div>
 
-            <div class="col-sm-4 pricing-container" [@showSection5]="pricingSection">
+            <div class="col-sm-4 pricing-container" [@showSection5]="showPricingSection">
                 <br/>
                 <ul class="list-unstyled pricing-table text-center">
                     <li class="headline"><h5 class="white">Business</h5></li>

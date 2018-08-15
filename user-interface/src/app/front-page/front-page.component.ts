@@ -7,39 +7,39 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     styleUrls: ['./front-page.component.css'],
     animations: [
         trigger('showMessage1', [
-            state('show', style({opacity: 1})),
-            state('hide', style({opacity: 0})),
-            transition('hide => show', animate(1000))
+            state('true', style({opacity: 1})),
+            state('false', style({opacity: 0})),
+            transition('true => false', animate(1000))
         ]),
         trigger('showMessage2', [
-            state('show', style({opacity: 1})),
-            state('hide', style({opacity: 0})),
-            transition('hide => show', animate('1s 1s ease-in'))
+            state('true', style({opacity: 1})),
+            state('false', style({opacity: 0})),
+            transition('false => true', animate('1s 1s ease-in'))
         ]),
         trigger('showSection1', [
-            state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(50%)'})),
-            transition('hide => show', animate('1s 1.5s ease-in'))
+            state('true', style({opacity: 1, transform: 'translateY(0%)'})),
+            state('false', style({opacity: 0, transform: 'translateY(50%)'})),
+            transition('false => true', animate('1s 1.5s ease-in'))
         ]),
         trigger('showSection2', [
-            state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(50%)'})),
-            transition('hide => show', animate('1s 2s ease-in'))
+            state('true', style({opacity: 1, transform: 'translateY(0%)'})),
+            state('false', style({opacity: 0, transform: 'translateY(50%)'})),
+            transition('false => true', animate('1s 2s ease-in'))
         ]),
         trigger('showSection3', [
-            state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(25%)'})),
-            transition('hide => show', animate('1s 0.5s ease-in'))
+            state('true', style({opacity: 1, transform: 'translateY(0%)'})),
+            state('false', style({opacity: 0, transform: 'translateY(25%)'})),
+            transition('false => true', animate('1s 0.5s ease-in'))
         ]),
         trigger('showSection4', [
-            state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(25%)'})),
-            transition('hide => show', animate('1s 1s ease-in'))
+            state('true', style({opacity: 1, transform: 'translateY(0%)'})),
+            state('false', style({opacity: 0, transform: 'translateY(25%)'})),
+            transition('false => true', animate('1s 1s ease-in'))
         ]),
         trigger('showSection5', [
-            state('show', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('hide', style({opacity: 0, transform: 'translateY(25%)'})),
-            transition('hide => show', animate('1s 2s ease-in'))
+            state('true', style({opacity: 1, transform: 'translateY(0%)'})),
+            state('false', style({opacity: 0, transform: 'translateY(25%)'})),
+            transition('false => true', animate('1s 2s ease-in'))
         ])
     ]
 })
@@ -47,10 +47,10 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
     private windowHeight: number;
     private scrollPosition: number;
 
-    public headerState: String = "hide";
-    public beTheFirstSection: String = "hide";
-    public mainInfoSection: String = "hide";
-    public pricingSection: String = "hide";
+    public showHeaderSection: boolean = false;
+    public showBeTheFirstSection: boolean = false;
+    public showMainInfoSection: boolean = false;
+    public showPricingSection: boolean = false;
 
     constructor(private cdr: ChangeDetectorRef) {
     }
@@ -61,23 +61,14 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
         this.scrollPosition = window.pageYOffset;
-
-        this.showHeader();
-        this.showBeTheFirstSection();
-        this.showMainInfoSection();
-        this.showPricingSection();
-
+        this.checkShowSections();
         this.cdr.detectChanges();
     }
 
     @HostListener('window:scroll', ['$event'])
     checkScroll() {
         this.scrollPosition = window.pageYOffset;
-
-        this.showHeader();
-        this.showBeTheFirstSection();
-        this.showMainInfoSection();
-        this.showPricingSection();
+        this.checkShowSections();
     }
 
     @HostListener('window:resize', ['$event'])
@@ -85,38 +76,19 @@ export class FrontPageComponent implements OnInit, AfterViewInit {
         this.scrollPosition = window.pageYOffset;
         this.windowHeight = window.innerHeight;
 
-        this.showHeader();
-        this.showBeTheFirstSection();
-        this.showMainInfoSection();
-        this.showPricingSection();
+        this.checkShowSections();
     }
 
-    private showHeader() {
-        if (this.isScrollPositionBetweenWindowSeize(0.0, 0.5)) {
-            this.headerState = 'show';
-        }
+
+    private checkShowSections() {
+        this.showHeaderSection = this.isScrollPositionBetweenWindowSeize(this.showHeaderSection, 0.0, 0.5);
+        this.showBeTheFirstSection = this.isScrollPositionBetweenWindowSeize(this.showBeTheFirstSection, 0.5, 1.5);
+        this.showMainInfoSection = this.isScrollPositionBetweenWindowSeize(this.showMainInfoSection, 1.5, 2.5);
+        this.showPricingSection = this.isScrollPositionBetweenWindowSeize(this.showPricingSection, 3, 4);
     }
 
-    private showBeTheFirstSection() {
-        if (this.isScrollPositionBetweenWindowSeize(0.5, 1.5)) {
-            this.beTheFirstSection = 'show';
-        }
-    }
-
-    private showMainInfoSection() {
-        if (this.isScrollPositionBetweenWindowSeize(1.5, 2.5)) {
-            this.mainInfoSection = 'show';
-        }
-    }
-
-    private showPricingSection() {
-        if (this.isScrollPositionBetweenWindowSeize(3, 4)) {
-            this.pricingSection = 'show';
-        }
-    }
-
-    private isScrollPositionBetweenWindowSeize(ratio1: number, ratio2: number): boolean {
-        return this.windowHeight * ratio1 <= this.scrollPosition && this.scrollPosition <= this.windowHeight * ratio2;
+    private isScrollPositionBetweenWindowSeize(currentState: boolean, ratio1: number, ratio2: number): boolean {
+        return currentState || (this.windowHeight * ratio1 <= this.scrollPosition && this.scrollPosition <= this.windowHeight * ratio2);
     }
 
 }
