@@ -3,7 +3,6 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../domain/User';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import {ErrorStateMatcher, MatSnackBar} from "@angular/material";
-import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
@@ -102,12 +101,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     onSubmitCreateAccount() {
         let user = new User();
-        user.userName = this.createAccountForm.controls.email.value;
+        user.username = this.createAccountForm.controls.email.value;
         user.password = this.createAccountForm.controls.password.value;
 
         this.authService.createUser(user).subscribe(
             data => this.authService.obtainAccessToken(user),
-            () => this.displayMessage("Email address " + user.userName + " is already registered !"));
+            error => this.displayMessage(error.message));
 
     }
 
@@ -134,10 +133,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     private displayMessage(message: String) {
         //TODO
-        this.snackbar.openFromComponent(SnackBarComponent, {
-            horizontalPosition: "start",
-            panelClass: ['mat-elevation-z3']
-        });
     }
 
 }

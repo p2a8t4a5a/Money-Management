@@ -17,7 +17,7 @@ export class AuthenticationService {
     }
 
     public obtainAccessToken(user: User) {
-        let data = "scope=ui&grant_type=password&username=" + user.userName + "&password=" + user.password;
+        let data = "scope=ui&grant_type=password&username=" + user.username + "&password=" + user.password;
 
         let headers = new HttpHeaders({
             'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
@@ -29,7 +29,7 @@ export class AuthenticationService {
 
         this.http.post(this.tokenRequest, data, options)
             .subscribe(
-                data => this.saveCredentials(data, user.userName))
+                data => this.saveCredentials(data, user.username))
     }
 
     public getCurrentAccount(): Observable<Account> {
