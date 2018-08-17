@@ -10,6 +10,7 @@ import {LoginComponent} from "./login/login.component";
 import {CookieService} from "ngx-cookie-service";
 import {FrontPageComponent} from './front-page/front-page.component';
 import {HttpClientModule} from "@angular/common/http";
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
     imports: [
@@ -19,6 +20,11 @@ import {HttpClientModule} from "@angular/common/http";
         ReactiveFormsModule,
         HttpClientModule,
         MaterialModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-bottom-right',
+            timeOut: 10000,
+            extendedTimeOut: 10000
+        }),
         AppRouting
     ],
     declarations: [
@@ -28,8 +34,7 @@ import {HttpClientModule} from "@angular/common/http";
     ],
     bootstrap: [AppComponent],
     providers: [CookieService],
-    entryComponents: [
-    ]
+    entryComponents: []
 })
 export class AppModule {
 }

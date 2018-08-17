@@ -2,8 +2,9 @@ import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit} from 
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../domain/User';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
-import {ErrorStateMatcher, MatSnackBar} from "@angular/material";
+import {ErrorStateMatcher} from "@angular/material";
 import {AuthenticationService} from "../service/authentication.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-login',
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private windowHeight: number;
     private scrollPosition: number;
 
-    constructor(private fb: FormBuilder, private snackbar: MatSnackBar, private cdr: ChangeDetectorRef,
+    constructor(private fb: FormBuilder, private toastr: ToastrService, private cdr: ChangeDetectorRef,
                 private authService: AuthenticationService) {
 
         this.flip = 'inactive';
@@ -105,8 +106,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
         user.password = this.createAccountForm.controls.password.value;
 
         this.authService.createUser(user).subscribe(
-            data => this.authService.obtainAccessToken(user),
-            error => this.displayMessage(error.message));
+            () => this.authService.obtainAccessToken(user),
+            error => this.displayMessage(error.error.message));
 
     }
 
@@ -131,8 +132,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
     }
 
-    private displayMessage(message: String) {
-        //TODO
+    private displayMessage(message: string) {
+        this.toastr.error(message, 'Error');
     }
 
 }
