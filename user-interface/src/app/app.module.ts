@@ -11,6 +11,7 @@ import {CookieService} from "ngx-cookie-service";
 import {FrontPageComponent} from './front-page/front-page.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import {ToastrModule} from "ngx-toastr";
     declarations: [
         AppComponent,
         LoginComponent,
-        FrontPageComponent
+        FrontPageComponent,
+        AccountComponent
     ],
     bootstrap: [AppComponent],
     providers: [CookieService],
