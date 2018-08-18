@@ -57,7 +57,7 @@ export class AuthenticationService {
 
     public checkCredentials() {
         if (!this.cookieService.check('access_token')) {
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
         }
     }
 
@@ -68,7 +68,7 @@ export class AuthenticationService {
     public logout() {
         this.cookieService.delete('access_token');
         this.cookieService.delete('username');
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
     }
 
     private saveCredentials(token, username) {
@@ -77,7 +77,7 @@ export class AuthenticationService {
         this.cookieService.set("access_token", token.access_token, expireDate);
         this.cookieService.set("username", username, expireDate);
 
-        this.router.navigate(['/']);
+        this.router.navigate(['/account']);
         window.location.reload();
     }
 

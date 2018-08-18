@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 import {ErrorStateMatcher} from "@angular/material";
 import {AuthenticationService} from "../service/authentication.service";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -56,7 +57,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private scrollPosition: number;
 
     constructor(private fb: FormBuilder, private toastr: ToastrService, private cdr: ChangeDetectorRef,
-                private authService: AuthenticationService) {
+                private authService: AuthenticationService, private router: Router) {
 
         this.flip = 'inactive';
         this.hidePassword1 = true;
@@ -78,6 +79,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.windowHeight = window.innerHeight;
+
+        if (this.authService.isUserLogin()) {
+            this.router.navigate(['/account']);
+        }
     }
 
     ngAfterViewInit(): void {
@@ -112,7 +117,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     onSubmitLogin() {
-        // TODO
+        let user = new User();
+        user.username = this.loginForm.controls.email.value;
+        user.password = this.loginForm.controls.password.value;
+
+        this.authService.obtainAccessToken(user);
     }
 
     toggleFlip() {
