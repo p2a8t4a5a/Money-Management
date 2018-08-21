@@ -77,7 +77,7 @@ export class AuthenticationService {
         this.cookieService.set("access_token", token.access_token, expireDate);
         this.cookieService.set("username", username, expireDate);
 
-        this.router.navigate(['/account']);
+        this.router.navigate(['/statistics']);
         window.location.reload();
     }
 

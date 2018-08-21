@@ -12,6 +12,7 @@ import {FrontPageComponent} from './front-page/front-page.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import { AccountComponent } from './account/account.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 @NgModule({
     imports: [
@@ -32,7 +33,8 @@ import { AccountComponent } from './account/account.component';
         AppComponent,
         LoginComponent,
         FrontPageComponent,
-        AccountComponent
+        AccountComponent,
+        StatisticsComponent
     ],
     bootstrap: [AppComponent],
     providers: [CookieService],

@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.windowHeight = window.innerHeight;
 
         if (this.authService.isUserLogin()) {
-            this.router.navigate(['/account']);
+            this.router.navigate(['/statistics']);
         }
     }
 
