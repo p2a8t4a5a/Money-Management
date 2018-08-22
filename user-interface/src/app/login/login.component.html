@@ -51,7 +51,8 @@
                                     <button type="submit" class="btn btn-primary btn-lg"
                                             [disabled]="loginForm.invalid">Login
                                     </button>
-                                    <button (click)="toggleFlip()" class="btn btn-primary btn-lg">Create Account
+                                    <button type="button" class="btn btn-primary btn-lg"
+                                            (click)="toggleFlip()">Create Account
                                     </button>
                                 </div>
 
@@ -127,7 +128,9 @@
                                     <button type="submit" class="btn btn-primary btn-lg"
                                             [disabled]="createAccountForm.invalid">Submit
                                     </button>
-                                    <button (click)="toggleFlip()" class="btn btn-primary btn-lg">Login</button>
+                                    <button type="button" class="btn btn-primary btn-lg"
+                                            (click)="toggleFlip()">Login
+                                    </button>
                                 </div>
                             </form>
                         </div>

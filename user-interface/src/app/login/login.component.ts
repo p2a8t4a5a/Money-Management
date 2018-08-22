@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private windowHeight: number;
     private scrollPosition: number;
 
-    constructor(private fb: FormBuilder, private toastr: ToastrService, private cdr: ChangeDetectorRef,
+    constructor(private fb: FormBuilder, private toaster: ToastrService, private cdr: ChangeDetectorRef,
                 private authService: AuthenticationService, private router: Router) {
 
         this.flip = 'inactive';
@@ -121,7 +121,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         user.username = this.loginForm.controls.email.value;
         user.password = this.loginForm.controls.password.value;
 
-        this.authService.obtainAccessToken(user);
+        this.authService.obtainAccessToken(user).subscribe(
+            data => this.authService.saveCredentials(data, user.username),
+            error => this.displayMessage(error.error.error_description))
     }
 
     toggleFlip() {
@@ -142,7 +144,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     private displayMessage(message: string) {
-        this.toastr.error(message, 'Error');
+        this.toaster.error(message, 'Error');
     }
 
 }

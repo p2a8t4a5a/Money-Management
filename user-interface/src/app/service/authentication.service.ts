@@ -16,20 +16,16 @@ export class AuthenticationService {
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
     }
 
-    public obtainAccessToken(user: User) {
+    public obtainAccessToken(user: User): Observable<Object> {
         let data = "scope=ui&grant_type=password&username=" + user.username + "&password=" + user.password;
-
-        let headers = new HttpHeaders({
-            'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
-            'Authorization': 'Basic YnJvd3Nlcjo='
-        });
         let options = {
-            headers: headers
+            headers: new HttpHeaders({
+                'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
+                'Authorization': 'Basic YnJvd3Nlcjo='
+            })
         };
 
-        this.http.post(this.tokenRequest, data, options)
-            .subscribe(
-                data => this.saveCredentials(data, user.username))
+        return this.http.post(this.tokenRequest, data, options);
     }
 
     public getCurrentAccount(): Observable<Account> {
@@ -71,7 +67,7 @@ export class AuthenticationService {
         this.router.navigate(['']);
     }
 
-    private saveCredentials(token, username) {
+    public saveCredentials(token, username) {
         let expireDate = new Date().getTime() + (1000 * token.expires_in);
 
         this.cookieService.set("access_token", token.access_token, expireDate);
