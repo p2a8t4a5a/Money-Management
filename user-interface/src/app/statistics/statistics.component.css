@@ -52,3 +52,68 @@
     margin: auto;
     position: absolute;
 }
+
+#plus {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #a6cbd4;
+    position: absolute;
+    cursor: pointer;
+    margin: auto;
+    width: 60px;
+    height: 60px;
+    right: 90px;
+}
+
+#plus:hover {
+    color: #9cbac2;
+}
+
+#plusborder {
+    -webkit-animation: plus 2s infinite;
+    -moz-animation: plus 2s infinite;
+    -o-animation: plus 2s infinite;
+    -ms-animation: plus 2s infinite;
+    animation: plus 2s infinite;
+    position: absolute;
+    border: 2px solid #cfe6ec;
+    -webkit-border-radius: 70px;
+    -moz-border-radius: 70px;
+    border-radius: 70px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 80%;
+    height: 80%;
+}
+
+#plusone, #plustwo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #cfe6ec;
+}
+
+#plusone {
+    width: 2px;
+    height: 50%;
+}
+
+#plustwo {
+    width: 50%;
+    height: 2px;
+}
+
+#plustext {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -15px;
+    margin: auto;
+}
