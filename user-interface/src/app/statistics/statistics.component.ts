@@ -15,4 +15,8 @@ export class StatisticsComponent implements OnInit {
         this.authService.checkCredentials();
     }
 
+    public logout() {
+        this.authService.logout();
+    }
+
 }
