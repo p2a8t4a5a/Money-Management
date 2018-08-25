@@ -12,7 +12,7 @@
     opacity: 1;
 }
 
-.close:before, .close:after {
+.close-icon:before, .close-icon:after {
     position: absolute;
     left: 15px;
     content: ' ';
@@ -21,10 +21,16 @@
     background-color: #333;
 }
 
-.close:before {
+.close-icon:before {
     transform: rotate(45deg);
 }
 
-.close:after {
+.close-icon:after {
     transform: rotate(-45deg);
+}
+
+.close-text {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 10px;
 }
