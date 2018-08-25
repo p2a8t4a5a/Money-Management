@@ -1,5 +1,6 @@
 .close {
     position: absolute;
+    cursor: pointer;
     right: 32px;
     top: 32px;
     width: 32px;

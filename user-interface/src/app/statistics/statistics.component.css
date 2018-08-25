@@ -1,119 +1,60 @@
-#minus {
-    right: 20px;
-    top: 10px;
-    margin: auto;
-    text-transform: uppercase;
-    font-size: 10px;
-    color: #c8c2c4;
+.add {
     position: absolute;
     cursor: pointer;
-    width: 35px;
-    height: 35px;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
 }
 
-#minus:hover {
-    color: #a39b9d;
+.add:hover, .logout:hover {
+    opacity: 1;
 }
 
-#minusborder {
+.add-icon:before, .add-icon:after, .logout-icon:before, .logout-icon:after {
     position: absolute;
-    border: 1px solid #c8c2c4;
-    -webkit-border-radius: 70px;
-    -moz-border-radius: 70px;
-    border-radius: 70px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    width: 80%;
-    height: 80%;
-}
-
-#minusone {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    background-color: #c8c2c4;
-    width: 50%;
-    height: 1px;
-}
-
-#minustext {
-    width: 70px;
-    text-align: center;
-    font-family: Arial;
-    left: -18px;
-    right: 0;
-    bottom: -17px;
-    margin: auto;
-    position: absolute;
-}
-
-#plus {
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 11px;
-    color: #a6cbd4;
-    position: absolute;
-    cursor: pointer;
-    margin: auto;
-    width: 60px;
-    height: 60px;
-    right: 90px;
-}
-
-#plus:hover {
-    color: #9cbac2;
-}
-
-#plusborder {
-    -webkit-animation: plus 2s infinite;
-    -moz-animation: plus 2s infinite;
-    -o-animation: plus 2s infinite;
-    -ms-animation: plus 2s infinite;
-    animation: plus 2s infinite;
-    position: absolute;
-    border: 2px solid #cfe6ec;
-    -webkit-border-radius: 70px;
-    -moz-border-radius: 70px;
-    border-radius: 70px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    width: 80%;
-    height: 80%;
-}
-
-#plusone, #plustwo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    background-color: #cfe6ec;
-}
-
-#plusone {
+    left: 15px;
+    content: ' ';
+    height: 33px;
     width: 2px;
-    height: 50%;
+    background-color: #333;
 }
 
-#plustwo {
-    width: 50%;
-    height: 2px;
+.add-icon:before {
+    transform: rotate(90deg);
 }
 
-#plustext {
+.add-icon:after {
+    transform: rotate(0deg);
+}
+
+.add-text, .logout-text {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.logout-text {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.logout-icon:before {
+    transform: rotate(90deg);
+}
+
+.logout-icon:after {
+    transform: rotate(-90deg);
+}
+
+.logout {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -15px;
-    margin: auto;
+    cursor: pointer;
+    right: 32px;
+    bottom: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
 }
