@@ -674,7 +674,7 @@ footer {
 }
 
 input.mat-input-element {
-   margin-top: 1px;
+    margin-top: 1px;
     margin-bottom: 2px;
 }
 
@@ -780,4 +780,81 @@ input.mat-input-element {
 
 .form-field {
     width: 100%;
+}
+
+.logout, .add, .close {
+    right: 32px;
+    position: absolute;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+}
+
+.logout{
+    bottom: 32px;
+}
+
+.close, .add {
+    top: 32px;
+}
+
+.add:hover, .logout:hover, .close:hover {
+    opacity: 1;
+}
+
+.add-icon:before, .add-icon:after,
+.logout-icon:before, .logout-icon:after,
+.close-icon:before, .close-icon:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #333;
+}
+
+.add-icon:before {
+    transform: rotate(90deg);
+}
+
+.add-icon:after {
+    transform: rotate(0deg);
+}
+
+.add-text, .close-text {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.logout-text-up, .logout-text-down {
+    text-align: center;
+    font-size: 10px;
+    position: absolute;
+    left: 5px;
+}
+
+.logout-text-up {
+    bottom: 20px;
+}
+
+.logout-text-down {
+    top: 20px;
+}
+
+.logout-icon:before {
+    transform: rotate(90deg);
+}
+
+.logout-icon:after {
+    transform: rotate(-90deg);
+}
+
+.close-icon:before {
+    transform: rotate(45deg);
+}
+
+.close-icon:after {
+    transform: rotate(-45deg);
 }
