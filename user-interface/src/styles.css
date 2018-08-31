@@ -894,7 +894,6 @@ input.mat-input-element {
     transform: translateY(-100%);
 }
 
-
 #bubble, #indicator, #save, #piggyicon, #rublesign, .arrowup, .arrowdown, .incomes-sprite-title, .close-sign, .modal-save-icon, #modaldeletecross, .initicons-arrow, .expenses-sprite-title, .savings-sprite-title, .triangle, .noUi-handle, .noUi-handle:after {
     background-size: 538px 84px;
 }
@@ -1377,18 +1376,10 @@ input.mat-input-element {
 }
 
 .blueline {
-    background-color: #b8d9e1;
+    background-color: black;
     position: absolute;
     top: 47px;
-    width: 100%;
-    height: 1px;
-}
-
-.brownline {
-    background-color: #a6989c;
-    position: absolute;
-    top: 47px;
-    width: 12px;
+    width: 95%;
     height: 1px;
 }
 
@@ -1600,13 +1591,13 @@ input#deposit + label.button:after, input#capitalization + label.button:after {
 input#deposit:checked + label.button:before, input#capitalization:checked + label.button:before {
     width: 33px;
     height: 21px;
-    background: #e7f6f8;
-    box-shadow: inset 0 0 0px 1px #b4d6da;
+    background: gainsboro;
+    box-shadow: inset 0 0 0 1px black;
 }
 
 input#deposit:checked + label.button:after, input#capitalization:checked + label.button:after {
     left: 13px;
-    box-shadow: inset 0 0 0 1px #b4d6da, 1px 1px 1px #ebebeb;
+    box-shadow: inset 0 0 0 1px black, 1px 1px 1px black;
 }
 
 #deposit:checked ~ .savingscapital, #deposit:checked ~ .savingspercent, #deposit:checked ~ input#percentvalue {
@@ -1623,7 +1614,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
 .savingstitle12 {
     font-size: 13px;
-    color: #a2c1c6;
+    color: black;
     font-style: italic;
     position: absolute;
     left: 30%;
@@ -1656,16 +1647,21 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
 /* =============== INCOMES SLIDER =============== */
 #noincomes, #noexpenses {
-    width: 160px;
-    height: 160px;
+    width: 110px;
+    height: 110px;
     position: absolute;
     display: block;
-    top: 30%;
+    top: 35%;
     left: 0;
     right: 0;
     margin: auto;
     cursor: pointer;
     z-index: 10;
+    opacity: 0.3;
+}
+
+#noexpenses:hover, #noincomes:hover {
+    opacity: 1;
 }
 
 .hoverplace {
@@ -1675,7 +1671,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 }
 
 .hoverplace:hover ~ .plusitemtitle, .majorplusitem:hover ~ .plusitemtitle, .plusitemtitle:hover {
-    color: #a2c1c6;
+    color: black;
 }
 
 .majorplusitem {
@@ -1729,7 +1725,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     text-align: center;
     width: 100%;
     font-size: 13px;
-    color: #a2c1c6;
+    color: black;
     font-style: italic;
     position: absolute;
     top: 0;
@@ -1752,7 +1748,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
 #incomeup, #incomedown {
     font-size: 12px;
-    color: #a2c1c6;
+    color: black;
     font-style: italic;
     position: absolute;
     bottom: 0px;
@@ -1801,19 +1797,11 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     -o-transition: 150ms;
     -ms-transition: 150ms;
     transition: 150ms;
+    opacity: 0.3;
 }
 
-.plusitemborder {
-    position: absolute;
-    border: 1px solid #aad6df;
-    -webkit-border-radius: 75px;
-    -moz-border-radius: 75px;
-    border-radius: 75px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+.plusitem:hover {
+    opacity: 1;
 }
 
 .plusitem:hover {
@@ -1839,22 +1827,22 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     right: 0;
     bottom: 0;
     margin: auto;
-    background-color: #aad6df;
+    background-color: black;
 }
 
 .plusitemone {
-    width: 50%;
-    height: 1px;
+    width: 70%;
+    height: 2px;
 }
 
 .plusitemtwo {
-    width: 1px;
-    height: 50%;
+    width: 2px;
+    height: 70%;
 }
 
 #expenseup, #expensedown {
     font-size: 12px;
-    color: #a2c1c6;
+    color: black;
     font-style: italic;
     position: absolute;
     bottom: 0;
@@ -4071,3 +4059,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     }
 }
 
+.container {
+    margin-bottom: 150px;
+}
