@@ -13,7 +13,7 @@ export class AccountComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.authService.checkCredentials();
+        this.authService.checkCredentials();
     }
 
     public navigateToStatistics() {

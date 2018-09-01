@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div id="settingspage" class="container">
+<div id="settingspage" class="container container-account">
     <div class="row">
         <div class="columns col-sm-12 col-md-4">
             <div class="incomes-sprite-title zoomplus incomebutton">INCOMES</div>
@@ -26,11 +26,11 @@
             </div>
             <div class="blueline"></div>
             <div id="incomedown">
-                <div class="arrowup"></div>
+                <i class="arrow up"></i>
                 forth
             </div>
             <div id="incomeup">
-                <div class="arrowdown"></div>
+                <i class="arrow down"></i>
                 back
             </div>
             <div class="frame">
@@ -38,7 +38,7 @@
                     <div id="incomeslider"></div>
                 </div>
             </div>
-        </div >
+        </div>
         <div class="columns col-sm-12 col-md-4">
             <div class="expenses-sprite-title zoomplus">EXPENSES</div>
             <div id="noexpenses">
@@ -57,11 +57,11 @@
             </div>
             <div class="blueline"></div>
             <div id="expensedown">
-                <div class="arrowup"></div>
+                <i class="arrow up"></i>
                 forth
             </div>
             <div id="expenseup">
-                <div class="arrowdown"></div>
+                <i class="arrow down"></i>
                 back
             </div>
             <div class="frame">
@@ -87,7 +87,8 @@
                 <label for="deposit" class="button"></label>
                 <label for="deposit" class="savingsdeposit">Accumulation account</label>
                 <span class="savingspercent">Interest</span>
-                <input type="text" name="percentvalue" id="percentvalue" data-a-sep="" data-v-min="0.00" data-v-max="99.99"
+                <input type="text" name="percentvalue" id="percentvalue" data-a-sep="" data-v-min="0.00"
+                       data-v-max="99.99"
                        data-l-zero="deny" data-a-sign=" %" data-w-empty="sign" data-p-sign="s" maxlength="5"
                        data-a-pad="false" size="6" data-a-dec="." autocomplete="off">
                 <input type="checkbox" name="capitalization" id="capitalization">

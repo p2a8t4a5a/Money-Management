@@ -894,10 +894,6 @@ input.mat-input-element {
     transform: translateY(-100%);
 }
 
-#bubble, #indicator, #save, #piggyicon, #rublesign, .arrowup, .arrowdown, .incomes-sprite-title, .close-sign, .modal-save-icon, #modaldeletecross, .initicons-arrow, .expenses-sprite-title, .savings-sprite-title, .triangle, .noUi-handle, .noUi-handle:after {
-    background-size: 538px 84px;
-}
-
 #chooseicon, .itembackground, .iconbox, .itemlinebackground, #circle-select-1-back, #circle-select-2-back, #circle-select-3-back {
     background-size: 1031px 42px;
     width: 42px;
@@ -1359,22 +1355,6 @@ input.mat-input-element {
     font-size: 20px;
 }
 
-.zoomplus:hover ~ .plusitem {
-    -webkit-transform: scale(1.15);
-    -moz-transform: scale(1.15);
-    -o-transform: scale(1.15);
-    -ms-transform: scale(1.15);
-    transform: scale(1.15);
-}
-
-.zoomplus:active ~ .plusitem {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -o-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-}
-
 .blueline {
     background-color: black;
     position: absolute;
@@ -1615,7 +1595,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 .savingstitle12 {
     font-size: 13px;
     color: black;
-    font-style: italic;
     position: absolute;
     left: 30%;
     top: 94px;
@@ -1691,22 +1670,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     transition: 150ms;
 }
 
-.majorplusitem:hover {
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    transform: scale(1.1);
-}
-
-.majorplusitem:active {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -o-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-}
-
 .plusitemtitle {
     text-align: center;
     width: 100%;
@@ -1726,37 +1689,21 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     width: 100%;
     font-size: 13px;
     color: black;
-    font-style: italic;
     position: absolute;
     top: 0;
-}
-
-.arrowup, .arrowdown {
-    position: absolute;
-    background-size: 538px 84px;
-    width: 21px;
-    height: 12px;
-}
-
-.arrowup {
-    background-position: -30px 0;
-}
-
-.arrowdown {
-    background-position: 0 0;
 }
 
 #incomeup, #incomedown {
     font-size: 12px;
     color: black;
-    font-style: italic;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     margin: auto;
     width: 90px;
     height: 12px;
     cursor: pointer;
     text-align: center;
+    opacity: 0.3;
 }
 
 #incomeup {
@@ -1765,6 +1712,10 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
 #incomedown {
     left: 35%;
+}
+
+#incomedown:hover, #incomeup:hover {
+    opacity: 1;
 }
 
 #incomeslider {
@@ -1804,22 +1755,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     opacity: 1;
 }
 
-.plusitem:hover {
-    -webkit-transform: scale(1.15);
-    -moz-transform: scale(1.15);
-    -o-transform: scale(1.15);
-    -ms-transform: scale(1.15);
-    transform: scale(1.15);
-}
-
-.plusitem:active {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -o-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-}
-
 .plusitemone, .plusitemtwo {
     position: absolute;
     top: 0;
@@ -1843,7 +1778,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 #expenseup, #expensedown {
     font-size: 12px;
     color: black;
-    font-style: italic;
     position: absolute;
     bottom: 0;
     margin: auto;
@@ -1851,6 +1785,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     height: 12px;
     cursor: pointer;
     text-align: center;
+    opacity: 0.3;
 }
 
 #expenseup {
@@ -1859,6 +1794,10 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
 #expensedown {
     left: 35%;
+}
+
+#expensedown:hover, #expenseup:hover {
+    opacity: 1;
 }
 
 .frame {
@@ -2440,14 +2379,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     opacity: 0.8;
 }
 
-.initicons:active {
-    -webkit-transform: scale(0.92);
-    -moz-transform: scale(0.92);
-    -o-transform: scale(0.92);
-    -ms-transform: scale(0.92);
-    transform: scale(0.92);
-}
-
 .modalincomessurface {
     position: absolute;
     z-index: 3000;
@@ -2622,14 +2553,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     top: 0;
 }
 
-.imgbox:active {
-    -webkit-transform: scale(0.8);
-    -moz-transform: scale(0.8);
-    -o-transform: scale(0.8);
-    -ms-transform: scale(0.8);
-    transform: scale(0.8);
-}
-
 .modalforward {
     -webkit-animation: 0.4s modalforward ease-out;
     -moz-animation: 0.4s modalforward ease-out;
@@ -2670,7 +2593,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     font-size: 11px;
     color: #242424;
     text-transform: uppercase;
-    font-style: italic;
     line-height: 20px;
     padding-left: 20px;
     left: 0;
@@ -2868,7 +2790,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     position: absolute;
     width: 100%;
     height: 35px;
-    font-style: italic;
     font-size: 11px;
     color: #a59b9e;
     display: none;
@@ -3292,7 +3213,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     right: 0;
     top: 84px;
     font-size: 15px;
-    font-style: italic;
 }
 
 .bottommaincircletitle {
@@ -3443,7 +3363,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     text-align: center;
     width: 70px;
     font-size: 11px;
-    font-style: italic;
     left: -12px;
 }
 
@@ -3637,14 +3556,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     overflow: visible;
 }
 
-.frontcircle:active {
-    -webkit-transform: scale(0.8);
-    -moz-transform: scale(0.8);
-    -o-transform: scale(0.8);
-    -ms-transform: scale(0.8);
-    transform: scale(0.8);
-}
-
 .cursordiv {
     position: absolute;
     width: 100%;
@@ -3662,7 +3573,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     transition: 0.3s ease-out;
     text-align: center;
     overflow: hidden;
-    font-style: italic;
     font-size: 10px;
     position: absolute;
     width: 120px;
@@ -3814,11 +3724,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
     #logo_statistic {
         top: -25px;
-        -webkit-transform: rotateY(180deg) scale(0.8);
-        -moz-transform: rotateY(180deg) scale(0.8);
-        -ms-transform: rotateY(180deg) scale(0.8);
-        -o-transform: rotateY(180deg) scale(0.8);
-        transform: rotateY(180deg) scale(0.8);
     }
 
     #small-circles-container {
@@ -3871,11 +3776,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
     #logo_statistic {
         top: -35px;
-        -webkit-transform: rotateY(180deg) scale(0.7);
-        -moz-transform: rotateY(180deg) scale(0.7);
-        -ms-transform: rotateY(180deg) scale(0.7);
-        -o-transform: rotateY(180deg) scale(0.7);
-        transform: rotateY(180deg) scale(0.7);
     }
 
     #small-circles-container {
@@ -4059,6 +3959,30 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     }
 }
 
-.container {
+.container-account {
     margin-bottom: 150px;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    margin-left: 9px;
+    bottom: 5px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin-left: 6px;
+    bottom: 18px;
 }
