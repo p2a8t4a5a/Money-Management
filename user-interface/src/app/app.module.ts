@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import { AccountComponent } from './account/account.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { IncomeDialogComponent } from './income-dialog/income-dialog.component';
 
 @NgModule({
     imports: [
@@ -34,11 +35,14 @@ import { StatisticsComponent } from './statistics/statistics.component';
         LoginComponent,
         FrontPageComponent,
         AccountComponent,
-        StatisticsComponent
+        StatisticsComponent,
+        IncomeDialogComponent
     ],
     bootstrap: [AppComponent],
     providers: [CookieService],
-    entryComponents: []
+    entryComponents: [
+        IncomeDialogComponent
+    ]
 })
 export class AppModule {
 }
