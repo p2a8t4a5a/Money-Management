@@ -1,4 +1,38 @@
-<div>
-    <span>{{data}}</span>
-    <button (click)="onCloseClick()">Close</button>
+<div id="add-modal">
+    <div class="modal-content">
+        <div class="modal-title mainmodaltitle">Add Income</div>
+        <div class="modal-close">
+            <div class="close-sign"></div>
+        </div>
+        <input type="text" name="modalvalue" class="modalvalue" data-a-sep=" " data-v-min="0" data-v-max="999999999"
+               data-l-zero="deny" maxlength="12" autocomplete="off" value="0">
+        <div class="modalselects">
+            <select class="modalcurrency">
+                <option value="RUB">rubles</option>
+                <option selected="selected" value="USD">dollars</option>
+                <option value="EUR">euro</option>
+            </select>
+
+            <select class="modalperiod">
+                <option value="YEAR">Per year</option>
+                <option value="QUARTER">Per quarter</option>
+                <option selected="selected" value="MONTH">Per month</option>
+                <option value="DAY">Per day</option>
+                <option value="HOUR">Per hour</option>
+            </select>
+        </div>
+        <div class="initicons">
+            <div id="chooseicon" class="cart-icon"></div>
+            <div class="initicons-arrow"></div>
+        </div>
+        <input class="modaltitle" placeholder="Title" type="text" autocomplete="off" maxlength="18"/>
+        <div class="modal-save">
+            <div class="modal-save-icon"></div>
+            <div class="modal-save-text">Save changes</div>
+        </div>
+        <div class="modal-delete">
+            <div id="modaldeletecross"></div>
+            <div class="modal-delete-text">Remove</div>
+        </div>
+    </div>
 </div>
