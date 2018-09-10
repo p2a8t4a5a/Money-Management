@@ -1493,6 +1493,7 @@ input.mat-input-element {
 input#deposit, input#capitalization {
     max-height: 0;
     max-width: 0;
+    display: none;
 }
 
 input#deposit + label.button, input#capitalization + label.button {
@@ -2079,8 +2080,8 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 }
 
 .modal-title {
-    font-weight: 900;
-    font-size: 18px;
+    font-weight: 400;
+    font-size: 30px;
     color: #242424;
     position: absolute;
     width: 240px;
@@ -2177,21 +2178,9 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 }
 
 .modalvalue {
-    text-align: center;
-    border: 0px solid;
-    background-color: transparent;
-    position: absolute;
     top: 78px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    font-size: 86px;
-    padding: 0;
-    width: 370px;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-    -ms-transition: 0.3s;
-    -o-transition: 0.3s;
+    font-size: 40px;
+    width: 70%;
 }
 
 .modalvalueerror {
@@ -3897,4 +3886,14 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     -webkit-transform: rotate(45deg);
     margin-left: 6px;
     bottom: 18px;
+}
+
+.modal-content .mat-input-element {
+    height: 55px;
+    font-size: 40px !important;
+    padding-left: 60px !important;
+}
+
+.modal-content .mat-form-field-prefix .mat-icon {
+    font-size: 120%;
 }

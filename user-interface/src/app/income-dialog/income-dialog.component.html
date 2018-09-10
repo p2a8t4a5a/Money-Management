@@ -4,8 +4,13 @@
         <div class="modal-close">
             <div class="close-sign"></div>
         </div>
-        <input type="text" name="modalvalue" class="modalvalue" data-a-sep=" " data-v-min="0" data-v-max="999999999"
-               data-l-zero="deny" maxlength="12" autocomplete="off" value="0">
+        <mat-form-field class="form-field modalvalue">
+            <mat-icon matPrefix>attach_money</mat-icon>
+            <input matInput value="0" maxlength="12" class="form-control" autocomplete="off"  name="modalvalue"
+                   data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny">
+        </mat-form-field>
+
+
         <div class="modalselects">
             <select class="modalcurrency">
                 <option value="RUB">rubles</option>
