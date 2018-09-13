@@ -2223,30 +2223,38 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     background-color: #ffdd33;
 }
 
-.modalselects {
+.modal-selects {
     z-index: 2000;
     text-transform: lowercase;
-    text-align: left;
     display: block;
     position: absolute;
-    top: 200px;
+    top: 180px;
     left: 0;
     right: 0;
     margin: auto;
-    width: 260px;
-    height: 30px;
+    width: 100%;
+    height: 50px;
 }
 
-.modalselects .mat-form-field-flex {
+.modal-currency {
+    padding-right: 50px;
+}
+
+.modal-currency .mat-form-field-flex {
     height: 50px;
     width: 200px;
 }
 
-.modalselects .mat-select-value {
+.modal-period .mat-form-field-flex {
+    height: 50px;
+    width: 400px;
+}
+
+.modal-selects .mat-select-value {
     font-size: 35px;
 }
 
-.modalselects .mat-select-arrow {
+.modal-selects .mat-select-arrow {
     border: solid black;
     border-width: 0 2px 2px 0;
     width: 20px;

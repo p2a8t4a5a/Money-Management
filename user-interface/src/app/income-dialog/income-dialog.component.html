@@ -11,22 +11,24 @@
         </mat-form-field>
 
 
-        <div class="modalselects">
-            <mat-form-field>
+        <div class="modal-selects">
+            <mat-form-field class="modal-currency">
                 <mat-select>
                     <mat-option [value]="'RUB'">Rubles</mat-option>
-                    <mat-option selected="selected" [value]="'USD'">Dollars</mat-option>
+                    <mat-option [value]="'USD'">Dollars</mat-option>
                     <mat-option [value]="'EUR'">Euro</mat-option>
                 </mat-select>
             </mat-form-field>
 
-            <select class="modalperiod">
-                <option value="YEAR">Per year</option>
-                <option value="QUARTER">Per quarter</option>
-                <option selected="selected" value="MONTH">Per month</option>
-                <option value="DAY">Per day</option>
-                <option value="HOUR">Per hour</option>
-            </select>
+            <mat-form-field class="modal-period">
+                <mat-select>
+                    <mat-option [value]="'YEAR'">Per year</mat-option>
+                    <mat-option [value]="'QUARTER'">Per quarter</mat-option>
+                    <mat-option [value]="'MONTH'">Per month</mat-option>
+                    <mat-option [value]="'DAY'">Per day</mat-option>
+                    <mat-option [value]="'HOUR'">Per hour</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
         <div class="initicons">
             <div id="chooseicon" class="cart-icon"></div>
