@@ -12,11 +12,13 @@
 
 
         <div class="modalselects">
-            <select class="modalcurrency">
-                <option value="RUB">rubles</option>
-                <option selected="selected" value="USD">dollars</option>
-                <option value="EUR">euro</option>
-            </select>
+            <mat-form-field>
+                <mat-select>
+                    <mat-option [value]="'RUB'">Rubles</mat-option>
+                    <mat-option selected="selected" [value]="'USD'">Dollars</mat-option>
+                    <mat-option [value]="'EUR'">Euro</mat-option>
+                </mat-select>
+            </mat-form-field>
 
             <select class="modalperiod">
                 <option value="YEAR">Per year</option>

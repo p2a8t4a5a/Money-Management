@@ -335,6 +335,7 @@ header {
 
 @keyframes scrolling {
     0% {
+        opacity: 0;
         top: 5px;
     }
     30% {
@@ -342,6 +343,7 @@ header {
         top: 10px;
     }
     100% {
+        opacity: 0;
         top: 25px;
     }
 }
@@ -743,6 +745,10 @@ input.mat-input-element {
     width: 100%;
     height: 100%;
     position: absolute;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
     text-align: center;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -2231,49 +2237,24 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     height: 30px;
 }
 
-.modalselects .selectbox {
-    color: #333;
-    vertical-align: middle;
-    cursor: pointer;
-    margin: 5px;
+.modalselects .mat-form-field-flex {
+    height: 50px;
+    width: 200px;
 }
 
-.modalselects .selectbox .select {
-    width: 60px;
-    height: 24px;
-    padding: 0 45px 0 10px;
-    font: 12px/24px Arial;
-    border: 1px solid #ccc;
+.modalselects .mat-select-value {
+    font-size: 35px;
 }
 
-.modalselects .selectbox .select .text {
-    display: block;
-    width: 100%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.modalselects .selectbox .trigger .arrow {
-    position: absolute;
-    top: 11px;
-    right: 10px;
-    border-left: 3px solid transparent;
-    border-right: 3px solid transparent;
-    border-top: 3px solid #a1a1a1;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-}
-
-.modalselects .selectbox .dropdown {
-    top: 25px;
-    width: 115px;
-    margin: 0;
-    padding: 0 0;
-    background: #FFF;
-    border: 1px solid #ccc;
-    font: 12px Arial;
+.modalselects .mat-select-arrow {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .initicons-arrow {
