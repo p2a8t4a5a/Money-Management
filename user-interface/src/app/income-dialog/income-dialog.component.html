@@ -7,7 +7,7 @@
         <mat-form-field class="form-field modalvalue">
             <mat-icon matPrefix>attach_money</mat-icon>
             <input matInput value="0" maxlength="12" class="form-control" autocomplete="off"  name="modalvalue"
-                   data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny">
+                   data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny"/>
         </mat-form-field>
 
 
@@ -34,7 +34,11 @@
             <div id="chooseicon" class="cart-icon"></div>
             <div class="initicons-arrow"></div>
         </div>
-        <input class="modaltitle" placeholder="Title" type="text" autocomplete="off" maxlength="18"/>
+
+        <mat-form-field class="form-field modaltitle">
+            <input matInput name="modaltitle" placeholder="Title" autocomplete="off" maxlength="18">
+        </mat-form-field>
+
         <div class="modal-save">
             <div class="modal-save-icon"></div>
             <div class="modal-save-text">Save changes</div>
