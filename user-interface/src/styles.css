@@ -800,7 +800,7 @@ input.mat-input-element {
     left: 15px;
     content: ' ';
     height: 33px;
-    width: 2px;
+    width: 3px;
     background-color: #333;
 }
 
@@ -816,6 +816,33 @@ input.mat-input-element {
     margin-top: 40px;
     text-align: center;
     font-size: 10px;
+}
+
+.modal-close {
+    top: 12px !important;
+    height: 40px !important;
+    width: 40px !important;
+}
+
+.modal-close-icon:after, .modal-close-icon:before {
+    height: 40px !important;
+    width: 4px !important;
+}
+
+.modal-close-icon:before {
+    -webkit-transform: rotate(60deg) !important;
+    transform: rotate(60deg) !important;
+}
+
+.modal-close-icon:after {
+    -webkit-transform: rotate(-60deg) !important;
+    transform: rotate(-60deg) !important;
+}
+
+.modal-close-text {
+    font-size: 12px !important;
+    right: 2px;
+    position: absolute;
 }
 
 .logout-text-up, .logout-text-down {
@@ -1218,13 +1245,13 @@ input.mat-input-element {
 }
 
 #plusone {
-    width: 2px;
+    width: 3px;
     height: 50%;
 }
 
 #plustwo {
     width: 50%;
-    height: 2px;
+    height: 3px;
 }
 
 #plustext {
@@ -1747,11 +1774,11 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
 .plusitemone {
     width: 70%;
-    height: 2px;
+    height: 3px;
 }
 
 .plusitemtwo {
-    width: 2px;
+    width: 3px;
     height: 70%;
 }
 
@@ -2075,16 +2102,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     right: 26px;
 }
 
-.modal-close {
-    position: absolute;
-    width: 86px;
-    height: 62px;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    z-index: 3500;
-}
-
 .modal-title {
     font-weight: 400;
     font-size: 30px;
@@ -2205,268 +2222,268 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 }
 
 .modaltitleerror {
-background-color: #ffdd33;
+    background-color: #ffdd33;
 }
 
 .modal-selects {
-z-index: 2000;
-text-transform: lowercase;
-display: block;
-position: absolute;
-top: 180px;
-left: 0;
-right: 0;
-margin: auto;
-width: 100%;
-height: 50px;
+    z-index: 2000;
+    text-transform: lowercase;
+    display: block;
+    position: absolute;
+    top: 180px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 50px;
 }
 
 .modal-currency {
-padding-right: 50px;
+    padding-right: 50px;
 }
 
 .modal-currency .mat-form-field-flex {
-height: 50px;
-width: 200px;
+    height: 50px;
+    width: 200px;
 }
 
 .modal-period .mat-form-field-flex {
-height: 50px;
-width: 400px;
+    height: 50px;
+    width: 400px;
 }
 
 .modal-selects .mat-select-value {
-font-size: 35px;
+    font-size: 35px;
 }
 
 .modal-selects .mat-select-arrow {
-border: solid black;
-border-width: 0 2px 2px 0;
-width: 20px;
-height: 20px;
-transform: rotate(45deg);
--webkit-transform: rotate(45deg);
-margin-top: 10px;
-margin-right: 10px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .initicons-arrow {
-background-position: -32px -24px;
-background-size: 538px 84px;
-position: absolute;
-width: 15px;
-height: 9px;
-right: 0;
-top: 18px;
+    background-position: -32px -24px;
+    background-size: 538px 84px;
+    position: absolute;
+    width: 15px;
+    height: 9px;
+    right: 0;
+    top: 18px;
 }
 
 .initicons {
-cursor: pointer;
-width: 75px;
-height: 42px;
-position: absolute;
-text-align: left;
-top: 270px;
-left: 0;
-right: 0;
-margin: auto;
+    cursor: pointer;
+    width: 75px;
+    height: 42px;
+    position: absolute;
+    text-align: left;
+    top: 270px;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 .initicons img {
-width: 42px;
-height: 42px;
+    width: 42px;
+    height: 42px;
 }
 
 .initicons:hover {
-opacity: 0.8;
+    opacity: 0.8;
 }
 
 .modalincomessurface {
-position: absolute;
-z-index: 3000;
-position: absolute;
-width: 100%;
-height: 100%;
-background-color: white;
+    position: absolute;
+    z-index: 3000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
 }
 
 .modalexpensessurface {
-z-index: 3000;
-position: absolute;
-width: 100%;
-height: 100%;
-background-color: white;
+    z-index: 3000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
 }
 
 #modalexpensetable {
-text-align: center;
-background-color: white;
-position: absolute;
-top: 14%;
-left: 42px;
+    text-align: center;
+    background-color: white;
+    position: absolute;
+    top: 14%;
+    left: 42px;
 
 }
 
 #modalincomestable {
-text-align: center;
-background-color: white;
-position: absolute;
-top: 30%;
-left: 42px;
+    text-align: center;
+    background-color: white;
+    position: absolute;
+    top: 30%;
+    left: 42px;
 }
 
 .modaltable tr, .modaltable-low tr {
-background-color: #ddeef1;
+    background-color: #ddeef1;
 }
 
 .modaltable td, .modaltable-low td {
-cursor: pointer;
-width: 86px;
-height: 86px;
+    cursor: pointer;
+    width: 86px;
+    height: 86px;
 }
 
 .imgbox {
-background-color: white;
-border: 2px solid white;
--webkit-transition: all 0.1s;
--o-transition: all 0.1s;
--ms-transition: all 0.1s;
--moz-transition: all 0.1s;
-transition: all 0.1s;
-width: 86px;
-height: 86px;
+    background-color: white;
+    border: 2px solid white;
+    -webkit-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    -ms-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+    width: 86px;
+    height: 86px;
 }
 
 .imgbox:hover {
-border: 2px solid #ddeef1;
+    border: 2px solid #ddeef1;
 }
 
 .modalborderwhite {
-border: 2px solid white;
+    border: 2px solid white;
 }
 
 .iconbox {
-background-color: white;
-position: absolute;
-margin: 22px;
+    background-color: white;
+    position: absolute;
+    margin: 22px;
 }
 
 .auto {
-background-position: -989px 0;
+    background-position: -989px 0;
 }
 
 .gas {
-background-position: -602px 0;
+    background-position: -602px 0;
 }
 
 .home {
-background-position: -473px 0;
+    background-position: -473px 0;
 }
 
 .baby {
-background-position: -946px 0;
+    background-position: -946px 0;
 }
 
 .cart {
-background-position: -903px 0;
+    background-position: -903px 0;
 }
 
 .clothes {
-background-position: -817px 0;
+    background-position: -817px 0;
 }
 
 .phone {
-background-position: -258px 0;
+    background-position: -258px 0;
 }
 
 .utilities {
-background-position: -43px 0;
+    background-position: -43px 0;
 }
 
 .island {
-background-position: -430px 0;
+    background-position: -430px 0;
 }
 
 .earth {
-background-position: -731px 0;
+    background-position: -731px 0;
 }
 
 .meal {
-background-position: -387px 0;
+    background-position: -387px 0;
 }
 
 .sport {
-background-position: -129px 0;
+    background-position: -129px 0;
 }
 
 .medical {
-background-position: -344px 0;
+    background-position: -344px 0;
 }
 
 .tv {
-background-position: -86px 0;
+    background-position: -86px 0;
 }
 
 .smoking {
-background-position: -172px 0;
+    background-position: -172px 0;
 }
 
 .other {
-background-position: -301px 0;
+    background-position: -301px 0;
 }
 
 .edu {
-background-position: -688px 0;
+    background-position: -688px 0;
 }
 
 .graphs {
-background-position: -516px 0;
+    background-position: -516px 0;
 }
 
 .wallet {
-background-position: 0 0;
+    background-position: 0 0;
 }
 
 .case {
-background-position: -860px 0;
+    background-position: -860px 0;
 }
 
 .rub {
-background-position: -215px 0;
+    background-position: -215px 0;
 }
 
 .euro {
-background-position: -645px 0;
+    background-position: -645px 0;
 }
 
 .doll {
-background-position: -774px 0;
+    background-position: -774px 0;
 }
 
 .gbp {
-background-position: -559px 0;
+    background-position: -559px 0;
 }
 
 #chooseicon {
-position: absolute;
-left: 0;
-top: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .modalforward {
--webkit-animation: 0.4s modalforward ease-out;
--moz-animation: 0.4s modalforward ease-out;
--o-animation: 0.4s modalforward ease-out;
--ms-animation: 0.4s modalforward ease-out;
-animation: 0.4s modalforward ease-out;
+    -webkit-animation: 0.4s modalforward ease-out;
+    -moz-animation: 0.4s modalforward ease-out;
+    -o-animation: 0.4s modalforward ease-out;
+    -ms-animation: 0.4s modalforward ease-out;
+    animation: 0.4s modalforward ease-out;
 }
 
 .modalreverse {
--webkit-animation: 0.3s modalreverse ease-out;
--moz-animation: 0.5s modalreverse ease-out;
--o-animation: 0.5s modalreverse ease-out;
--ms-animation: 0.5s modalreverse ease-out;
-animation: 0.3s modalreverse ease-out;
+    -webkit-animation: 0.3s modalreverse ease-out;
+    -moz-animation: 0.5s modalreverse ease-out;
+    -o-animation: 0.5s modalreverse ease-out;
+    -ms-animation: 0.5s modalreverse ease-out;
+    animation: 0.3s modalreverse ease-out;
 }
 
 /* ============= STATISTIC PAGE STYLES =============*/
