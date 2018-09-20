@@ -819,13 +819,14 @@ input.mat-input-element {
 }
 
 .modal-close {
-    top: 12px !important;
+    top: 80% !important;
+    right: 35% !important;
     height: 40px !important;
     width: 40px !important;
 }
 
 .modal-close-icon:after, .modal-close-icon:before {
-    height: 40px !important;
+    height: 60px !important;
     width: 4px !important;
 }
 
@@ -840,9 +841,10 @@ input.mat-input-element {
 }
 
 .modal-close-text {
-    font-size: 12px !important;
-    right: 2px;
+    font-size: 15px !important;
+    right: 1px;
     position: absolute;
+    margin-top: 50px;
 }
 
 .logout-text-up, .logout-text-down {
@@ -2216,7 +2218,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 }
 
 .modaltitle {
-    top: 190px;
+    top: 135px;
     width: 50%;
     font-size: 20px;
 }
@@ -3904,4 +3906,8 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     line-height: 1.125;
     text-transform: lowercase;
     font-size: 20px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    top: 100% !important;
 }
