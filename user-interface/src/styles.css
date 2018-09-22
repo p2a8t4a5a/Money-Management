@@ -825,6 +825,20 @@ input.mat-input-element {
     width: 40px !important;
 }
 
+.modal-add {
+    top: 81%;
+    position: absolute;
+    left: 35%;
+    width: 70px;
+    height: 40px;
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.modal-add:hover {
+    opacity: 1;
+}
+
 .modal-close-icon:after, .modal-close-icon:before {
     height: 60px !important;
     width: 4px !important;
@@ -840,11 +854,33 @@ input.mat-input-element {
     transform: rotate(-60deg) !important;
 }
 
-.modal-close-text {
-    font-size: 15px !important;
+.modal-add-icon .plusitemone {
+    width: 100% !important;
+}
+
+.modal-add-icon .plusitemtwo {
+    width: 4px !important;
+    height: 100% !important;
+}
+
+.modal-close-text,
+.modal-add-text {
     right: 1px;
     position: absolute;
     margin-top: 50px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000 !important;
+    text-shadow: 0 1px 0 #fff;
+}
+
+.modal-close-text {
+    font-size: 15px !important;
+}
+
+.modal-add-text {
+    top: -5px !important;
+    font-size: 16px !important;
 }
 
 .logout-text-up, .logout-text-down {
