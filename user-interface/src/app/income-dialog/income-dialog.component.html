@@ -1,21 +1,21 @@
 <div id="add-modal">
     <div class="modal-content">
-        <div class="modal-title mainmodaltitle">Add Income</div>
+        <div class="modal-title mainmodaltitle">Add Item</div>
         <mat-form-field class="form-field modalvalue">
             <mat-icon matPrefix>attach_money</mat-icon>
             <input matInput value="0" maxlength="12" class="form-control" autocomplete="off" name="modalvalue"
-                   data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny"/>
+                   data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny" [(ngModel)]="item.amount"/>
         </mat-form-field>
         <div class="modal-selects">
             <mat-form-field class="modal-currency">
-                <mat-select>
-                    <mat-option [value]="'RON'">Ron</mat-option>
-                    <mat-option [value]="'USD'">Dollars</mat-option>
+                <mat-select [(ngModel)]="item.currency">
                     <mat-option [value]="'EUR'">Euro</mat-option>
+                    <mat-option [value]="'USD'">Dollars</mat-option>
+                    <mat-option [value]="'RON'">Ron</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field class="modal-period">
-                <mat-select>
+                <mat-select [(ngModel)]="item.period">
                     <mat-option [value]="'YEAR'">Per year</mat-option>
                     <mat-option [value]="'QUARTER'">Per quarter</mat-option>
                     <mat-option [value]="'MONTH'">Per month</mat-option>
@@ -25,9 +25,10 @@
             </mat-form-field>
         </div>
         <mat-form-field class="form-field modaltitle">
-            <input matInput name="modaltitle" placeholder="Title" autocomplete="off" maxlength="18">
+            <input matInput name="modaltitle" placeholder="Title" autocomplete="off" maxlength="18"
+                   [(ngModel)]="item.title">
         </mat-form-field>
-        <div class="modal-add">
+        <div class="modal-add" (click)="onAddClick()">
             <div class="modal-add-icon">
                 <div class="plusitemborder"></div>
                 <div class="plusitemone"></div>
