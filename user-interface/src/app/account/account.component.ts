@@ -3,6 +3,7 @@ import {AuthenticationService} from "../service/authentication.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material";
 import {IncomeDialogComponent} from "../income-dialog/income-dialog.component";
+import {AccountService} from "../service/account.service";
 
 @Component({
     selector: 'app-account',
@@ -11,11 +12,16 @@ import {IncomeDialogComponent} from "../income-dialog/income-dialog.component";
 })
 export class AccountComponent implements OnInit {
 
-    constructor(private authService: AuthenticationService, private router: Router, public dialog: MatDialog) {
+    constructor(private authService: AuthenticationService, private router: Router, public dialog: MatDialog,
+                private accountService: AccountService) {
     }
 
     ngOnInit() {
         this.authService.checkCredentials();
+        this.accountService.getCurrentAccount().subscribe(result => {
+            console.log(result);
+            //TODO
+        })
     }
 
     public navigateToStatistics() {
@@ -26,10 +32,6 @@ export class AccountComponent implements OnInit {
         const dialogRef = this.dialog.open(IncomeDialogComponent, {
             width: '250px',
             data: "Add Income"
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            //TODO
         });
     }
 
