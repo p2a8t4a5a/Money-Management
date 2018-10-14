@@ -9,7 +9,7 @@ import {AuthenticationService} from "./authentication.service";
 export class AccountService {
     private static account: Account;
 
-    private getCurrentAccountUrl = 'api/account/current';
+    private getCurrentAccountUrl = 'api/accounts/current';
 
     constructor(private http: HttpClient, private authService: AuthenticationService) {
     }
@@ -19,7 +19,9 @@ export class AccountService {
             return this.requestServer();
         }
 
-        return Observable.create(AccountService.account);
+        return new Observable(obs => {
+            obs.next(AccountService.account);
+        })
     }
 
 
