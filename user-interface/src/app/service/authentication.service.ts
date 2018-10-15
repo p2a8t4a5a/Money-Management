@@ -65,6 +65,7 @@ export class AuthenticationService {
         this.cookieService.delete('access_token');
         this.cookieService.delete('username');
         this.router.navigate(['']);
+        localStorage.clear();
     }
 
     public saveCredentials(token, username) {

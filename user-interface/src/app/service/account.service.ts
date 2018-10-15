@@ -2,36 +2,38 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AuthenticationService} from "./authentication.service";
+import {Account} from "../domain/Account";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AccountService {
-    private static account: Account;
-
     private getCurrentAccountUrl = 'api/accounts/current';
 
     constructor(private http: HttpClient, private authService: AuthenticationService) {
     }
 
     public getCurrentAccount(): Observable<Account> {
-        if (!AccountService.account) {
+        let account = AccountService.getCurrentAccountFromSession();
+
+        if (account == null) {
             return this.requestServer();
         }
 
         return new Observable(obs => {
-            obs.next(AccountService.account);
+            obs.next(account);
         })
+    }
+
+
+    private static getCurrentAccountFromSession(): Account {
+        return JSON.parse(localStorage.getItem('account'))
     }
 
 
     private requestServer(): Observable<Account> {
         var observable = this.createRequest();
-
-        observable.subscribe(result => {
-            AccountService.account = result;
-        });
-
+        observable.subscribe(result => AccountService.saveAccount(result));
         return observable;
     }
 
@@ -44,6 +46,10 @@ export class AccountService {
         };
 
         return this.http.get<Account>(this.getCurrentAccountUrl, options);
+    }
+
+    private static saveAccount(account: Account) {
+        localStorage.setItem('account', JSON.stringify(account));
     }
 
 }
