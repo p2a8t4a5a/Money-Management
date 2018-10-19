@@ -1769,10 +1769,9 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     -o-transition: 0.25s;
     -ms-transition: 0.25s;
     transition: 0.25s;
-    position: absolute; /*RELATIVE!*/
-    bottom: 0px;
+    position: absolute;
     margin: auto;
-    width: 100%;
+    width: 90%;
 }
 
 /* =============== EXPENSE SLIDER =============== */
@@ -1846,6 +1845,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 }
 
 .frame {
+    position: relative;
     text-align: left;
     overflow: hidden;
     top: 50px;

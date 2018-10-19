@@ -10,7 +10,7 @@
     <div class="row">
         <div class="columns col-sm-12 col-md-4">
             <div class="incomes-sprite-title zoomplus incomebutton">INCOMES</div>
-            <div id="noincomes" class="incomebutton" (click)="openAddIncome()" >
+            <div id="noincomes" class="incomebutton" (click)="openAddIncome()" *ngIf="account.incomes.length == 0">
                 <div class="hoverplace"></div>
                 <div class="majorplusitem">
                     <div class="plusitemborder"></div>
@@ -19,7 +19,7 @@
                 </div>
                 <span class="plusitemtitle">Add income</span>
             </div>
-            <div class="plusitem" id="incomesplusitem">
+            <div class="plusitem" id="incomesplusitem" (click)="openAddIncome()">
                 <div class="plusitemborder incomebutton"></div>
                 <div class="plusitemone"></div>
                 <div class="plusitemtwo"></div>
@@ -35,7 +35,16 @@
             </div>
             <div class="frame">
                 <div id="incomewrapper" class="wrapper">
-                    <div id="incomeslider"></div>
+                    <div id="incomeslider">
+                        <div *ngFor="let income of account.incomes" (click)="openUpdateIncome(income)" class="incomeitem">
+                            <span class="title11museo300">{{income.title}}</span>
+                            <p class="title9museo300">
+                                <span class="bolddigit20">{{'value1'}} </span>
+                                <span class="lightdigit20">{{'value2'}}</span>
+                            </p>
+                            <div class="itembackground"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
