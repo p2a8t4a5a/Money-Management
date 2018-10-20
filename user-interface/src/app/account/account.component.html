@@ -39,8 +39,8 @@
                         <div *ngFor="let income of account.incomes" (click)="openUpdateIncome(income)" class="incomeitem">
                             <span class="title11museo300">{{income.title}}</span>
                             <p class="title9museo300">
-                                <span class="bolddigit20">{{'value1'}} </span>
-                                <span class="lightdigit20">{{'value2'}}</span>
+                                <span class="bolddigit20">{{income.amount}} </span>
+                                <span class="lightdigit20">{{income.currency + ' - ' + income.period}}</span>
                             </p>
                             <div class="itembackground"></div>
                         </div>
