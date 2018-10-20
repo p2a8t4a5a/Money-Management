@@ -1871,8 +1871,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     -o-transition: 0.25s;
     -ms-transition: 0.25s;
     transition: 0.25s;
-    position: absolute; /*RELATIVE!*/
-    bottom: 0;
+    position: absolute;
     margin: auto;
     width: 100%;
 }

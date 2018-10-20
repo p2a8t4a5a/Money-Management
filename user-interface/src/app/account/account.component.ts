@@ -24,8 +24,6 @@ export class AccountComponent implements OnInit {
         this.authService.checkCredentials();
         this.accountService.getCurrentAccount().subscribe(result => {
             this.account = result;
-
-            console.log(result);
         })
     }
 
@@ -37,11 +35,19 @@ export class AccountComponent implements OnInit {
         //TODO
     }
 
+    public openUpdateExpense(income: Item) {
+        //TODO
+    }
+
     public openAddIncome() {
         const dialogRef = this.dialog.open(IncomeDialogComponent, {
             width: '250px',
             data: "Add Income"
         });
+    }
+
+    public openAddExpense() {
+        //TODO
     }
 
 }

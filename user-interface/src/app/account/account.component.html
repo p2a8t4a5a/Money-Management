@@ -36,7 +36,8 @@
             <div class="frame">
                 <div id="incomewrapper" class="wrapper">
                     <div id="incomeslider">
-                        <div *ngFor="let income of account.incomes" (click)="openUpdateIncome(income)" class="incomeitem">
+                        <div *ngFor="let income of account.incomes" (click)="openUpdateIncome(income)"
+                             class="incomeitem">
                             <span class="title11museo300">{{income.title}}</span>
                             <p class="title9museo300">
                                 <span class="bolddigit20">{{income.amount}} </span>
@@ -50,7 +51,7 @@
         </div>
         <div class="columns col-sm-12 col-md-4">
             <div class="expenses-sprite-title zoomplus">EXPENSES</div>
-            <div id="noexpenses">
+            <div id="noexpenses" (click)="openAddIncome()" *ngIf="account.expenses.length == 0">
                 <div class="hoverplace"></div>
                 <div class="majorplusitem">
                     <div class="plusitemborder"></div>
@@ -59,7 +60,7 @@
                 </div>
                 <span class="plusitemtitle">Add expense</span>
             </div>
-            <div class="plusitem" id="expensesplusitem">
+            <div class="plusitem" id="expensesplusitem" (click)="openAddIncome()">
                 <div class="plusitemborder"></div>
                 <div class="plusitemone"></div>
                 <div class="plusitemtwo"></div>
@@ -75,7 +76,17 @@
             </div>
             <div class="frame">
                 <div id="expensewrapper" class="wrapper">
-                    <div id="expenseslider"></div>
+                    <div id="expenseslider">
+                        <div *ngFor="let expense of account.expenses" onclick="openUpdateExpense(this)"
+                             class="expenseitem">
+                            <span class="title11museo300">{{expense.title}}</span>
+                            <p class="title9museo300">
+                                <span class="bolddigit20">{{expense.amount}} </span>
+                                <span class="lightdigit20">{{expense.currency + ' - ' + expense.period}}</span>
+                            </p>
+                            <div class="itembackground"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
