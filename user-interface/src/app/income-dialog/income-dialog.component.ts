@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from "@angular/material";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {Item} from "../domain/Item";
 import {AuthenticationService} from "../service/authentication.service";
 
@@ -10,15 +10,21 @@ import {AuthenticationService} from "../service/authentication.service";
 })
 export class IncomeDialogComponent implements OnInit {
 
-    item: Item = new Item();
+    public title: String = "Add Income";
 
     constructor(
-        public dialogRef: MatDialogRef<IncomeDialogComponent>, private authService: AuthenticationService) {
+        public dialogRef: MatDialogRef<IncomeDialogComponent>, private authService: AuthenticationService,
+        @Inject(MAT_DIALOG_DATA) public income: Item) {
     }
 
     ngOnInit() {
         this.authService.checkCredentials();
-        this.initItem()
+
+        if (this.income == null) {
+            this.initItem()
+        } else {
+            this.title = "Update Income";
+        }
     }
 
     onCloseClick(): void {
@@ -30,9 +36,10 @@ export class IncomeDialogComponent implements OnInit {
     }
 
     private initItem() {
-        this.item.currency = 'EUR';
-        this.item.period = 'MONTH';
-        this.item.amount = '0';
+        this.income = new Item();
+        this.income.currency = 'EUR';
+        this.income.period = 'MONTH';
+        this.income.amount = '0';
     }
 
 }

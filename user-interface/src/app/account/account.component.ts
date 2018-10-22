@@ -32,7 +32,10 @@ export class AccountComponent implements OnInit {
     }
 
     public openUpdateIncome(income: Item) {
-        //TODO
+        const dialogRef = this.dialog.open(IncomeDialogComponent, {
+            width: '250px',
+            data: income
+        });
     }
 
     public openUpdateExpense(income: Item) {
@@ -42,7 +45,7 @@ export class AccountComponent implements OnInit {
     public openAddIncome() {
         const dialogRef = this.dialog.open(IncomeDialogComponent, {
             width: '250px',
-            data: "Add Income"
+            data: null
         });
     }
 
