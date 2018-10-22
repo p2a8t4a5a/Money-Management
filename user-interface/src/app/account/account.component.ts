@@ -31,10 +31,16 @@ export class AccountComponent implements OnInit {
         this.router.navigate(['/statistics'])
     }
 
-    public openUpdateIncome(income: Item) {
+    public openUpdateIncome(index: number) {
         const dialogRef = this.dialog.open(IncomeDialogComponent, {
             width: '250px',
-            data: income
+            data: this.account.incomes[index]
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result != null) {
+                this.account.incomes[index] = result;
+            }
         });
     }
 
@@ -46,6 +52,12 @@ export class AccountComponent implements OnInit {
         const dialogRef = this.dialog.open(IncomeDialogComponent, {
             width: '250px',
             data: null
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result != null) {
+                this.account.incomes.push(result);
+            }
         });
     }
 

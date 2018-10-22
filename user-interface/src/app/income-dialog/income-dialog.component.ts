@@ -28,11 +28,11 @@ export class IncomeDialogComponent implements OnInit {
     }
 
     onCloseClick(): void {
-        this.dialogRef.close();
+        this.dialogRef.close(null);
     }
 
     onAddClick() {
-        //TODO
+        this.dialogRef.close(this.income);
     }
 
     private initItem() {
