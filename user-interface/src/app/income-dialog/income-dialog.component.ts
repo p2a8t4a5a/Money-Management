@@ -40,6 +40,7 @@ export class IncomeDialogComponent implements OnInit {
         this.income.currency = 'EUR';
         this.income.period = 'MONTH';
         this.income.amount = '0';
+        this.income.icon = '';
     }
 
 }

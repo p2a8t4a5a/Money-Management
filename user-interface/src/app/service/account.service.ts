@@ -8,7 +8,7 @@ import {Account} from "../domain/Account";
     providedIn: 'root'
 })
 export class AccountService {
-    private getCurrentAccountUrl = 'api/accounts/current';
+    private currentAccountUrl = 'api/accounts/current';
 
     constructor(private http: HttpClient, private authService: AuthenticationService) {
     }
@@ -25,6 +25,23 @@ export class AccountService {
         })
     }
 
+
+    public saveAccount(account: Account): Observable<void> {
+        let token = this.authService.getOauthToken();
+
+        let headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+        let options = {
+            headers: headers
+        };
+
+        let request = this.http.put<void>(this.currentAccountUrl, account, options);
+
+        request.subscribe(() => {
+           this.saveAccount(account);
+        });
+
+        return request;
+    }
 
     private static getCurrentAccountFromSession(): Account {
         return JSON.parse(localStorage.getItem('account'))
@@ -45,7 +62,7 @@ export class AccountService {
             headers: headers
         };
 
-        return this.http.get<Account>(this.getCurrentAccountUrl, options);
+        return this.http.get<Account>(this.currentAccountUrl, options);
     }
 
     private static saveAccount(account: Account) {

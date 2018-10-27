@@ -6,6 +6,7 @@ import {IncomeDialogComponent} from "../income-dialog/income-dialog.component";
 import {AccountService} from "../service/account.service";
 import {Account} from "../domain/Account";
 import {Item} from "../domain/Item";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-account',
@@ -17,7 +18,7 @@ export class AccountComponent implements OnInit {
     public account: Account;
 
     constructor(private authService: AuthenticationService, private router: Router, public dialog: MatDialog,
-                private accountService: AccountService) {
+                private accountService: AccountService, private toaster: ToastrService) {
     }
 
     ngOnInit() {
@@ -66,7 +67,12 @@ export class AccountComponent implements OnInit {
     }
 
     public saveAccount() {
-        //TODO
+        this.accountService.saveAccount(this.account).subscribe(() => {
+                this.toaster.success('The account was successfully saved !', 'Success');
+            },
+            error => {
+                this.toaster.error('An error occur during the saving !', 'Error');
+            });
     }
 
 }
