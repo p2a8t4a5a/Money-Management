@@ -65,4 +65,8 @@ export class AccountComponent implements OnInit {
         //TODO
     }
 
+    public saveAccount() {
+        //TODO
+    }
+
 }

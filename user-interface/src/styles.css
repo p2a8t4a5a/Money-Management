@@ -785,8 +785,12 @@ input.mat-input-element {
     bottom: 32px;
 }
 
-.close, .add {
+.add {
     top: 32px;
+}
+
+.close {
+    bottom: 32px;
 }
 
 .add:hover, .logout:hover, .close:hover {
@@ -912,6 +916,19 @@ input.mat-input-element {
 
 .close-icon:after {
     transform: rotate(-45deg);
+}
+
+.tick {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    opacity: 0.2;
+}
+
+.tick:hover {
+    opacity: 1;
 }
 
 /* OLD STYLE */
