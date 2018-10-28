@@ -80,13 +80,28 @@ export class AccountComponent implements OnInit {
         AccountComponent.down("income");
     }
 
+    public incomeUp() {
+        AccountComponent.up("income");
+    }
+
+    private static up(id: String) {
+        var slider = $("#" + id + "slider");
+        var sliderOffset = $(slider).position().top;
+        var itemHeight = 70;
+        var scroll = Math.abs(sliderOffset) + itemHeight;
+
+        $('#' + id + 'frame').animate({
+            scrollTop: scroll
+        }, 'slow');
+    }
+
     private static down(id: String) {
         var slider = $("#" + id + "slider");
-        var sliderTop = $(slider).position().top;
+        var sliderOffset = $(slider).position().top;
         var itemHeight = 70;
 
-        if (sliderTop < 0) {
-            var lastElementOnScreen = Math.abs(Math.round(sliderTop/itemHeight)) - 1;
+        if (sliderOffset < 0) {
+            var lastElementOnScreen = Math.abs(Math.round(sliderOffset / itemHeight)) - 1;
 
             $('#' + id + 'frame').animate({
                 scrollTop: lastElementOnScreen * itemHeight
