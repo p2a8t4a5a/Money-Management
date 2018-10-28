@@ -82,6 +82,10 @@ a:hover, a:focus {
     color: #FFFFFF;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 /*------------------Buttons---------------------*/
 .btn:focus {
     outline: 0px auto -webkit-focus-ring-color;
@@ -1427,8 +1431,9 @@ input.mat-input-element {
 
 .columns {
     text-transform: uppercase;
-    margin-top: 15%;
+    margin-top: 10%;
     padding: 15px;
+    height: 600px;
 }
 
 #savebutton {
@@ -1788,7 +1793,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     transition: 0.25s;
     position: absolute;
     margin: auto;
-    width: 90%;
+    width: 100%;
 }
 
 /* =============== EXPENSE SLIDER =============== */
@@ -1864,13 +1869,14 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 .frame {
     position: relative;
     text-align: left;
-    overflow: hidden;
-    top: 50px;
+    top: 35px;
     left: 0;
     right: 0;
     bottom: 0;
     width: 100%;
     height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .wrapper {
