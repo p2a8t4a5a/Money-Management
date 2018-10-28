@@ -7,6 +7,7 @@ import {AccountService} from "../service/account.service";
 import {Account} from "../domain/Account";
 import {Item} from "../domain/Item";
 import {ToastrService} from "ngx-toastr";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-account',
@@ -73,6 +74,24 @@ export class AccountComponent implements OnInit {
             error => {
                 this.toaster.error('An error occur during the saving !', 'Error');
             });
+    }
+
+    public incomeDown() {
+        AccountComponent.down("income");
+    }
+
+    private static down(id: String) {
+        var slider = $("#" + id + "slider");
+        var sliderTop = $(slider).position().top;
+        var itemHeight = 70;
+
+        if (sliderTop < 0) {
+            var lastElementOnScreen = Math.abs(Math.round(sliderTop/itemHeight)) - 1;
+
+            $('#' + id + 'frame').animate({
+                scrollTop: lastElementOnScreen * itemHeight
+            }, 'slow');
+        }
     }
 
 }

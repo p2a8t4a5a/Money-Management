@@ -30,7 +30,7 @@
                 <div class="plusitemtwo"></div>
             </div>
             <div class="blueline"></div>
-            <div id="incomedown">
+            <div id="incomedown" (click)="incomeDown()">
                 <i class="arrow up"></i>
                 forth
             </div>
@@ -38,7 +38,7 @@
                 <i class="arrow down"></i>
                 back
             </div>
-            <div class="frame">
+            <div class="frame" id="incomeframe">
                 <div id="incomewrapper" class="wrapper">
                     <div id="incomeslider">
                         <div *ngFor="let income of account.incomes; let i = index" (click)="openUpdateIncome(i)"

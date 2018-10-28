@@ -929,6 +929,7 @@ input.mat-input-element {
     right: 20px;
     top: 15px;
     opacity: 0.2;
+    cursor: pointer;
 }
 
 .tick:hover {
