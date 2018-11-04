@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../service/authentication.service";
 import {Router} from "@angular/router";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatDialogRef} from "@angular/material";
 import {ItemDialogComponent} from "../item-dialog/item-dialog.component";
 import {AccountService} from "../service/account.service";
 import {Account} from "../domain/Account";
@@ -34,29 +34,23 @@ export class AccountComponent implements OnInit {
     }
 
     public openUpdateIncome(index: number) {
-        const dialogRef = this.dialog.open(ItemDialogComponent, {
-            width: '250px',
-            data: this.account.incomes[index]
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
+        this.openItemPopup(this.account.incomes[index]).afterClosed().subscribe(result => {
             if (result != null) {
                 this.account.incomes[index] = result;
             }
         });
     }
 
-    public openUpdateExpense(income: Item) {
-        //TODO
+    public openUpdateExpense(index: number) {
+        this.openItemPopup(this.account.expenses[index]).afterClosed().subscribe(result => {
+            if (result != null) {
+                this.account.expenses[index] = result;
+            }
+        });
     }
 
     public openAddIncome() {
-        const dialogRef = this.dialog.open(ItemDialogComponent, {
-            width: '250px',
-            data: null
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
+        this.openItemPopup(null).afterClosed().subscribe(result => {
             if (result != null) {
                 this.account.incomes.push(result);
             }
@@ -64,7 +58,11 @@ export class AccountComponent implements OnInit {
     }
 
     public openAddExpense() {
-        //TODO
+        this.openItemPopup(null).afterClosed().subscribe(result => {
+            if (result != null) {
+                this.account.expenses.push(result);
+            }
+        });
     }
 
     public saveAccount() {
@@ -107,6 +105,13 @@ export class AccountComponent implements OnInit {
                 scrollTop: lastElementOnScreen * itemHeight
             }, 'slow');
         }
+    }
+
+    private openItemPopup(item: Item): MatDialogRef<ItemDialogComponent, any> {
+        return this.dialog.open(ItemDialogComponent, {
+            width: '250px',
+            data: item
+        });
     }
 
 }

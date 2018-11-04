@@ -65,7 +65,7 @@
                 </div>
                 <span class="plusitemtitle">Add expense</span>
             </div>
-            <div class="plusitem" id="expensesplusitem" (click)="openAddIncome()">
+            <div class="plusitem" id="expensesplusitem" (click)="openAddExpense()">
                 <div class="plusitemborder"></div>
                 <div class="plusitemone"></div>
                 <div class="plusitemtwo"></div>
@@ -82,7 +82,7 @@
             <div class="frame">
                 <div id="expensewrapper" class="wrapper">
                     <div id="expenseslider">
-                        <div *ngFor="let expense of account.expenses" onclick="openUpdateExpense(this)"
+                        <div *ngFor="let expense of account.expenses; let i = index" (click)="openUpdateExpense(i)"
                              class="expenseitem">
                             <span class="title11museo300">{{expense.title}}</span>
                             <p class="title9museo300">
