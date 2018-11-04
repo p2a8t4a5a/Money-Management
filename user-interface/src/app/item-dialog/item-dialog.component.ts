@@ -5,15 +5,15 @@ import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
     selector: 'app-income-dialog',
-    templateUrl: './income-dialog.component.html',
-    styleUrls: ['./income-dialog.component.css']
+    templateUrl: './item-dialog.component.html',
+    styleUrls: ['./item-dialog.component.css']
 })
-export class IncomeDialogComponent implements OnInit {
+export class ItemDialogComponent implements OnInit {
 
-    public title: String = "Add Income";
+    public title: String = "Add Item";
 
     constructor(
-        public dialogRef: MatDialogRef<IncomeDialogComponent>, private authService: AuthenticationService,
+        public dialogRef: MatDialogRef<ItemDialogComponent>, private authService: AuthenticationService,
         @Inject(MAT_DIALOG_DATA) public income: Item) {
     }
 
@@ -23,7 +23,7 @@ export class IncomeDialogComponent implements OnInit {
         if (this.income == null) {
             this.initItem()
         } else {
-            this.title = "Update Income";
+            this.title = "Update Item";
         }
     }
 

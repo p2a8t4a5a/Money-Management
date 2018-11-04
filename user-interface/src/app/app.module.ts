@@ -13,7 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import { AccountComponent } from './account/account.component';
 import { StatisticsComponent } from './statistics/statistics.component';
-import { IncomeDialogComponent } from './income-dialog/income-dialog.component';
+import { ItemDialogComponent } from './item-dialog/item-dialog.component';
 
 @NgModule({
     imports: [
@@ -36,12 +36,12 @@ import { IncomeDialogComponent } from './income-dialog/income-dialog.component';
         FrontPageComponent,
         AccountComponent,
         StatisticsComponent,
-        IncomeDialogComponent
+        ItemDialogComponent
     ],
     bootstrap: [AppComponent],
     providers: [CookieService],
     entryComponents: [
-        IncomeDialogComponent
+        ItemDialogComponent
     ]
 })
 export class AppModule {

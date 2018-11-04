@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IncomeDialogComponent } from './income-dialog.component';
+import { ItemDialogComponent } from './item-dialog.component';
 
 describe('IncomeDialogComponent', () => {
-  let component: IncomeDialogComponent;
-  let fixture: ComponentFixture<IncomeDialogComponent>;
+  let component: ItemDialogComponent;
+  let fixture: ComponentFixture<ItemDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IncomeDialogComponent ]
+      declarations: [ ItemDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IncomeDialogComponent);
+    fixture = TestBed.createComponent(ItemDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

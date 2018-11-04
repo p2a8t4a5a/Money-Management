@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../service/authentication.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material";
-import {IncomeDialogComponent} from "../income-dialog/income-dialog.component";
+import {ItemDialogComponent} from "../item-dialog/item-dialog.component";
 import {AccountService} from "../service/account.service";
 import {Account} from "../domain/Account";
 import {Item} from "../domain/Item";
@@ -34,7 +34,7 @@ export class AccountComponent implements OnInit {
     }
 
     public openUpdateIncome(index: number) {
-        const dialogRef = this.dialog.open(IncomeDialogComponent, {
+        const dialogRef = this.dialog.open(ItemDialogComponent, {
             width: '250px',
             data: this.account.incomes[index]
         });
@@ -51,7 +51,7 @@ export class AccountComponent implements OnInit {
     }
 
     public openAddIncome() {
-        const dialogRef = this.dialog.open(IncomeDialogComponent, {
+        const dialogRef = this.dialog.open(ItemDialogComponent, {
             width: '250px',
             data: null
         });
