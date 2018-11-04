@@ -71,15 +71,15 @@
                 <div class="plusitemtwo"></div>
             </div>
             <div class="blueline"></div>
-            <div id="expensedown">
+            <div id="expensedown" (click)="expenseDown()">
                 <i class="arrow up"></i>
                 forth
             </div>
-            <div id="expenseup">
+            <div id="expenseup" (click)="expenseUp()">
                 <i class="arrow down"></i>
                 back
             </div>
-            <div class="frame">
+            <div class="frame" id="expenseframe">
                 <div id="expensewrapper" class="wrapper">
                     <div id="expenseslider">
                         <div *ngFor="let expense of account.expenses; let i = index" (click)="openUpdateExpense(i)"

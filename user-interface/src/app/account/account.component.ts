@@ -82,6 +82,14 @@ export class AccountComponent implements OnInit {
         AccountComponent.up("income");
     }
 
+    public expenseDown() {
+        AccountComponent.down("expense");
+    }
+
+    public expenseUp() {
+        AccountComponent.up("expense");
+    }
+
     private static up(id: String) {
         var slider = $("#" + id + "slider");
         var sliderOffset = $(slider).position().top;
