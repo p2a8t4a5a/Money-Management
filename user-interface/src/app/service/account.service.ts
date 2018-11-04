@@ -37,7 +37,7 @@ export class AccountService {
         let request = this.http.put<void>(this.currentAccountUrl, account, options);
 
         request.subscribe(() => {
-           this.saveAccount(account);
+            AccountService.saveAccount(account);
         });
 
         return request;

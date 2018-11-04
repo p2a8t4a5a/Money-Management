@@ -104,9 +104,12 @@
                 <span class="savingstitle12">At the moment</span>
                 <div id="rublebox"></div>
                 <div id="rublesign"></div>
-                <input type="text" name="savingsvalue" id="savingsvalue" data-a-sep=" " data-v-min="0"
-                       data-v-max="999999999" data-l-zero="deny" maxlength="12" autocomplete="off"
-                       [(ngModel)]="account.saving.amount">
+                <mat-form-field class="form-field form-savings">
+                    <mat-icon matPrefix class="savingsvalue">attach_money</mat-icon>
+                    <input matInput value="0" maxlength="12" autocomplete="off" name="savingsvalue"
+                           data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny" class="form-control savingsvalue"
+                           [(ngModel)]="account.saving.amount"/>
+                </mat-form-field>
             </div>
             <div id="bottomsavingsline">
                 <input type="checkbox" name="deposit" id="deposit" [(ngModel)]="account.saving.deposit">
