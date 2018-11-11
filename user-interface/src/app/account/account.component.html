@@ -116,11 +116,12 @@
                 <label for="deposit" class="button"></label>
                 <label for="deposit" class="savingsdeposit">Accumulation account</label>
                 <span class="savingspercent">Interest</span>
-                <input type="text" name="percentvalue" id="percentvalue" data-a-sep="" data-v-min="0.00"
-                       data-v-max="99.99"
-                       data-l-zero="deny" data-a-sign=" %" data-w-empty="sign" data-p-sign="s" maxlength="5"
-                       data-a-pad="false" size="6" data-a-dec="." autocomplete="off"
-                       [(ngModel)]="account.saving.interest">
+                <mat-form-field class="form-field form-savings">
+                    <mat-icon matPrefix class="savingsvalue">%</mat-icon>
+                    <input matInput value="0" maxlength="5" autocomplete="off" name="percentvalue" size="6" data-a-dec="."
+                           data-a-sep="" data-v-min="0.00" data-v-max="99.99" data-l-zero="deny" class="form-control savingsvalue"
+                           [(ngModel)]="account.saving.interest" data-a-sign=" %" data-w-empty="sign" data-p-sign="s" data-a-pad="false"/>
+                </mat-form-field>
                 <input type="checkbox" name="capitalization" id="capitalization"
                        [(ngModel)]="account.saving.capitalization">
                 <label for="capitalization" class="button"></label>

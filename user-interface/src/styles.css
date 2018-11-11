@@ -1521,7 +1521,6 @@ input.mat-input-element {
     display: block;
     width: 100%;
     height: 190px;
-    border-bottom: 1px solid #e2e2e2;
 }
 
 #bottomsavingsline {
@@ -1529,7 +1528,6 @@ input.mat-input-element {
     display: block;
     width: 100%;
     height: 92px;
-    border-bottom: 1px solid #e2e2e2;
 }
 
 .form-savings {
@@ -1583,7 +1581,7 @@ mat-icon.savingsvalue {
 
 #capitalization + label.button {
     position: absolute;
-    bottom: -42px;
+    bottom: -100px;
 }
 
 input#deposit, input#capitalization {
@@ -1686,7 +1684,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
 .savingscapital {
     left: 25px;
-    bottom: -40px;
+    bottom: -100px;
 }
 
 .savingspercent {
