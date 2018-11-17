@@ -24,10 +24,46 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <mat-form-field class="form-field modaltitle">
-            <input matInput name="modaltitle" placeholder="Title" autocomplete="off" maxlength="18"
-                   [(ngModel)]="income.title">
-        </mat-form-field>
+        <div class="modal-selects">
+            <mat-form-field class="modal-icon">
+                <mat-select [(ngModel)]="income.icon">
+                    <mat-option [value]="'car'">
+                        <img src="../../assets/img/car.svg" alt="Car"> Car
+                    </mat-option>
+                    <mat-option [value]="'clothes'">
+                        <img src="../../assets/img/clothes.svg" alt="Clothes"> Clothes
+                    </mat-option>
+                    <mat-option [value]="'gift'">
+                        <img src="../../assets/img/gift.svg" alt="Gift"> Gift
+                    </mat-option>
+                    <mat-option [value]="'house'">
+                        <img src="../../assets/img/house.svg" alt="House"> House
+                    </mat-option>
+                    <mat-option [value]="'learning'">
+                        <img src="../../assets/img/learning.svg" alt="Learning"> Learning
+                    </mat-option>
+                    <mat-option [value]="'grocery'">
+                        <img src="../../assets/img/grocery.svg" alt="Grocery"> Grocery
+                    </mat-option>
+                    <mat-option [value]="'vacation'">
+                        <img src="../../assets/img/vacation.svg" alt="Vacation"> Vacation
+                    </mat-option>
+                    <mat-option [value]="'restaurant'">
+                        <img src="../../assets/img/restaurant.svg" alt="Restaurant"> Restaurant
+                    </mat-option>
+                    <mat-option [value]="'gym'">
+                        <img src="../../assets/img/gym.svg" alt="Gym"> Gym
+                    </mat-option>
+                    <mat-option [value]="'repair'">
+                        <img src="../../assets/img/repair.svg" alt="Repair"> Repair
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-field modaltitle">
+                <input matInput name="modaltitle" placeholder="Title" autocomplete="off" maxlength="18"
+                       [(ngModel)]="income.title">
+            </mat-form-field>
+        </div>
         <div class="modal-add" (click)="onAddClick()">
             <div class="modal-add-icon">
                 <div class="plusitemborder"></div>

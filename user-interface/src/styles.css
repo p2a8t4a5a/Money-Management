@@ -2277,9 +2277,21 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 }
 
 .modaltitle {
-    top: 135px;
+    top: 73px;
     width: 50%;
     font-size: 20px;
+    padding-left: 40px;
+}
+
+
+.modal-icon {
+    top: 70px;
+    padding-right: 40px;
+}
+
+.mat-option-text img {
+    height: 30px;
+    width: 30px;
 }
 
 .modaltitleerror {
