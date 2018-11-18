@@ -8,6 +8,7 @@ import {Account} from "../domain/Account";
 import {Item} from "../domain/Item";
 import {ToastrService} from "ngx-toastr";
 import * as $ from 'jquery';
+import {IconService} from "../service/icon.service";
 
 @Component({
     selector: 'app-account',
@@ -34,7 +35,11 @@ export class AccountComponent implements OnInit {
     }
 
     public openUpdateIncome(index: number) {
-        this.openItemPopup(this.account.incomes[index]).afterClosed().subscribe(result => {
+        let dialog = this.openItemDialog(this.account.incomes[index]);
+        dialog.componentInstance.title = "Update Income";
+        dialog.componentInstance.icons = IconService.getIncomeIcons();
+
+        dialog.afterClosed().subscribe(result => {
             if (result != null) {
                 this.account.incomes[index] = result;
             }
@@ -42,7 +47,11 @@ export class AccountComponent implements OnInit {
     }
 
     public openUpdateExpense(index: number) {
-        this.openItemPopup(this.account.expenses[index]).afterClosed().subscribe(result => {
+        let dialog = this.openItemDialog(this.account.expenses[index]);
+        dialog.componentInstance.title = "Update Expense";
+        dialog.componentInstance.icons = IconService.getExpenseIcons();
+
+        dialog.afterClosed().subscribe(result => {
             if (result != null) {
                 this.account.expenses[index] = result;
             }
@@ -50,7 +59,11 @@ export class AccountComponent implements OnInit {
     }
 
     public openAddIncome() {
-        this.openItemPopup(null).afterClosed().subscribe(result => {
+        let dialog = this.openItemDialog(null);
+        dialog.componentInstance.title = "Add Income";
+        dialog.componentInstance.icons = IconService.getIncomeIcons();
+
+        dialog.afterClosed().subscribe(result => {
             if (result != null) {
                 this.account.incomes.push(result);
             }
@@ -58,7 +71,11 @@ export class AccountComponent implements OnInit {
     }
 
     public openAddExpense() {
-        this.openItemPopup(null).afterClosed().subscribe(result => {
+        let dialog = this.openItemDialog(null);
+        dialog.componentInstance.title = "Add Expense";
+        dialog.componentInstance.icons = IconService.getExpenseIcons();
+
+        dialog.afterClosed().subscribe(result => {
             if (result != null) {
                 this.account.expenses.push(result);
             }
@@ -115,7 +132,7 @@ export class AccountComponent implements OnInit {
         }
     }
 
-    private openItemPopup(item: Item): MatDialogRef<ItemDialogComponent, any> {
+    private openItemDialog(item: Item): MatDialogRef<ItemDialogComponent, any> {
         return this.dialog.open(ItemDialogComponent, {
             width: '250px',
             data: item

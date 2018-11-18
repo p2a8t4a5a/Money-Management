@@ -4,18 +4,18 @@
         <mat-form-field class="form-field modalvalue">
             <mat-icon matPrefix>attach_money</mat-icon>
             <input matInput value="0" maxlength="12" class="form-control" autocomplete="off" name="modalvalue"
-                   data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny" [(ngModel)]="income.amount"/>
+                   data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny" [(ngModel)]="item.amount"/>
         </mat-form-field>
         <div class="modal-selects modal-selects-currency">
             <mat-form-field class="modal-currency">
-                <mat-select [(ngModel)]="income.currency">
+                <mat-select [(ngModel)]="item.currency">
                     <mat-option [value]="'EUR'">Euro</mat-option>
                     <mat-option [value]="'USD'">Dollars</mat-option>
                     <mat-option [value]="'RON'">Ron</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field class="modal-period">
-                <mat-select [(ngModel)]="income.period">
+                <mat-select [(ngModel)]="item.period">
                     <mat-option [value]="'YEAR'">Per year</mat-option>
                     <mat-option [value]="'QUARTER'">Per quarter</mat-option>
                     <mat-option [value]="'MONTH'">Per month</mat-option>
@@ -26,48 +26,18 @@
         </div>
         <div class="modal-selects modal-selects-title">
             <mat-form-field class="modal-icon">
-                <mat-select [(ngModel)]="income.icon">
-                    <mat-select-trigger><img [src]="'../../assets/img/' + income.icon + '.svg'" width="35px">
-                        {{income.icon}}
+                <mat-select [(ngModel)]="item.icon">
+                    <mat-select-trigger><img [src]="'../../assets/img/' + item.icon + '.svg'" width="35px">
+                        {{item.icon}}
                     </mat-select-trigger>
-                    <mat-option [value]="'car'">
-                        <img src="../../assets/img/car.svg" alt="Car"> Car
-                    </mat-option>
-                    <mat-option [value]="'clothes'">
-                        <img src="../../assets/img/clothes.svg" alt="Clothes"> Clothes
-                    </mat-option>
-                    <mat-option [value]="'gift'">
-                        <img src="../../assets/img/gift.svg" alt="Gift"> Gift
-                    </mat-option>
-                    <mat-option [value]="'house'">
-                        <img src="../../assets/img/house.svg" alt="House"> House
-                    </mat-option>
-                    <mat-option [value]="'learning'">
-                        <img src="../../assets/img/learning.svg" alt="Learning"> Learning
-                    </mat-option>
-                    <mat-option [value]="'grocery'">
-                        <img src="../../assets/img/grocery.svg" alt="Grocery"> Grocery
-                    </mat-option>
-                    <mat-option [value]="'vacation'">
-                        <img src="../../assets/img/vacation.svg" alt="Vacation"> Vacation
-                    </mat-option>
-                    <mat-option [value]="'restaurant'">
-                        <img src="../../assets/img/restaurant.svg" alt="Restaurant"> Restaurant
-                    </mat-option>
-                    <mat-option [value]="'gym'">
-                        <img src="../../assets/img/gym.svg" alt="Gym"> Gym
-                    </mat-option>
-                    <mat-option [value]="'phone'">
-                        <img src="../../assets/img/phone.svg" alt="Phone"> Phone
-                    </mat-option>
-                    <mat-option [value]="'repair'">
-                        <img src="../../assets/img/repair.svg" alt="Repair"> Repair
+                    <mat-option *ngFor="let icon of icons" [value]="icon">
+                        <img [src]="iconService.getIcon(icon)" alt="{{icon | uppercase}}"> {{icon | uppercase}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field class="form-field modaltitle">
                 <input matInput name="modaltitle" placeholder="Title" autocomplete="off" maxlength="18"
-                       [(ngModel)]="income.title">
+                       [(ngModel)]="item.title">
             </mat-form-field>
         </div>
         <div class="modal-add" (click)="onAddClick()">

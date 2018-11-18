@@ -2,28 +2,28 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {Item} from "../domain/Item";
 import {AuthenticationService} from "../service/authentication.service";
+import {IconService} from "../service/icon.service";
 
 @Component({
-    selector: 'app-income-dialog',
+    selector: 'app-item-dialog',
     templateUrl: './item-dialog.component.html',
     styleUrls: ['./item-dialog.component.css']
 })
 export class ItemDialogComponent implements OnInit {
 
-    public title: String = "Add Item";
+    public title: String = "";
+    public icons: String[] = [];
 
     constructor(
-        public dialogRef: MatDialogRef<ItemDialogComponent>, private authService: AuthenticationService,
-        @Inject(MAT_DIALOG_DATA) public income: Item) {
+        private authService: AuthenticationService, public iconService: IconService,
+        public dialogRef: MatDialogRef<ItemDialogComponent>, @Inject(MAT_DIALOG_DATA) public item: Item) {
     }
 
     ngOnInit() {
         this.authService.checkCredentials();
 
-        if (this.income == null) {
+        if (this.item == null) {
             this.initItem()
-        } else {
-            this.title = "Update Item";
         }
     }
 
@@ -32,15 +32,15 @@ export class ItemDialogComponent implements OnInit {
     }
 
     onAddClick() {
-        this.dialogRef.close(this.income);
+        this.dialogRef.close(this.item);
     }
 
     private initItem() {
-        this.income = new Item();
-        this.income.currency = 'EUR';
-        this.income.period = 'MONTH';
-        this.income.amount = '0';
-        this.income.icon = '';
+        this.item = new Item();
+        this.item.currency = 'EUR';
+        this.item.period = 'MONTH';
+        this.item.amount = '0';
+        this.item.icon = '';
     }
 
 }
