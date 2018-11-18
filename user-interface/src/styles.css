@@ -3989,3 +3989,16 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 .mat-form-field-appearance-outline .mat-form-field-outline {
     top: 100% !important;
 }
+
+.item-image {
+    width: 50px;
+    position: relative;
+    left: 10%;
+    top:5px;
+}
+
+.item-information {
+    width: 85%;
+    position: relative;
+    float: right;
+}

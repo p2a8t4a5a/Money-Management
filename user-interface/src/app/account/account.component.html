@@ -84,12 +84,16 @@
                     <div id="expenseslider">
                         <div *ngFor="let expense of account.expenses; let i = index" (click)="openUpdateExpense(i)"
                              class="expenseitem">
-                            <span class="title11museo300">{{expense.title}}</span>
-                            <p class="title9museo300">
-                                <span class="bolddigit20">{{expense.amount}} </span>
-                                <span class="lightdigit20">{{expense.currency + ' - ' + expense.period}}</span>
-                            </p>
-                            <div class="itembackground"></div>
+                            <img *ngIf="expense.icon.trim() != ''" [src]="'../../assets/img/' + expense.icon + '.svg'"
+                                 class="item-image">
+                            <div class="item-information">
+                                <span class="title11museo300">{{expense.title}}</span>
+                                <p class="title9museo300">
+                                    <span class="bolddigit20">{{expense.amount}} </span>
+                                    <span class="lightdigit20">{{expense.currency + ' - ' + expense.period}}</span>
+                                </p>
+                                <div class="itembackground"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,7 +111,8 @@
                 <mat-form-field class="form-field form-savings">
                     <mat-icon matPrefix class="savingsvalue">attach_money</mat-icon>
                     <input matInput value="0" maxlength="12" autocomplete="off" name="savingsvalue"
-                           data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny" class="form-control savingsvalue"
+                           data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny"
+                           class="form-control savingsvalue"
                            [(ngModel)]="account.saving.amount"/>
                 </mat-form-field>
             </div>
@@ -118,9 +123,12 @@
                 <span class="savingspercent">Interest</span>
                 <mat-form-field class="form-field form-savings">
                     <mat-icon matPrefix class="savingsvalue">%</mat-icon>
-                    <input matInput value="0" maxlength="5" autocomplete="off" name="percentvalue" size="6" data-a-dec="."
-                           data-a-sep="" data-v-min="0.00" data-v-max="99.99" data-l-zero="deny" class="form-control savingsvalue"
-                           [(ngModel)]="account.saving.interest" data-a-sign=" %" data-w-empty="sign" data-p-sign="s" data-a-pad="false"/>
+                    <input matInput value="0" maxlength="5" autocomplete="off" name="percentvalue" size="6"
+                           data-a-dec="."
+                           data-a-sep="" data-v-min="0.00" data-v-max="99.99" data-l-zero="deny"
+                           class="form-control savingsvalue"
+                           [(ngModel)]="account.saving.interest" data-a-sign=" %" data-w-empty="sign" data-p-sign="s"
+                           data-a-pad="false"/>
                 </mat-form-field>
                 <input type="checkbox" name="capitalization" id="capitalization"
                        [(ngModel)]="account.saving.capitalization">
