@@ -778,7 +778,7 @@ input.mat-input-element {
 
 .logout, .add, .close {
     right: 32px;
-    position: absolute;
+    position: fixed;
     cursor: pointer;
     width: 32px;
     height: 32px;
@@ -925,7 +925,7 @@ input.mat-input-element {
 .tick {
     width: 40px;
     height: 40px;
-    position: absolute;
+    position: fixed;
     right: 20px;
     top: 15px;
     opacity: 0.2;
@@ -1506,14 +1506,12 @@ input.mat-input-element {
 /* =============== SAVINGS SLIDER =============== */
 
 #piggyicon {
-    background-position: -100px 0;
-    background-size: 538px 84px;
     position: absolute;
     display: block;
-    width: 46px;
-    height: 38px;
+    width: 50px;
+    height: 50px;
     left: 25px;
-    top: 70px;
+    top: 50px;
 }
 
 #topsavingsline {
@@ -3991,14 +3989,14 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 }
 
 .item-image {
-    width: 50px;
+    width: 40px;
     position: relative;
-    left: 10%;
-    top:5px;
+    left: 15%;
+    top:15px;
 }
 
 .item-information {
-    width: 85%;
+    width: 87%;
     position: relative;
     float: right;
 }

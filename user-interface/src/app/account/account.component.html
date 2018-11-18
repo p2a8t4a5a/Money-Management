@@ -43,12 +43,16 @@
                     <div id="incomeslider">
                         <div *ngFor="let income of account.incomes; let i = index" (click)="openUpdateIncome(i)"
                              class="incomeitem">
-                            <span class="title11museo300">{{income.title}}</span>
-                            <p class="title9museo300">
-                                <span class="bolddigit20">{{income.amount}} </span>
-                                <span class="lightdigit20">{{income.currency + ' - ' + income.period}}</span>
-                            </p>
-                            <div class="itembackground"></div>
+                            <img *ngIf="income.icon.trim() != ''" [src]="iconService.getIcon(income.icon)"
+                                 class="item-image">
+                            <div class="item-information">
+                                <span class="title11museo300">{{income.title}}</span>
+                                <p class="title9museo300">
+                                    <span class="bolddigit20">{{income.amount}} </span>
+                                    <span class="lightdigit20">{{income.currency + ' - ' + income.period}}</span>
+                                </p>
+                                <div class="itembackground"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +88,7 @@
                     <div id="expenseslider">
                         <div *ngFor="let expense of account.expenses; let i = index" (click)="openUpdateExpense(i)"
                              class="expenseitem">
-                            <img *ngIf="expense.icon.trim() != ''" [src]="'../../assets/img/' + expense.icon + '.svg'"
+                            <img *ngIf="expense.icon.trim() != ''" [src]="iconService.getIcon(expense.icon)"
                                  class="item-image">
                             <div class="item-information">
                                 <span class="title11museo300">{{expense.title}}</span>
@@ -103,7 +107,9 @@
             <div class="savings-sprite-title">SAVINGS</div>
             <div class="blueline"></div>
             <div id="topsavingsline">
-                <div id="piggyicon"></div>
+                <div id="piggyicon">
+                    <img [src]="iconService.getIcon('piggy')">
+                </div>
                 <span class="savingstitle14">My spare money</span>
                 <span class="savingstitle12">At the moment</span>
                 <div id="rublebox"></div>

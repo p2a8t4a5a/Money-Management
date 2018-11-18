@@ -20,7 +20,7 @@ export class AccountComponent implements OnInit {
     public account: Account;
 
     constructor(private authService: AuthenticationService, private router: Router, public dialog: MatDialog,
-                private accountService: AccountService, private toaster: ToastrService) {
+                private accountService: AccountService, private toaster: ToastrService, public iconService: IconService) {
     }
 
     ngOnInit() {
