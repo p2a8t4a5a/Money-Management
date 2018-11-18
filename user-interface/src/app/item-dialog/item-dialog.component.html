@@ -6,7 +6,7 @@
             <input matInput value="0" maxlength="12" class="form-control" autocomplete="off" name="modalvalue"
                    data-a-sep=" " data-v-min="0" data-v-max="999999999" data-l-zero="deny" [(ngModel)]="income.amount"/>
         </mat-form-field>
-        <div class="modal-selects">
+        <div class="modal-selects modal-selects-currency">
             <mat-form-field class="modal-currency">
                 <mat-select [(ngModel)]="income.currency">
                     <mat-option [value]="'EUR'">Euro</mat-option>
@@ -24,9 +24,12 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="modal-selects">
+        <div class="modal-selects modal-selects-title">
             <mat-form-field class="modal-icon">
                 <mat-select [(ngModel)]="income.icon">
+                    <mat-select-trigger><img [src]="'../../assets/img/' + income.icon + '.svg'" width="35px">
+                        {{income.icon}}
+                    </mat-select-trigger>
                     <mat-option [value]="'car'">
                         <img src="../../assets/img/car.svg" alt="Car"> Car
                     </mat-option>
