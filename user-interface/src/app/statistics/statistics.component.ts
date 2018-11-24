@@ -24,8 +24,9 @@ export class StatisticsComponent implements OnInit {
             this.dataPoints = result;
         });
 
-        this.createMainCanvas();
+        this.circlesInitialization();
         this.createLittleCanvases();
+        this.createMainCanvas();
     }
 
     public logout() {
@@ -34,6 +35,73 @@ export class StatisticsComponent implements OnInit {
 
     public navigateToAccount() {
         this.router.navigate(['/account']);
+    }
+
+    private circlesInitialization() {
+        $("#inner-circle").knob({
+            "readOnly": true,
+            "width": 223,
+            "height": 223,
+            "thickness": 0.1,
+            "displayInput": false,
+            "fgColor": "#e6eff1"
+        });
+
+        $("#outer-circle").data({ "width": 265 }).knob({
+            "readOnly": true,
+            "width": 265,
+            "height": 265,
+            "thickness": 0.13,
+            "displayInput": false,
+            "fgColor": "#a59b9e"
+        });
+
+        $("#outer-circle-cursor").knob({
+            "cursor": 0.5,
+            "readOnly": true,
+            "width": 303,
+            "height": 303,
+            "thickness": 0.24,
+            "displayInput": false,
+            "fgColor":"#898989"
+        });
+
+        $("#first-circle").data({ "width": 165 }).knob({
+            "readOnly": true,
+            "width": 165,
+            "height": 165,
+            "thickness": 0.14,
+            "displayInput": false,
+            "fgColor": "#efefef"
+        });
+
+        $("#second-circle").data({ "width": 165 }).knob({
+            "readOnly": true,
+            "width": 165,
+            "height": 165,
+            "thickness": 0.14,
+            "displayInput": false,
+            "fgColor": "#e0ded5"
+        });
+
+        $("#third-circle").data({ "width": 165 }).knob({
+            "readOnly": true,
+            "width": 165,
+            "height": 165,
+            "thickness": 0.14,
+            "displayInput": false,
+            "fgColor": "#b6aeb0"
+        });
+
+        $("#first-circle-cursor, #second-circle-cursor, #third-circle-cursor").knob({
+            "cursor": 0.5,
+            "readOnly": true,
+            "width": 189,
+            "height": 189,
+            "thickness": 0.25,
+            "displayInput": false,
+            "fgColor":"#898989"
+        });
     }
 
     private createLittleCanvases() {
