@@ -2584,7 +2584,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
 .flag {
     height: 19px;
-    border: 1px solid #c7dade;
     font-size: 11px;
     color: #242424;
     text-transform: uppercase;
@@ -3610,7 +3609,7 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
 
 #setcurrency {
     right: -18px;
-    top: -15%;
+    top: -10%;
     position: absolute;
     width: 170px;
     height: 42px;
