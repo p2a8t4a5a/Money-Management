@@ -126,4 +126,104 @@ export class StatisticsComponent implements OnInit {
         }
     }
 
+    private animatecircle(beforevalue, aftervalue, sum, title) {
+        var before = (100 * beforevalue / sum),
+            after = (100 * aftervalue / sum),
+            R = $(this).data("width") / 2,
+            alpha = (after * 0.02 * Math.PI),	// percent to radians
+            n = 10,								// margin from circle
+            id = $(this).attr("id"),
+            $this = $(this),
+            ycord, xcord, animatetime;
+
+        // Set font size
+        (function () {
+            var fontpx;
+            if (id == "outer-circle") {
+                if (sum - aftervalue < 999999) {
+                    fontpx = 48
+                } else if (sum - aftervalue < 9999999) {
+                    fontpx = 37
+                } else {
+                    fontpx = 22
+                }
+            } else {
+                if (aftervalue < 99999) {
+                    fontpx = 31
+                } else if (aftervalue < 999999) {
+                    fontpx = 27
+                } else {
+                    fontpx = 18
+                }
+            }
+            $("#" + id + "-value").css({"font-size": fontpx + "px"})
+        })();
+
+        // Percent value location
+        if (after <= 25) {
+            ycord = Math.round(R + (n / 2) - (R * Math.sin(1.57 - alpha)));
+            xcord = Math.round(R + (n) + (R * Math.cos(1.57 - alpha)));
+            animatetime = 500;
+        } else if (after <= 50) {
+            ycord = Math.round(R + (n / 2) + (R * Math.sin(alpha - 1.57)));
+            xcord = Math.round(R + (n * 2) + (R * Math.cos(alpha - 1.57)));
+            animatetime = 1400;
+        } else if (after <= 75) {
+            ycord = Math.round(R - (n * 2) + (R * Math.sin(alpha - 1.57)));
+            xcord = Math.round(R - (n * 4) + (R * Math.cos(alpha - 1.57)));
+            animatetime = 1500;
+        } else {
+            ycord = Math.round(R + (-n * 3) - (R * Math.sin(1.57 - alpha)));
+            xcord = Math.round(R + (-n * 3) + (R * Math.cos(1.57 - alpha)));
+            animatetime = 1600;
+        }
+
+        // Set and show percent value next to cursor
+        $("#" + id + "-percent").hide();
+        $("#" + id + "-percent").empty().append('<span class="lightcircletitle">' + Math.round(after) + '%</span>');
+        setTimeout(function () {
+            $("#" + id + "-percent").css({"left": xcord, "top": ycord}).fadeIn(400)
+        }, animatetime - 200);
+
+        // Animate circle with its cursor
+        $({value: before}).animate({value: after}, {
+            duration: animatetime,
+            easing: 'swing',
+            step: function () {
+                $this.val(this.value).trigger('change');
+                $("#" + id + "-cursor").val(this.value).trigger('change');
+            }
+        });
+
+        // Set precision value
+        (function () {
+            if (id == "outer-circle") {
+                $("#" + id + "-value").html(this.separateNumber(Math.abs(Math.round((sum - aftervalue) / 10) * 10)));
+            } else {
+                $("#" + id + "-value").html(this.separateNumber(aftervalue));
+                $("#" + id + "-title").html(title);
+            }
+        })();
+    }
+
+    private simpleanimatecircle(before, after, duration) {
+        var $this = $(this);
+        $({ value: before }).animate({ value: after }, {
+            duration: duration,
+            easing: 'swing',
+            step: function () {
+                $this.val(this.value).trigger('change');
+            }
+        });
+    }
+
+    private separateNumber(val) {
+        if (Math.abs(val) > 999) {
+            val = val.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1 <span class="lightcircletitle">');
+        } else {
+            val = val.toString().replace(/(\.)/g, '<span class="lightcircletitle">$1');
+        }
+        return val;
+    };
+
 }
