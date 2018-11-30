@@ -27,8 +27,10 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "src/assets/js/jquery-1.11.0.min.js",
+              "src/assets/js/jquery.min.js",
               "src/assets/js/bootstrap.min.js",
+              "src/assets/js/touchscreens.js",
+              "src/assets/js/extrascripts.js",
               "src/assets/js/main.js"
             ]
           },

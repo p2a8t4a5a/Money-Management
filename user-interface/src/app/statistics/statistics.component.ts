@@ -3,7 +3,7 @@ import {AuthenticationService} from "../service/authentication.service";
 import {Router} from "@angular/router";
 import {StatisticsService} from "../service/statistics.service";
 import {DataPoint} from "../domain/DataPoint";
-import {$} from "jquery";
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-statistics',
@@ -24,7 +24,6 @@ export class StatisticsComponent implements OnInit {
             this.dataPoints = result;
         });
 
-        this.circlesInitialization();
         this.createLittleCanvases();
         this.createMainCanvas();
     }
@@ -37,86 +36,19 @@ export class StatisticsComponent implements OnInit {
         this.router.navigate(['/account']);
     }
 
-    private circlesInitialization() {
-        $("#inner-circle").knob({
-            "readOnly": true,
-            "width": 223,
-            "height": 223,
-            "thickness": 0.1,
-            "displayInput": false,
-            "fgColor": "#e6eff1"
-        });
-
-        $("#outer-circle").data({ "width": 265 }).knob({
-            "readOnly": true,
-            "width": 265,
-            "height": 265,
-            "thickness": 0.13,
-            "displayInput": false,
-            "fgColor": "#a59b9e"
-        });
-
-        $("#outer-circle-cursor").knob({
-            "cursor": 0.5,
-            "readOnly": true,
-            "width": 303,
-            "height": 303,
-            "thickness": 0.24,
-            "displayInput": false,
-            "fgColor":"#898989"
-        });
-
-        $("#first-circle").data({ "width": 165 }).knob({
-            "readOnly": true,
-            "width": 165,
-            "height": 165,
-            "thickness": 0.14,
-            "displayInput": false,
-            "fgColor": "#efefef"
-        });
-
-        $("#second-circle").data({ "width": 165 }).knob({
-            "readOnly": true,
-            "width": 165,
-            "height": 165,
-            "thickness": 0.14,
-            "displayInput": false,
-            "fgColor": "#e0ded5"
-        });
-
-        $("#third-circle").data({ "width": 165 }).knob({
-            "readOnly": true,
-            "width": 165,
-            "height": 165,
-            "thickness": 0.14,
-            "displayInput": false,
-            "fgColor": "#b6aeb0"
-        });
-
-        $("#first-circle-cursor, #second-circle-cursor, #third-circle-cursor").knob({
-            "cursor": 0.5,
-            "readOnly": true,
-            "width": 189,
-            "height": 189,
-            "thickness": 0.25,
-            "displayInput": false,
-            "fgColor":"#898989"
-        });
-    }
-
     private createLittleCanvases() {
-        let canvas1 = $("#movingcircle-1"),
-            canvas2 = $("#movingcircle-2"),
-            canvas3 = $("#movingcircle-3"),
-            ctx1 = canvas1.getContext('2d'),
-            ctx2 = canvas2.getContext('2d'),
-            ctx3 = canvas3.getContext('2d'),
-            x = canvas1.width / 2,
-            y = canvas1.height / 2,
-            radius = 99,
-            startAngle = Math.PI,
-            endAngle = 2.2 * Math.PI,
-            counterClockwise = false;
+        let canvas1 = $("#movingcircle-1")[0];
+        let canvas2 = $("#movingcircle-2")[0];
+        let canvas3 = $("#movingcircle-3")[0];
+        let ctx1 = canvas1.getContext('2d');
+        let ctx2 = canvas2.getContext('2d');
+        let ctx3 = canvas3.getContext('2d');
+        let x = canvas1.width / 2;
+        let y = canvas1.height / 2;
+        let radius = 99;
+        let startAngle = Math.PI;
+        let endAngle = 2.2 * Math.PI;
+        let counterClockwise = false;
 
         ctx1.beginPath();
         ctx1.arc(x, y, radius, startAngle, endAngle, counterClockwise);
@@ -173,10 +105,9 @@ export class StatisticsComponent implements OnInit {
     private drawChartLine(position) {
         let canvas = $('#chartline');
         let savingsChart = $('#savingschart');
-
-        let chartWidth = savingsChart.width(),
-            chartHeight = savingsChart.height(),
-            segmentWidth = $(".months").width();
+        let chartWidth = savingsChart.width();
+        let chartHeight = savingsChart.height();
+        let segmentWidth = $(".months").width();
 
         if (canvas.getContext) {
             var ctx = canvas.getContext("2d");
@@ -276,7 +207,7 @@ export class StatisticsComponent implements OnInit {
 
     private simpleanimatecircle(before, after, duration) {
         var $this = $(this);
-        $({ value: before }).animate({ value: after }, {
+        $({value: before}).animate({value: after}, {
             duration: duration,
             easing: 'swing',
             step: function () {
