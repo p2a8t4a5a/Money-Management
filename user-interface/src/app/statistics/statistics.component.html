@@ -44,14 +44,18 @@
 
     <div id="outermaindiv">
         <div class="linesbackground"></div>
-        <div id="outermaincursordiv"><input class="knob" id="outer-circle-cursor"/></div>
-        <input class="knob" id="outer-circle"/>
+        <div id="outermaincursordiv">
+            <ngx-knob class="knob" id="outer-circle-cursor" [options]="outerCircleCursorOptions"></ngx-knob>
+        </div>
+        <ngx-knob class="knob" id="outer-circle" [options]="outerCircleOptions"></ngx-knob>
         <div class="topmaincircletitle lightcircletitle"></div>
         <div id="outer-circle-value" class="boldcircletitle"></div>
         <span></span>
         <div class="bottommaincircletitle"><span class="boldcircletitle curr"></span><span class="lightcircletitle">/ Month</span>
         </div>
-        <div id="innermaindiv"><input class="knob" id="inner-circle"/></div>
+        <div id="innermaindiv">
+            <ngx-knob class="knob" id="inner-circle" [options]="innerCircleOptions"></ngx-knob>
+        </div>
         <div id="maincircleline"></div>
         <div id="maincircle100percent"><span class="lightcircletitle">100%</span></div>
         <div id="outer-circle-percent"><span class="lightcircletitle"></span></div>
@@ -62,8 +66,10 @@
             <div id="firstcircledivflipper">
                 <div class="frontcircle">
                     <div class="linesbackground"></div>
-                    <input class="knob" id="first-circle"/>
-                    <div class="cursordiv"><input class="knob" id="first-circle-cursor"/></div>
+                    <ngx-knob class="knob" id="first-circle" [options]="firstCircleOptions"></ngx-knob>
+                    <div class="cursordiv">
+                        <ngx-knob class="knob" id="first-circle-cursor" [options]="circleCursorOptions"></ngx-knob>
+                    </div>
                     <div id="first-circle-title" class="circletoptitle lightcircletitle"></div>
                     <div id="first-circle-value" class="circlevalue boldcircletitle"></div>
                     <span></span>
@@ -88,8 +94,10 @@
             <div id="secondcircledivflipper">
                 <div class="frontcircle">
                     <div class="linesbackground"></div>
-                    <input class="knob" id="second-circle"/>
-                    <div class="cursordiv"><input class="knob" id="second-circle-cursor"/></div>
+                    <ngx-knob class="knob" id="second-circle" [options]="secondCircleOptions"></ngx-knob>
+                    <div class="cursordiv">
+                        <ngx-knob class="knob" id="second-circle-cursor" [options]="circleCursorOptions"></ngx-knob>
+                    </div>
                     <div id="second-circle-title" class="circletoptitle lightcircletitle"></div>
                     <div id="second-circle-value" class="circlevalue boldcircletitle"></div>
                     <span></span>
@@ -114,7 +122,9 @@
             <div id="thirdcircledivflipper">
                 <div class="frontcircle">
                     <div class="linesbackground"></div>
-                    <div class="cursordiv"><input class="knob" id="third-circle-cursor"/></div>
+                    <div class="cursordiv">
+                        <ngx-knob class="knob" id="third-circle-cursor" [options]="circleCursorOptions"></ngx-knob>
+                    </div>
                     <div id="third-circle-title" class="circletoptitle lightcircletitle"></div>
                     <div id="third-circle-value" class="circlevalue boldcircletitle"></div>
                     <span></span>
@@ -123,7 +133,7 @@
                     <div id="third-circle-percent"><span class="lightcircletitle"></span></div>
                     <div class="circleline"></div>
                     <div class="circle100percent"><span class="lightcircletitle">100%</span></div>
-                    <input class="knob" id="third-circle"/>
+                    <ngx-knob class="knob" id="third-circle" [options]="thirdCircleOptions"></ngx-knob>
                 </div>
                 <div class="backcircle">
                     <canvas id="movingcircle-3" width="200" height="200"></canvas>
@@ -276,70 +286,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    $("#inner-circle").knob({
-        "readOnly": true,
-        "width": 223,
-        "height": 223,
-        "thickness": 0.1,
-        "displayInput": false,
-        "fgColor": "#e6eff1"
-    });
-
-    $("#outer-circle").data({ "width": 265 }).knob({
-        "readOnly": true,
-        "width": 265,
-        "height": 265,
-        "thickness": 0.13,
-        "displayInput": false,
-        "fgColor": "#a59b9e"
-    });
-
-    $("#outer-circle-cursor").knob({
-        "cursor": 0.5,
-        "readOnly": true,
-        "width": 303,
-        "height": 303,
-        "thickness": 0.24,
-        "displayInput": false,
-        "fgColor":"#898989"
-    });
-
-    $("#first-circle").data({ "width": 165 }).knob({
-        "readOnly": true,
-        "width": 165,
-        "height": 165,
-        "thickness": 0.14,
-        "displayInput": false,
-        "fgColor": "#efefef"
-    });
-
-    $("#second-circle").data({ "width": 165 }).knob({
-        "readOnly": true,
-        "width": 165,
-        "height": 165,
-        "thickness": 0.14,
-        "displayInput": false,
-        "fgColor": "#e0ded5"
-    });
-
-    $("#third-circle").data({ "width": 165 }).knob({
-        "readOnly": true,
-        "width": 165,
-        "height": 165,
-        "thickness": 0.14,
-        "displayInput": false,
-        "fgColor": "#b6aeb0"
-    });
-
-    $("#first-circle-cursor, #second-circle-cursor, #third-circle-cursor").knob({
-        "cursor": 0.5,
-        "readOnly": true,
-        "width": 189,
-        "height": 189,
-        "thickness": 0.25,
-        "displayInput": false,
-        "fgColor":"#898989"
-    });
-</script>

@@ -14,6 +14,7 @@ import {ToastrModule} from "ngx-toastr";
 import { AccountComponent } from './account/account.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ItemDialogComponent } from './item-dialog/item-dialog.component';
+import { KnobModule } from "@xmlking/ngx-knob";
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import { ItemDialogComponent } from './item-dialog/item-dialog.component';
         ReactiveFormsModule,
         HttpClientModule,
         MaterialModule,
+        KnobModule,
         ToastrModule.forRoot({
             positionClass: 'toast-bottom-right',
             timeOut: 10000,

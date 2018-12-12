@@ -14,6 +14,71 @@ export class StatisticsComponent implements OnInit {
 
     public dataPoints: DataPoint[];
 
+    public innerCircleOptions = {
+        "readOnly": true,
+        "width": 223,
+        "height": 223,
+        "thickness": 0.1,
+        "displayInput": false,
+        "fgColor": "#e6eff1"
+    };
+
+    public outerCircleOptions = {
+        "readOnly": true,
+        "width": 265,
+        "height": 265,
+        "thickness": 0.13,
+        "displayInput": false,
+        "fgColor": "#a59b9e"
+    };
+
+    public outerCircleCursorOptions = {
+        "cursor": 0.5,
+        "readOnly": true,
+        "width": 303,
+        "height": 303,
+        "thickness": 0.24,
+        "displayInput": false,
+        "fgColor": "#898989"
+    };
+
+    public firstCircleOptions = {
+        "readOnly": true,
+        "width": 165,
+        "height": 165,
+        "thickness": 0.14,
+        "displayInput": false,
+        "fgColor": "#efefef"
+    };
+
+    public secondCircleOptions = {
+        "readOnly": true,
+        "width": 165,
+        "height": 165,
+        "thickness": 0.14,
+        "displayInput": false,
+        "fgColor": "#e0ded5"
+    };
+
+    public thirdCircleOptions = {
+        "readOnly": true,
+        "width": 165,
+        "height": 165,
+        "thickness": 0.14,
+        "displayInput": false,
+        "fgColor": "#b6aeb0"
+    };
+
+    public circleCursorOptions = {
+        "cursor": 0.5,
+        "readOnly": true,
+        "width": 189,
+        "height": 189,
+        "thickness": 0.25,
+        "displayInput": false,
+        "fgColor": "#898989"
+    };
+
     constructor(private authService: AuthenticationService, private router: Router, private statisticsService: StatisticsService) {
     }
 
