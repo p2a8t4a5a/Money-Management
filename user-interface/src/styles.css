@@ -280,7 +280,7 @@ a:hover, a:focus {
 /* ==========================================================================
    Main styles
    ========================================================================== */
-header {
+.header {
     background: url(assets/img/header-bg.jpg) no-repeat center center;
     width: 100%;
     padding: 20px 10px 60px 10px;

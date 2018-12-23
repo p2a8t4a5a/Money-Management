@@ -11,9 +11,11 @@ import {CookieService} from "ngx-cookie-service";
 import {FrontPageComponent} from './front-page/front-page.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
-import { AccountComponent } from './account/account.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { ItemDialogComponent } from './item-dialog/item-dialog.component';
+import {AccountComponent} from './account/account.component';
+import {StatisticsComponent} from './statistics/statistics.component';
+import {ItemDialogComponent} from './item-dialog/item-dialog.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {DateFormatPipe} from "./pipe/DateFormatPipe";
 
 @NgModule({
     imports: [
@@ -28,7 +30,8 @@ import { ItemDialogComponent } from './item-dialog/item-dialog.component';
             timeOut: 10000,
             extendedTimeOut: 10000
         }),
-        AppRouting
+        AppRouting,
+        NgxChartsModule
     ],
     declarations: [
         AppComponent,
@@ -36,10 +39,14 @@ import { ItemDialogComponent } from './item-dialog/item-dialog.component';
         FrontPageComponent,
         AccountComponent,
         StatisticsComponent,
-        ItemDialogComponent
+        ItemDialogComponent,
+        DateFormatPipe
     ],
     bootstrap: [AppComponent],
-    providers: [CookieService],
+    providers: [
+        CookieService,
+        DateFormatPipe
+    ],
     entryComponents: [
         ItemDialogComponent
     ]
