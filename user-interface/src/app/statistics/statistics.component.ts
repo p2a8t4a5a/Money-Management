@@ -20,7 +20,8 @@ export class StatisticsComponent implements OnInit {
     };
 
     public lineChartResults: any[] = [];
-    public pieChartResults: any[] = [];
+    public incomesPieChartResults: any[] = [];
+    public expensePieChartResults: any[] = [];
 
     constructor(private authService: AuthenticationService, private router: Router, private statisticsService: StatisticsService,
                 private dateFormatPipe: DateFormatPipe) {
@@ -42,15 +43,18 @@ export class StatisticsComponent implements OnInit {
     private populateCharts(results: DataPoint[]) {
         let incomeResults: any[] = [];
         let expensesResults: any[] = [];
-        let pieChartResults: Map<String, number> = new Map();
+        let incomesPieChartResults: Map<String, number> = new Map();
+        let expensesPieChartResults: Map<String, number> = new Map();
 
         results.forEach(result => {
             this.extractLineChartData(result, incomeResults, expensesResults);
-            this.extractPieChartData(pieChartResults, result.incomes);
+            this.extractPieChartData(incomesPieChartResults, result.incomes);
+            this.extractPieChartData(expensesPieChartResults, result.expenses);
         });
 
         this.lineChartResults = this.getLineChartData(incomeResults, expensesResults);
-        this.pieChartResults = this.getPieChartData(pieChartResults);
+        this.incomesPieChartResults = this.getPieChartData(incomesPieChartResults);
+        this.expensePieChartResults = this.getPieChartData(expensesPieChartResults);
     }
 
     private extractPieChartData(pieChartResults: Map<String, number>, items: Set<ItemMetric>) {

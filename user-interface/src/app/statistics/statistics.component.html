@@ -17,22 +17,40 @@
     </div>
 </div>
 
-<ngx-charts-line-chart
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="lineChartResults"
-        [gradient]="false"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="true"
-        [showXAxisLabel]="true"
-        [showYAxisLabel]="true"
-        [xAxisLabel]="'Date'"
-        [yAxisLabel]="'Value'">
-</ngx-charts-line-chart>
-
-<ngx-charts-advanced-pie-chart
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="pieChartResults">
-</ngx-charts-advanced-pie-chart>
+<div class="container">
+    <div class="row">
+        <div class="columns col-sm-12 col-md-6">
+        </div>
+        <div class="columns col-sm-12 col-md-6">
+            <ngx-charts-line-chart
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="lineChartResults"
+                    [gradient]="false"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    [legend]="true"
+                    [showXAxisLabel]="true"
+                    [showYAxisLabel]="true"
+                    [xAxisLabel]="'Date'"
+                    [yAxisLabel]="'Value'">
+            </ngx-charts-line-chart>
+        </div>
+        <div class="columns col-sm-12 col-md-6">
+            <div class="incomes-sprite-title pie-chart-title">INCOMES</div>
+            <ngx-charts-advanced-pie-chart
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="incomesPieChartResults">
+            </ngx-charts-advanced-pie-chart>
+        </div>
+        <div class="columns col-sm-12 col-md-6">
+            <div class="expenses-sprite-title pie-chart-title">EXPENSES</div>
+            <ngx-charts-advanced-pie-chart
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="expensePieChartResults">
+            </ngx-charts-advanced-pie-chart>
+        </div>
+    </div>
+</div>

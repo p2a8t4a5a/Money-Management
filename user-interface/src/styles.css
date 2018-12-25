@@ -983,7 +983,7 @@ input.mat-input-element {
     height: 1px;
 }
 
-.columns {
+.account-columns {
     text-transform: uppercase;
     margin-top: 10%;
     padding: 15px;
@@ -1639,4 +1639,13 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     width: 87%;
     position: relative;
     float: right;
+}
+
+ngx-charts-legend {
+    display: block !important;
+    margin-left: 40%;
+}
+
+.pie-chart-title {
+    top: 50px;
 }
