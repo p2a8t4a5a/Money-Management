@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {StatisticsService} from "../service/statistics.service";
 import {DataPoint} from "../domain/DataPoint";
 import {DateFormatPipe} from "../pipe/DateFormatPipe";
+import {ItemMetric} from "../domain/ItemMetric";
 
 @Component({
     selector: 'app-statistics',
@@ -27,7 +28,7 @@ export class StatisticsComponent implements OnInit {
 
     ngOnInit() {
         this.authService.checkCredentials();
-        this.statisticsService.getCurrentAccountStatistics().subscribe(results => this.populateLineChart(results));
+        this.statisticsService.getCurrentAccountStatistics().subscribe(results => this.populateCharts(results));
     }
 
     public logout() {
@@ -38,40 +39,47 @@ export class StatisticsComponent implements OnInit {
         this.router.navigate(['/account']);
     }
 
-    private populateLineChart(results: DataPoint[]) {
+    private populateCharts(results: DataPoint[]) {
         let incomeResults: any[] = [];
         let expensesResults: any[] = [];
-
         let pieChartResults: Map<String, number> = new Map();
 
-
         results.forEach(result => {
-            let date = this.dateFormatPipe.transform(result.id.date);
-
-            incomeResults.push({
-                name: date,
-                value: result.statistics["INCOMES_AMOUNT"]
-            });
-
-            expensesResults.push({
-                name: date,
-                value: result.statistics["EXPENSES_AMOUNT"]
-            });
-
-
-            result.incomes.forEach(income => {
-
-                if (pieChartResults.has(income.title)) {
-                    let newAmount = pieChartResults.get(income.title) + Math.trunc(income.amount);
-                    pieChartResults.set(income.title, newAmount);
-                } else {
-                    pieChartResults.set(income.title, Math.trunc(income.amount));
-                }
-            });
-
+            this.extractLineChartData(result, incomeResults, expensesResults);
+            this.extractPieChartData(pieChartResults, result.incomes);
         });
 
-        this.lineChartResults = [
+        this.lineChartResults = this.getLineChartData(incomeResults, expensesResults);
+        this.pieChartResults = this.getPieChartData(pieChartResults);
+    }
+
+    private extractPieChartData(pieChartResults: Map<String, number>, items: Set<ItemMetric>) {
+        items.forEach(income => {
+            if (pieChartResults.has(income.title)) {
+                let newAmount = pieChartResults.get(income.title) + Math.trunc(income.amount);
+                pieChartResults.set(income.title, newAmount);
+            } else {
+                pieChartResults.set(income.title, Math.trunc(income.amount));
+            }
+        });
+    }
+
+    private extractLineChartData(result: DataPoint, incomeResults: any[], expensesResults: any[]) {
+        let date = this.dateFormatPipe.transform(result.id.date);
+
+        incomeResults.push({
+            name: date,
+            value: result.statistics["INCOMES_AMOUNT"]
+        });
+
+        expensesResults.push({
+            name: date,
+            value: result.statistics["EXPENSES_AMOUNT"]
+        });
+    }
+
+    private getLineChartData(incomeResults: any[], expensesResults: any[]): any[] {
+        return [
             {
                 name: 'Incomes',
                 series: incomeResults
@@ -81,7 +89,9 @@ export class StatisticsComponent implements OnInit {
                 series: expensesResults
             }
         ];
+    }
 
+    private getPieChartData(pieChartResults: Map<String, number>): any[] {
         let index = 0;
         let pieChartResultsArray = [];
 
@@ -97,7 +107,8 @@ export class StatisticsComponent implements OnInit {
             index++;
         });
 
-        this.pieChartResults = pieChartResultsArray;
+        return pieChartResultsArray;
     }
+
 
 }
