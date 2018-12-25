@@ -96,23 +96,43 @@ export class StatisticsComponent implements OnInit {
     }
 
     private getPieChartData(pieChartResults: Map<String, number>): any[] {
-        let index = 0;
+        let pieChartResultsArray = this.convertPieChartMapToArray(pieChartResults);
+        pieChartResultsArray.sort((a, b) => b.value - a.value);
+
+        if (pieChartResultsArray.length > 4) {
+            return this.shrinkPieChartArray(pieChartResultsArray);
+        } else {
+            return pieChartResultsArray;
+        }
+    }
+
+    private convertPieChartMapToArray(pieChartResults: Map<String, number>): any[] {
         let pieChartResultsArray = [];
 
         pieChartResults.forEach((v, k) => {
-
-            if (index < 4) {
-                pieChartResultsArray.push({
-                    "name": k,
-                    "value": v
-                })
-            }
-
-            index++;
+            pieChartResultsArray.push({
+                "name": k,
+                "value": v
+            });
         });
 
         return pieChartResultsArray;
     }
 
+    private shrinkPieChartArray(pieChartResultsArray: any[]): any[] {
+        let others = {
+            "name": "Others",
+            "value": 0
+        };
+
+        pieChartResultsArray.slice(3, pieChartResultsArray.length).forEach(result => {
+            others.value += result.value;
+        });
+
+        let shrinkArray = pieChartResultsArray.slice(0, 3);
+        shrinkArray.push(others);
+
+        return shrinkArray;
+    }
 
 }
