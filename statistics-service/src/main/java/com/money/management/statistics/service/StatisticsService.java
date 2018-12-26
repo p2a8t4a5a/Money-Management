@@ -3,6 +3,7 @@ package com.money.management.statistics.service;
 import com.money.management.statistics.domain.Account;
 import com.money.management.statistics.domain.timeseries.DataPoint;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface StatisticsService {
@@ -15,6 +16,8 @@ public interface StatisticsService {
 	 */
 	List<DataPoint> findByAccountName(String accountName);
 
+	List<DataPoint> findByAccountNameBetweenDates(String account, String beginDate, String endDate) throws ParseException;
+
 	/**
 	 * Converts given {@link Account} object to {@link DataPoint} with
 	 * a set of significant statistic metrics.
@@ -26,5 +29,4 @@ public interface StatisticsService {
 	 * @param account
 	 */
 	DataPoint save(String accountName, Account account);
-
 }

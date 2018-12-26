@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -25,25 +26,43 @@ public class DataPointRepositoryTest {
     private DataPointRepository repository;
 
     @Test
+    public void shouldGetDataPointsBetweenDates() {
+        DataPoint point = createDataPoint();
+        repository.save(createDataPoint());
+        List<DataPoint> points;
+
+        points = repository.findByIdAccountBetweenDates(point.getId().getAccount(), new Date(-1), new Date(1));
+        assertEquals(1, points.size());
+        areEquals(point, points.get(0));
+
+        points = repository.findByIdAccountBetweenDates(point.getId().getAccount(), new Date(0), new Date(1));
+        assertEquals(1, points.size());
+        areEquals(point, points.get(0));
+
+        points = repository.findByIdAccountBetweenDates(point.getId().getAccount(), new Date(-1), new Date(0));
+        assertEquals(1, points.size());
+        areEquals(point, points.get(0));
+
+        points = repository.findByIdAccountBetweenDates(point.getId().getAccount(), new Date(0), new Date(0));
+        assertEquals(1, points.size());
+        areEquals(point, points.get(0));
+
+        points = repository.findByIdAccountBetweenDates(point.getId().getAccount(), new Date(1), new Date(2));
+        assertEquals(0, points.size());
+
+        points = repository.findByIdAccountBetweenDates(point.getId().getAccount(), new Date(1), new Date(-1));
+        assertEquals(0, points.size());
+    }
+
+    @Test
     public void shouldSaveDataPoint() {
-        ItemMetric salary = new ItemMetric("salary", new BigDecimal(20_000));
-        ItemMetric grocery = new ItemMetric("grocery", new BigDecimal(1_000));
-        ItemMetric vacation = new ItemMetric("vacation", new BigDecimal(2_000));
-
-        DataPoint point = DataPointUtil.getDataPoint(ImmutableMap.of(
-                StatisticMetric.SAVING_AMOUNT, new BigDecimal(400_000),
-                StatisticMetric.INCOMES_AMOUNT, new BigDecimal(20_000),
-                StatisticMetric.EXPENSES_AMOUNT, new BigDecimal(3_000)
-        ), salary, grocery, vacation);
-
+        DataPoint point = createDataPoint();
         repository.save(point);
 
         List<DataPoint> points = repository.findByIdAccount(point.getId().getAccount());
+
         assertEquals(1, points.size());
-        assertEquals(point.getId().getDate(), points.get(0).getId().getDate());
-        assertEquals(point.getStatistics().size(), points.get(0).getStatistics().size());
-        assertEquals(point.getIncomes().size(), points.get(0).getIncomes().size());
-        assertEquals(point.getExpenses().size(), points.get(0).getExpenses().size());
+        areEquals(point, points.get(0));
     }
 
     @Test
@@ -67,4 +86,24 @@ public class DataPointRepositoryTest {
         assertEquals(1, points.size());
         assertEquals(lateAmount, points.get(0).getStatistics().get(StatisticMetric.SAVING_AMOUNT));
     }
+
+    private DataPoint createDataPoint() {
+        ItemMetric salary = new ItemMetric("salary", new BigDecimal(20_000));
+        ItemMetric grocery = new ItemMetric("grocery", new BigDecimal(1_000));
+        ItemMetric vacation = new ItemMetric("vacation", new BigDecimal(2_000));
+
+        return DataPointUtil.getDataPoint(ImmutableMap.of(
+                StatisticMetric.SAVING_AMOUNT, new BigDecimal(400_000),
+                StatisticMetric.INCOMES_AMOUNT, new BigDecimal(20_000),
+                StatisticMetric.EXPENSES_AMOUNT, new BigDecimal(3_000)
+        ), salary, grocery, vacation);
+    }
+
+    private void areEquals(DataPoint dataPoint1, DataPoint dataPoint2) {
+        assertEquals(dataPoint1.getId().getDate(), dataPoint2.getId().getDate());
+        assertEquals(dataPoint1.getStatistics().size(), dataPoint2.getStatistics().size());
+        assertEquals(dataPoint1.getIncomes().size(), dataPoint2.getIncomes().size());
+        assertEquals(dataPoint1.getExpenses().size(), dataPoint2.getExpenses().size());
+    }
+
 }

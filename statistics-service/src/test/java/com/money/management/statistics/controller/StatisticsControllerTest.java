@@ -94,4 +94,17 @@ public class StatisticsControllerTest {
 
         verify(statisticsService, times(1)).save(anyString(), any(Account.class));
     }
+
+    @Test
+    public void shouldGetAccountStatisticsBetweenDates() throws Exception {
+        DataPoint dataPoint = new DataPoint();
+        dataPoint.setId(new DataPointId("test", new Date()));
+
+        when(statisticsService.findByAccountNameBetweenDates(dataPoint.getId().getAccount(), "2018-11-11", "2018-11-15"))
+                .thenReturn(ImmutableList.of(dataPoint));
+
+        mockMvc.perform(get("/between?beginDate=2018-11-11&endDate=2018-11-12").principal(new UserPrincipal(dataPoint.getId().getAccount())))
+                .andExpect(status().isOk());
+    }
+
 }

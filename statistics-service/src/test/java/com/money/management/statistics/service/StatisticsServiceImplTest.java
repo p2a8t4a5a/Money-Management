@@ -21,6 +21,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -69,6 +71,24 @@ public class StatisticsServiceImplTest {
         statisticsService.findByAccountName("");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldFailToFindDataPointsBetweenDatesWhenParametersAreNull() throws ParseException {
+        statisticsService.findByAccountNameBetweenDates(null, null, null);
+    }
+
+    @Test
+    public void shouldFindDataPointsBetweenDates() throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date beginDate = simpleDateFormat.parse("2018-11-11");
+        Date endDate = simpleDateFormat.parse("2018-11-15");
+
+        List<DataPoint> list = ImmutableList.of(new DataPoint());
+        when(repository.findByIdAccountBetweenDates("test", beginDate, endDate)).thenReturn(list);
+
+        List<DataPoint> result = statisticsService.findByAccountNameBetweenDates("test", "2018-11-11", "2018-11-15");
+        assertEquals(list, result);
+    }
+
     @Test
     public void shouldSaveDataPoint() {
         Item salary = ItemUtil.getItemSalary();
@@ -103,9 +123,9 @@ public class StatisticsServiceImplTest {
         assertEquals("test", dataPoint.getId().getAccount());
         assertEquals(dataPoint.getId().getDate(), Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 
-        assertEquals(0,expectedExpensesAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.EXPENSES_AMOUNT)));
-        assertEquals(0,expectedIncomesAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.INCOMES_AMOUNT)));
-        assertEquals(0,expectedSavingAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.SAVING_AMOUNT)));
+        assertEquals(0, expectedExpensesAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.EXPENSES_AMOUNT)));
+        assertEquals(0, expectedIncomesAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.INCOMES_AMOUNT)));
+        assertEquals(0, expectedSavingAmount.compareTo(dataPoint.getStatistics().get(StatisticMetric.SAVING_AMOUNT)));
 
         ItemMetric salaryItemMetric = dataPoint.getIncomes().stream()
                 .filter(i -> i.getTitle().equals(salary.getTitle()))
@@ -119,9 +139,9 @@ public class StatisticsServiceImplTest {
                 .filter(i -> i.getTitle().equals(grocery.getTitle()))
                 .findFirst().get();
 
-        assertEquals(0,expectedNormalizedSalaryAmount.compareTo(salaryItemMetric.getAmount()));
-        assertEquals(0,expectedNormalizedVacationAmount.compareTo(vacationItemMetric.getAmount()));
-        assertEquals(0,expectedNormalizedGroceryAmount.compareTo(groceryItemMetric.getAmount()));
+        assertEquals(0, expectedNormalizedSalaryAmount.compareTo(salaryItemMetric.getAmount()));
+        assertEquals(0, expectedNormalizedVacationAmount.compareTo(vacationItemMetric.getAmount()));
+        assertEquals(0, expectedNormalizedGroceryAmount.compareTo(groceryItemMetric.getAmount()));
 
         assertEquals(rates, dataPoint.getRates());
 

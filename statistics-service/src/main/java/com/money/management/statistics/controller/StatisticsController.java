@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,13 @@ public class StatisticsController {
         return statisticsService.findByAccountName(principal.getName());
     }
 
-    @PreAuthorize("#oauth2.hasScope('server') or #accountName.equals('demo')")
+    @RequestMapping(value = "/between", method = RequestMethod.GET)
+    public List<DataPoint> getAccountsStatisticsBetweenDates(Principal principal, @RequestParam("beginDate") String beginDate,
+                                                             @RequestParam("endDate") String endDate) throws ParseException {
+        return statisticsService.findByAccountNameBetweenDates(principal.getName(), beginDate, endDate);
+    }
+
+    @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     public List<DataPoint> getStatisticsByAccountName(@RequestParam("name") String accountName) {
         return statisticsService.findByAccountName(accountName);

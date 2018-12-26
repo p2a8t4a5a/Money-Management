@@ -15,6 +15,8 @@ import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -41,6 +43,16 @@ public class StatisticsServiceImpl implements StatisticsService {
     public List<DataPoint> findByAccountName(String accountName) {
         Assert.hasLength(accountName, "Account Name can't be empty !");
         return repository.findByIdAccount(accountName);
+    }
+
+    @Override
+    public List<DataPoint> findByAccountNameBetweenDates(String account, String beginDate, String endDate) throws ParseException {
+        Assert.hasLength(account, "Account Name can't be empty !");
+        Assert.hasLength(beginDate, "Begin Date can't be empty !");
+        Assert.hasLength(endDate, "End Date can't be empty !");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return repository.findByIdAccountBetweenDates(account, sdf.parse(beginDate), sdf.parse(endDate));
     }
 
     @Override
