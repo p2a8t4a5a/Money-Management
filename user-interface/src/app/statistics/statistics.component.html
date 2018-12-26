@@ -33,7 +33,8 @@
                     [showXAxisLabel]="true"
                     [showYAxisLabel]="true"
                     [xAxisLabel]="'Date'"
-                    [yAxisLabel]="'Value'">
+                    [yAxisLabel]="'Value'"
+            (select)="onSelect($event)">
             </ngx-charts-line-chart>
         </div>
         <div class="columns col-sm-12 col-md-6">

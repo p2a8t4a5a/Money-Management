@@ -23,13 +23,18 @@ export class StatisticsComponent implements OnInit {
     public incomesPieChartResults: any[] = [];
     public expensePieChartResults: any[] = [];
 
+    private datePoints: DataPoint[];
+
     constructor(private authService: AuthenticationService, private router: Router, private statisticsService: StatisticsService,
                 private dateFormatPipe: DateFormatPipe) {
     }
 
     ngOnInit() {
         this.authService.checkCredentials();
-        this.statisticsService.getCurrentAccountStatistics().subscribe(results => this.populateCharts(results));
+        this.statisticsService.getCurrentAccountStatistics().subscribe(results => {
+            this.datePoints = results;
+            this.populateCharts(results);
+        });
     }
 
     public logout() {
@@ -38,6 +43,17 @@ export class StatisticsComponent implements OnInit {
 
     public navigateToAccount() {
         this.router.navigate(['/account']);
+    }
+
+    public onSelect(event) {
+        this.datePoints.forEach(point => {
+            let date = this.dateFormatPipe.transform(point.id.date);
+
+            if(event.name == date) {
+                this.populatePieCharts(point);
+                return;
+            }
+        })
     }
 
     private populateCharts(results: DataPoint[]) {
@@ -53,6 +69,17 @@ export class StatisticsComponent implements OnInit {
         });
 
         this.lineChartResults = this.getLineChartData(incomeResults, expensesResults);
+        this.incomesPieChartResults = this.getPieChartData(incomesPieChartResults);
+        this.expensePieChartResults = this.getPieChartData(expensesPieChartResults);
+    }
+
+    private populatePieCharts(result : DataPoint) {
+        let incomesPieChartResults: Map<String, number> = new Map();
+        let expensesPieChartResults: Map<String, number> = new Map();
+
+        this.extractPieChartData(incomesPieChartResults, result.incomes);
+        this.extractPieChartData(expensesPieChartResults, result.expenses);
+
         this.incomesPieChartResults = this.getPieChartData(incomesPieChartResults);
         this.expensePieChartResults = this.getPieChartData(expensesPieChartResults);
     }
