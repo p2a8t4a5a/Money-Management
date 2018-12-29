@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.0.RELEASE'
+        springBootVersion = '2.1.1.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -31,8 +31,8 @@ subprojects {
     group 'com.money.management'
     version '1.0-SNAPSHOT'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 1.11
+    targetCompatibility = 1.11
 
     repositories {
         mavenCentral()
@@ -40,10 +40,15 @@ subprojects {
     }
 
     ext {
-        springCloudVersion = 'Finchley.RC1'
+        springCloudVersion = 'Greenwich.RC2'
     }
 
     dependencies {
+        compile('javax.xml.bind:jaxb-api:2.2.11')
+        compile('com.sun.xml.bind:jaxb-core:2.2.11')
+        compile('com.sun.xml.bind:jaxb-impl:2.2.11')
+        compile('javax.activation:activation:1.1.1')
+
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
 

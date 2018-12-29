@@ -10,6 +10,8 @@ spring:
       port: 27017
   rabbitmq:
     host: rabbitmq
+  main:
+    allow-bean-definition-overriding: true
 
 security:
   oauth2:

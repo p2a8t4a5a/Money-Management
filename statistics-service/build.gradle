@@ -12,7 +12,7 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 
     compile('org.springframework.security.oauth:spring-security-oauth2')
-    compile('com.google.guava:guava')
+    compile('com.google.guava:guava:27.0.1-jre')
 
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
     testCompile('com.jayway.jsonpath:json-path:2.2.0')
