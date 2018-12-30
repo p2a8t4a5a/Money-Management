@@ -16,6 +16,9 @@ export class StatisticsComponent implements OnInit {
     public lineChartView: number[] = [900, 400];
     public pieChartView: number[] = [600, 400];
 
+    public startDate: Date;
+    public endDate: Date;
+
     public colorScheme = {
         domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     };
@@ -36,6 +39,7 @@ export class StatisticsComponent implements OnInit {
             this.datePoints = results;
             this.populateCharts(results);
         });
+        this.initDates();
     }
 
     public logout() {
@@ -58,7 +62,11 @@ export class StatisticsComponent implements OnInit {
     }
 
     public search() {
-
+        this.statisticsService.getAccountStatisticsBetweenDates(this.startDate, this.endDate)
+            .subscribe(results => {
+                this.datePoints = results;
+                this.populateCharts(results);
+            });
     }
 
     private populateCharts(results: DataPoint[]) {
@@ -165,6 +173,12 @@ export class StatisticsComponent implements OnInit {
         shrinkArray.push(others);
 
         return shrinkArray;
+    }
+
+    private initDates() {
+        let date = new Date();
+        this.startDate = new Date(date.getFullYear(), date.getMonth(), 1);
+        this.endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     }
 
 }
