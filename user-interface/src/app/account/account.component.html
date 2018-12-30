@@ -1,17 +1,15 @@
-<div class="tick" (click)="saveAccount()">
-    <img src="../../assets/img/tick.svg">
-    <span>SAVE</span>
-</div>
-
-<div class="close" (click)="navigateToStatistics()">
-    <div class="close-icon">
-    </div>
-    <div class="close-text">
-        CLOSE
-    </div>
-</div>
-
 <div id="settingspage" class="container container-account">
+    <div class="sidenav">
+        <div class="tick" (click)="saveAccount()">
+            <img src="../../assets/img/tick.svg">
+            <span>SAVE</span>
+        </div>
+
+        <div class="close-button" (click)="navigateToStatistics()">
+            <img src="../../assets/img/close.svg">
+            <span>CLOSE</span>
+        </div>
+    </div>
     <div class="row">
         <div class="account-columns col-sm-12 col-md-4">
             <div class="incomes-sprite-title zoomplus incomebutton">INCOMES</div>

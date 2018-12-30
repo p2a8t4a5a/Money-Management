@@ -1,23 +1,18 @@
-<div class="add" (click)="navigateToAccount()">
-    <div class="add-icon">
-    </div>
-    <div class="add-text">
-        ADD
-    </div>
-</div>
-
-<div class="logout" (click)="logout()">
-    <div class="logout-text-up">
-        LOG
-    </div>
-    <div class="logout-icon">
-    </div>
-    <div class="logout-text-down">
-        OUT
-    </div>
-</div>
-
 <div class="container">
+    <div class="sidenav">
+        <div class="add" (click)="navigateToAccount()">
+            <img src="../../assets/img/add.svg">
+            <div class="add-text">
+                ADD
+            </div>
+        </div>
+        <div class="logout" (click)="logout()">
+            <img src="../../assets/img/logout.svg">
+            <div class="logout-text">
+                OUT
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="columns col-sm-12 col-md-4 date-column">
             <mat-form-field>
@@ -50,7 +45,7 @@
                     [showYAxisLabel]="true"
                     [xAxisLabel]="'Date'"
                     [yAxisLabel]="'Value'"
-            (select)="onSelect($event)">
+                    (select)="onSelect($event)">
             </ngx-charts-line-chart>
         </div>
         <div class="columns col-sm-12 col-md-6">

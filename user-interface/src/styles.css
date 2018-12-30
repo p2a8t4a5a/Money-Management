@@ -776,34 +776,47 @@ input.mat-input-element {
     width: 100%;
 }
 
-.logout, .add, .close {
+.logout, .add, .close-button {
     right: 32px;
     position: fixed;
     cursor: pointer;
     width: 32px;
     height: 32px;
-    opacity: 0.3;
+    opacity: 0.5;
+}
+
+.close-button span {
+    right: 5px;
+    position: relative;
 }
 
 .logout {
-    bottom: 32px;
+    bottom: 40px;
+}
+
+.logout img {
+    height: 40px;
 }
 
 .add {
     top: 32px;
 }
 
-.close {
+.add img {
+    height: 40px;
+}
+
+.close-button {
     bottom: 32px;
 }
 
-.add:hover, .logout:hover, .close:hover {
+.add:hover, .logout:hover, .close-button:hover {
     opacity: 1;
 }
 
 .add-icon:before, .add-icon:after,
 .logout-icon:before, .logout-icon:after,
-.close-icon:before, .close-icon:after {
+.close-button-icon:before, .close-button-icon:after {
     position: absolute;
     left: 15px;
     content: ' ';
@@ -820,10 +833,10 @@ input.mat-input-element {
     transform: rotate(0deg);
 }
 
-.add-text, .close-text {
-    margin-top: 40px;
+.add-text, .close-button-text {
     text-align: center;
-    font-size: 10px;
+    font-size: 15px;
+    padding-left: 5px;
 }
 
 .modal-close {
@@ -891,35 +904,11 @@ input.mat-input-element {
     font-size: 16px !important;
 }
 
-.logout-text-up, .logout-text-down {
+.logout-text {
     text-align: center;
-    font-size: 10px;
+    font-size: 15px;
     position: absolute;
-    left: 5px;
-}
-
-.logout-text-up {
-    bottom: 20px;
-}
-
-.logout-text-down {
-    top: 20px;
-}
-
-.logout-icon:before {
-    transform: rotate(90deg);
-}
-
-.logout-icon:after {
-    transform: rotate(-90deg);
-}
-
-.close-icon:before {
-    transform: rotate(45deg);
-}
-
-.close-icon:after {
-    transform: rotate(-45deg);
+    padding-left: 10px;
 }
 
 .tick {
@@ -928,8 +917,13 @@ input.mat-input-element {
     position: fixed;
     right: 20px;
     top: 15px;
-    opacity: 0.2;
+    opacity: 0.5;
     cursor: pointer;
+}
+
+.tick img {
+    width: 40px;
+    height: 40px;
 }
 
 .tick:hover {
@@ -941,7 +935,7 @@ input.mat-input-element {
     height: 40px;
     left: 90px;
     top: 15px;
-    opacity: 0.2;
+    opacity: 0.5;
     cursor: pointer;
     position: relative;
 }
@@ -1494,16 +1488,6 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     transition: all 0.3s;
 }
 
-.close-sign {
-    background-position: 0 -22px;
-    background-size: 538px 84px;
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 20px;
-    right: 26px;
-}
-
 .modal-title {
     font-weight: 400;
     font-size: 30px;
@@ -1673,4 +1657,15 @@ ngx-charts-legend {
 .date-column {
     padding-bottom: 70px;
     padding-top: 100px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 90px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #efefef;
+    overflow-x: hidden;
+    transition: 0.5s;
 }
