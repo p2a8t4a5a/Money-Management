@@ -19,11 +19,27 @@
 
 <div class="container">
     <div class="row">
-        <div class="columns col-sm-12 col-md-6">
+        <div class="columns col-sm-12 col-md-4 date-column">
+            <mat-form-field>
+                <input matInput [matDatepicker]="startDate" placeholder="Start date">
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate startView="year"></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="endDate" placeholder="End date">
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate startView="year"></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <div class="search" (click)="search()">
+                <img src="../../assets/img/update.svg">
+                <span>SEARCH</span>
+            </div>
         </div>
-        <div class="columns col-sm-12 col-md-6">
+        <div class="columns col-sm-12 col-md-8">
             <ngx-charts-line-chart
-                    [view]="view"
+                    [view]="lineChartView"
                     [scheme]="colorScheme"
                     [results]="lineChartResults"
                     [gradient]="false"
@@ -40,7 +56,7 @@
         <div class="columns col-sm-12 col-md-6">
             <div class="incomes-sprite-title pie-chart-title">INCOMES</div>
             <ngx-charts-advanced-pie-chart
-                    [view]="view"
+                    [view]="pieChartView"
                     [scheme]="colorScheme"
                     [results]="incomesPieChartResults">
             </ngx-charts-advanced-pie-chart>
@@ -48,7 +64,7 @@
         <div class="columns col-sm-12 col-md-6">
             <div class="expenses-sprite-title pie-chart-title">EXPENSES</div>
             <ngx-charts-advanced-pie-chart
-                    [view]="view"
+                    [view]="pieChartView"
                     [scheme]="colorScheme"
                     [results]="expensePieChartResults">
             </ngx-charts-advanced-pie-chart>

@@ -13,7 +13,8 @@ import {ItemMetric} from "../domain/ItemMetric";
 })
 export class StatisticsComponent implements OnInit {
 
-    public view: number[] = [700, 400];
+    public lineChartView: number[] = [900, 400];
+    public pieChartView: number[] = [600, 400];
 
     public colorScheme = {
         domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -49,11 +50,15 @@ export class StatisticsComponent implements OnInit {
         this.datePoints.forEach(point => {
             let date = this.dateFormatPipe.transform(point.id.date);
 
-            if(event.name == date) {
+            if (event.name == date) {
                 this.populatePieCharts(point);
                 return;
             }
         })
+    }
+
+    public search() {
+
     }
 
     private populateCharts(results: DataPoint[]) {
@@ -73,7 +78,7 @@ export class StatisticsComponent implements OnInit {
         this.expensePieChartResults = this.getPieChartData(expensesPieChartResults);
     }
 
-    private populatePieCharts(result : DataPoint) {
+    private populatePieCharts(result: DataPoint) {
         let incomesPieChartResults: Map<String, number> = new Map();
         let expensesPieChartResults: Map<String, number> = new Map();
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {
     MatButtonModule,
     MatFormFieldModule,
@@ -9,7 +9,11 @@ import {
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule, MatDialogModule, MatSelectModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 } from '@angular/material';
 
 const MATERIAL_MODULES = [
@@ -23,14 +27,17 @@ const MATERIAL_MODULES = [
     MatToolbarModule,
     MatTooltipModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 ];
 
 @NgModule({
     imports: MATERIAL_MODULES,
     exports: MATERIAL_MODULES,
     providers: [
-        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
+        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
     ]
 })
-export class MaterialModule { }
+export class MaterialModule {
+}

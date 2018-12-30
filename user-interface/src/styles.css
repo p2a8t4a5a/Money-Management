@@ -936,6 +936,26 @@ input.mat-input-element {
     opacity: 1;
 }
 
+.search {
+    width: 40px;
+    height: 40px;
+    left: 90px;
+    top: 15px;
+    opacity: 0.2;
+    cursor: pointer;
+    position: relative;
+}
+
+.search:hover {
+    opacity: 1;
+}
+
+.search img {
+    margin-left: 7px;
+    width: 40px;
+    height: 40px;
+}
+
 .itembackground {
     background-size: 1031px 42px;
     width: 42px;
@@ -1648,4 +1668,9 @@ ngx-charts-legend {
 
 .pie-chart-title {
     top: 50px;
+}
+
+.date-column {
+    padding-bottom: 70px;
+    padding-top: 100px;
 }
