@@ -15,8 +15,8 @@ jdk:
   - oraclejdk11
 
 script:
-  - gradle check
-  - gradle sonarqube
+  - ./gradlew check
+  - ./gradlew sonarqube
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
