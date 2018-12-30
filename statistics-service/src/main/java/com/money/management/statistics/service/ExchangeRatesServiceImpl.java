@@ -31,7 +31,7 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
     @Override
     public Map<Currency, BigDecimal> getCurrentRates() {
         if (container == null || !container.getDate().equals(LocalDate.now())) {
-            container = client.getRates(Currency.getBase());
+            container = client.getRates();
             log.info("exchange rates has been updated: {}", container);
         }
 

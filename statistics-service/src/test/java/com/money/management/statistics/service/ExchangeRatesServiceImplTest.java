@@ -40,10 +40,10 @@ public class ExchangeRatesServiceImplTest {
     public void shouldReturnCurrentRatesWhenContainerIsEmptySoFar() {
         ExchangeRatesContainer container = getExchangeRatesContainer();
 
-        when(client.getRates(Currency.getBase())).thenReturn(container);
+        when(client.getRates()).thenReturn(container);
 
         Map<Currency, BigDecimal> result = ratesService.getCurrentRates();
-        verify(client, times(1)).getRates(Currency.getBase());
+        verify(client, times(1)).getRates();
 
         assertEquals(container.getRates().get(Currency.EUR.name()), result.get(Currency.EUR));
         assertEquals(BigDecimal.ONE, result.get(Currency.USD));
@@ -51,16 +51,16 @@ public class ExchangeRatesServiceImplTest {
 
     @Test
     public void shouldNotRequestRatesWhenTodayContainerAlreadyExists() {
-        when(client.getRates(Currency.getBase())).thenReturn(getExchangeRatesContainer());
+        when(client.getRates()).thenReturn(getExchangeRatesContainer());
 
         ratesService.getCurrentRates();
 
-        verify(client, times(1)).getRates(Currency.getBase());
+        verify(client, times(1)).getRates();
     }
 
     @Test
     public void shouldConvertCurrency() {
-        when(client.getRates(Currency.getBase())).thenReturn(getExchangeRatesContainer());
+        when(client.getRates()).thenReturn(getExchangeRatesContainer());
 
         BigDecimal amount = new BigDecimal(100);
         BigDecimal expectedConversion = new BigDecimal("80.00");
