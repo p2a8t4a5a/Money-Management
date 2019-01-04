@@ -123,12 +123,12 @@ a:hover, a:focus {
 }
 
 .btn-primary {
-    background-color: #70cbce;
+    background-color: #1E90FF;
     color: #ffffff;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-    background-color: #8be2e5;
+    background-color: #2EAAFF;
     color: #ffffff;
     -webkit-transition: all 0.35s ease-in-out;
     -moz-transition: all 0.35s ease-in-out;
@@ -206,7 +206,7 @@ a:hover, a:focus {
 }
 
 .blue {
-    color: #70cbce;
+    color: #1E90FF;
 }
 
 .white {
@@ -218,7 +218,7 @@ a:hover, a:focus {
 }
 
 .blue-bg {
-    background: #70cbce;
+    background: #1E90FF;
 }
 
 .white-bg {
@@ -234,8 +234,8 @@ a:hover, a:focus {
    ========================================================================== */
 
 .navbar {
-    border: 0px solid rgba(0, 0, 0, 0);
-    background: #70cbce;
+    border: 0 solid rgba(0, 0, 0, 0);
+    background: #1E90FF;
     margin: auto;
     min-height: 60px;
     padding-top: 8px;
@@ -266,7 +266,7 @@ a:hover, a:focus {
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    border-color: #4ec3cd;
+    border-color: #1E90FF;
 }
 
 .navbar-inverse .navbar-toggle {
@@ -274,7 +274,8 @@ a:hover, a:focus {
 }
 
 .logo img {
-    margin-top: 6px;
+    height: 50px;
+    padding-bottom: 10px;
 }
 
 /* ==========================================================================
@@ -388,8 +389,8 @@ hr.line {
 }
 
 .blue {
-    border-color: #70cbce;
-    color: #70cbce
+    border-color: #1E90FF;
+    color: #1E90FF
 }
 
 .yellow {
@@ -432,7 +433,7 @@ footer {
 /*---------------Pricing Tables-------------------*/
 
 #pricing {
-    background: #70cbce;
+    background: #1E90FF;
 }
 
 .pricing-container {
@@ -530,7 +531,7 @@ footer {
 }
 
 .features.last a {
-    color: #70cbce;
+    color: #1E90FF;
     font-size: 14px;
     letter-spacing: 1px;
 }
@@ -664,7 +665,7 @@ footer {
 .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,
 .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap,
 .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-start {
-    border-color: #70cbce;
+    border-color: #1E90FF;
 }
 
 input.mat-input-element {
