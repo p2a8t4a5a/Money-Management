@@ -31,11 +31,6 @@ import {Router} from "@angular/router";
             state('true', style({opacity: 1, transform: 'translateY(0%)'})),
             state('false', style({opacity: 0, transform: 'translateY(25%)'})),
             transition('false => true', animate('1s 1s ease-in'))
-        ]),
-        trigger('showSocial', [
-            state('true', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('false', style({opacity: 0, transform: 'translateY(25%)'})),
-            transition('false => true', animate('1s 2s ease-in'))
         ])
     ]
 })
@@ -57,7 +52,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private scrollPosition: number;
 
     constructor(private fb: FormBuilder, private toaster: ToastrService, private cdr: ChangeDetectorRef,
-                private authService: AuthenticationService, private router: Router) {
+                private authService: AuthenticationService) {
 
         this.flip = 'inactive';
         this.hidePassword1 = true;
@@ -79,10 +74,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.windowHeight = window.innerHeight;
-
-        if (this.authService.isUserLogin()) {
-            this.router.navigate(['/statistics']);
-        }
     }
 
     ngAfterViewInit(): void {
