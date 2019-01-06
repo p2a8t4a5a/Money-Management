@@ -1,0 +1,74 @@
+<div class="col-sm-6 text-center" [@showLogin]="showSection">
+    <div class="flipper" [@flipState]="flip">
+        <div class="front-card">
+            <h2 class="black">Forgot password</h2>
+            <br/>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 pad-sig-in">
+                    <form [formGroup]="forgotPassword" (ngSubmit)="onForgotPasswordSubmit()">
+                        <div class="form-group">
+                            <mat-form-field class="form-field">
+                                <mat-icon matPrefix>email</mat-icon>
+                                <input matInput placeholder="Email" formControlName="email" type="email"
+                                       class="form-control" autocomplete="off">
+                                <mat-error *ngIf="forgotPassword.get('email')?.hasError('required')">
+                                    This is required.
+                                </mat-error>
+                                <mat-error *ngIf="forgotPassword.get('email')?.hasError('email')">
+                                    Please enter a valid email address.
+                                </mat-error>
+                                <mat-error *ngIf="forgotPassword.get('email')?.hasError('maxlength')">
+                                    The email must be maximum 64 characters long.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="space">
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                    [disabled]="forgotPassword.invalid">Submit
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg" (click)="toggleFlip()">Resend
+                                confirmation
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-card">
+            <h2 class="black">Resend confirmation</h2>
+            <br>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 pad-sig-in">
+                    <form [formGroup]="resendEmail" (ngSubmit)="onResendEmailSubmit()">
+                        <div class="form-group">
+                            <mat-form-field class="form-field">
+                                <mat-icon matPrefix>email</mat-icon>
+                                <input matInput placeholder="Email" formControlName="email" type="email"
+                                       class="form-control" autocomplete="off">
+                                <mat-error *ngIf="resendEmail.get('email')?.hasError('required')">
+                                    This is required.
+                                </mat-error>
+                                <mat-error *ngIf="resendEmail.get('email')?.hasError('email')">
+                                    Please enter a valid email address.
+                                </mat-error>
+                                <mat-error *ngIf="resendEmail.get('email')?.hasError('maxlength')">
+                                    The email must be maximum 64 characters long.
+                                </mat-error>
+                            </mat-form-field>
+
+                            <div class="space">
+                                <button type="submit" class="btn btn-primary btn-lg"
+                                        [disabled]="resendEmail.invalid">Resend
+                                </button>
+                                <button type="button" class="btn btn-primary btn-lg"
+                                        (click)="toggleFlip()">Forgot password
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

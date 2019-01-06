@@ -737,7 +737,7 @@ input.mat-input-element {
     margin: auto;
 }
 
-#flipper {
+.flipper {
     position: relative;
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
@@ -1669,4 +1669,9 @@ ngx-charts-legend {
     background-color: #efefef;
     overflow-x: hidden;
     transition: 0.5s;
+}
+
+.pad-sig-in {
+    padding-right: 70px;
+    padding-left: 70px;
 }

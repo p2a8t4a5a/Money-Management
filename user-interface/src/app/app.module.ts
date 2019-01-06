@@ -18,6 +18,7 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {DateFormatPipe} from "./pipe/DateFormatPipe";
 import { SocialMediaConnectionComponent } from './social-media-connection/social-media-connection.component';
 import { AccountSectionComponent } from './account-section/account-section.component';
+import { AccountTroubleComponent } from './account-trouble/account-trouble.component';
 
 @NgModule({
     imports: [
@@ -44,7 +45,8 @@ import { AccountSectionComponent } from './account-section/account-section.compo
         ItemDialogComponent,
         DateFormatPipe,
         SocialMediaConnectionComponent,
-        AccountSectionComponent
+        AccountSectionComponent,
+        AccountTroubleComponent
     ],
     bootstrap: [AppComponent],
     providers: [

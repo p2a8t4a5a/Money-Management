@@ -1,10 +1,10 @@
-<div class="col-sm-8 col-sm-offset-2 text-center" [@showLogin]="showSection">
-    <div id="flipper" [@flipState]="flip">
+<div class="col-sm-6 text-center" [@showLogin]="showSection">
+    <div class="flipper" [@flipState]="flip">
         <div class="front-card">
             <h2 class="black">Login</h2>
             <br/>
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <div class="col-sm-12 col-md-12 pad-sig-in">
                     <form (ngSubmit)="onSubmitLogin()" [formGroup]="loginForm" autocomplete="off">
 
                         <div class="form-group">
@@ -63,7 +63,7 @@
             <h2 class="black">Create Account</h2>
             <br/>
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <div class="col-sm-12 col-md-12 pad-sig-in">
                     <form (ngSubmit)="onSubmitCreateAccount()" [formGroup]="createAccountForm"
                           autocomplete="off">
 
