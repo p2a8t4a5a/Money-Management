@@ -1,15 +1,16 @@
-import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {User} from '../domain/User';
+import {User} from '../../../domain/User';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
 import {ErrorStateMatcher} from "@angular/material";
-import {AuthenticationService} from "../service/authentication.service";
+import {AuthenticationService} from "../../../service/authentication.service";
 import {ToastrService} from "ngx-toastr";
+import {AccountSection} from "../account-section";
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
+    selector: 'app-account-connection',
+    templateUrl: './account-connection.component.html',
+    styleUrls: ['./account-connection.component.css'],
     animations: [
         trigger('flipState', [
             state('active', style({
@@ -28,7 +29,7 @@ import {ToastrService} from "ngx-toastr";
         ])
     ]
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class AccountConnectionComponent extends AccountSection {
     public hidePassword1: Boolean;
     public hidePassword2: Boolean;
     public hidePassword3: Boolean;
@@ -40,13 +41,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     public matcher: PasswordErrorStateMatcher;
 
-    public showSection: Boolean = false;
+    constructor(private fb: FormBuilder, private toaster: ToastrService, private authService: AuthenticationService,
+                cdr: ChangeDetectorRef) {
 
-    private windowHeight: number;
-    private scrollPosition: number;
-
-    constructor(private fb: FormBuilder, private toaster: ToastrService, private cdr: ChangeDetectorRef,
-                private authService: AuthenticationService) {
+        super(cdr);
 
         this.flip = 'inactive';
         this.hidePassword1 = true;
@@ -64,30 +62,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
             password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
             repeatPassword: ['']
         }, {validator: this.checkPasswords});
-    }
-
-    ngOnInit() {
-        this.windowHeight = window.innerHeight;
-    }
-
-    ngAfterViewInit(): void {
-        this.scrollPosition = window.pageYOffset;
-        this.checkShowSection();
-        this.cdr.detectChanges();
-    }
-
-    @HostListener('window:scroll', ['$event'])
-    checkScroll() {
-        this.scrollPosition = window.pageYOffset;
-        this.checkShowSection();
-    }
-
-    @HostListener('window:resize', ['$event'])
-    onResize() {
-        this.scrollPosition = window.pageYOffset;
-        this.windowHeight = window.innerHeight;
-
-        this.checkShowSection();
     }
 
     onSubmitCreateAccount() {
@@ -120,12 +94,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
         let confirmPass = group.controls.repeatPassword.value;
 
         return pass === confirmPass ? null : {notSame: true}
-    }
-
-    private checkShowSection() {
-        if (this.windowHeight * 4.5 <= this.scrollPosition) {
-            this.showSection = true;
-        }
     }
 
     private displayMessage(message: string) {

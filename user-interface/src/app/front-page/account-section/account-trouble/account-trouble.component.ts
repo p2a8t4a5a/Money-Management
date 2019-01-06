@@ -1,6 +1,7 @@
-import {AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
+import { ChangeDetectorRef, Component} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AccountSection} from "../account-section";
 
 @Component({
     selector: 'app-account-trouble',
@@ -24,19 +25,16 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
         ]),
     ]
 })
-export class AccountTroubleComponent implements OnInit, AfterViewInit {
+export class AccountTroubleComponent extends AccountSection{
 
     public flip: String;
 
     public forgotPassword: FormGroup;
     public resendEmail: FormGroup;
 
-    public showSection: Boolean = false;
+    constructor(private formBuilder: FormBuilder, cdr: ChangeDetectorRef) {
+        super(cdr);
 
-    private windowHeight: number;
-    private scrollPosition: number;
-
-    constructor(private formBuilder: FormBuilder, private cdr: ChangeDetectorRef) {
         this.flip = 'inactive';
 
         this.forgotPassword = this.formBuilder.group({
@@ -46,30 +44,6 @@ export class AccountTroubleComponent implements OnInit, AfterViewInit {
         this.resendEmail = this.formBuilder.group({
             email: ['', [Validators.required, Validators.email]]
         });
-    }
-
-    ngOnInit() {
-        this.windowHeight = window.innerHeight;
-    }
-
-    ngAfterViewInit(): void {
-        this.scrollPosition = window.pageYOffset;
-        this.checkShowSection();
-        this.cdr.detectChanges();
-    }
-
-    @HostListener('window:scroll', ['$event'])
-    checkScroll() {
-        this.scrollPosition = window.pageYOffset;
-        this.checkShowSection();
-    }
-
-    @HostListener('window:resize', ['$event'])
-    onResize() {
-        this.scrollPosition = window.pageYOffset;
-        this.windowHeight = window.innerHeight;
-
-        this.checkShowSection();
     }
 
     onForgotPasswordSubmit() {
@@ -82,12 +56,6 @@ export class AccountTroubleComponent implements OnInit, AfterViewInit {
 
     toggleFlip() {
         this.flip = (this.flip === 'inactive') ? 'active' : 'inactive';
-    }
-
-    private checkShowSection() {
-        if (this.windowHeight * 4.5 <= this.scrollPosition) {
-            this.showSection = true;
-        }
     }
 
 }

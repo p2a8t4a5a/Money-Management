@@ -6,7 +6,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "./material.modules";
 import {AppRouting} from "./app.routing";
-import {LoginComponent} from "./login/login.component";
+import {AccountConnectionComponent} from "./front-page/account-section/account-connection/account-connection.component";
 import {CookieService} from "ngx-cookie-service";
 import {FrontPageComponent} from './front-page/front-page.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -16,9 +16,9 @@ import {StatisticsComponent} from './statistics/statistics.component';
 import {ItemDialogComponent} from './item-dialog/item-dialog.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {DateFormatPipe} from "./pipe/DateFormatPipe";
-import { SocialMediaConnectionComponent } from './social-media-connection/social-media-connection.component';
-import { AccountSectionComponent } from './account-section/account-section.component';
-import { AccountTroubleComponent } from './account-trouble/account-trouble.component';
+import { SocialMediaConnectionComponent } from './front-page/account-section/social-media-connection/social-media-connection.component';
+import { AccountSectionComponent } from './front-page/account-section/account-section.component';
+import { AccountTroubleComponent } from './front-page/account-section/account-trouble/account-trouble.component';
 
 @NgModule({
     imports: [
@@ -38,7 +38,7 @@ import { AccountTroubleComponent } from './account-trouble/account-trouble.compo
     ],
     declarations: [
         AppComponent,
-        LoginComponent,
+        AccountConnectionComponent,
         FrontPageComponent,
         AccountComponent,
         StatisticsComponent,
