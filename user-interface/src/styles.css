@@ -282,7 +282,7 @@ a:hover, a:focus {
    Main styles
    ========================================================================== */
 .header {
-    background: url(assets/img/header-bg.jpg) no-repeat center center;
+    background: url(assets/img/header-bg.jpeg) no-repeat center center;
     width: 100%;
     padding: 20px 10px 60px 10px;
     height: 100vh;
@@ -409,7 +409,7 @@ hr.line {
     left: 0;
     right: 0;
     width: 100%;
-    max-width: 440px;
+    max-width: 800px;
 }
 
 #sing-up {
