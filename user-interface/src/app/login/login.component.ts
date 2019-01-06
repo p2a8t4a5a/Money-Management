@@ -5,7 +5,6 @@ import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validat
 import {ErrorStateMatcher} from "@angular/material";
 import {AuthenticationService} from "../service/authentication.service";
 import {ToastrService} from "ngx-toastr";
-import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -26,11 +25,6 @@ import {Router} from "@angular/router";
             state('true', style({opacity: 1, transform: 'translateY(0%)'})),
             state('false', style({opacity: 0, transform: 'translateY(100%)'})),
             transition('false => true', [animate('1s 0.5s ease-in')])
-        ]),
-        trigger('showBar', [
-            state('true', style({opacity: 1, transform: 'translateY(0%)'})),
-            state('false', style({opacity: 0, transform: 'translateY(25%)'})),
-            transition('false => true', animate('1s 1s ease-in'))
         ])
     ]
 })

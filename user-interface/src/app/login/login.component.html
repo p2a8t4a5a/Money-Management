@@ -1,148 +1,138 @@
-<div class="container login-container">
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 text-center" [@showLogin]="showSection">
-            <div id="flipper" [@flipState]="flip">
-                <div class="front-card">
-                    <h2 class="black">Login</h2>
-                    <br/>
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                            <form (ngSubmit)="onSubmitLogin()" [formGroup]="loginForm" autocomplete="off">
+<div class="col-sm-8 col-sm-offset-2 text-center" [@showLogin]="showSection">
+    <div id="flipper" [@flipState]="flip">
+        <div class="front-card">
+            <h2 class="black">Login</h2>
+            <br/>
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    <form (ngSubmit)="onSubmitLogin()" [formGroup]="loginForm" autocomplete="off">
 
-                                <div class="form-group">
-                                    <mat-form-field class="form-field">
-                                        <mat-icon matPrefix>email</mat-icon>
-                                        <input matInput placeholder="Email" formControlName="email" type="email"
-                                               class="form-control" autocomplete="off">
-                                        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
-                                            This is required.
-                                        </mat-error>
-                                        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
-                                            Please enter a valid email address.
-                                        </mat-error>
-                                        <mat-error *ngIf="loginForm.get('email')?.hasError('maxlength')">
-                                            The email must be maximum 64 characters long.
-                                        </mat-error>
-                                    </mat-form-field>
+                        <div class="form-group">
+                            <mat-form-field class="form-field">
+                                <mat-icon matPrefix>email</mat-icon>
+                                <input matInput placeholder="Email" formControlName="email" type="email"
+                                       class="form-control" autocomplete="off">
+                                <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                                    This is required.
+                                </mat-error>
+                                <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+                                    Please enter a valid email address.
+                                </mat-error>
+                                <mat-error *ngIf="loginForm.get('email')?.hasError('maxlength')">
+                                    The email must be maximum 64 characters long.
+                                </mat-error>
+                            </mat-form-field>
 
-                                    <mat-form-field class="form-field">
-                                        <mat-icon matPrefix>vpn_key</mat-icon>
-                                        <input matInput placeholder="Password" formControlName="password"
-                                               [type]="hidePassword1 ? 'password': 'text'"
-                                               class="form-control" autocomplete="off">
-                                        <button mat-icon-button matSuffix
-                                                [matTooltip]="(hidePassword1 ? 'Show' : 'Hide') + ' Password'"
-                                                (click)="hidePassword1 = !hidePassword1">
-                                            <mat-icon>{{hidePassword1 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                        </button>
-                                        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">This is
-                                            required.
-                                        </mat-error>
-                                        <mat-error *ngIf="loginForm.get('password')?.hasError('maxlength')">
-                                            The password must be maximum 40 characters long.
-                                        </mat-error>
-                                        <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
-                                            The password must be at least 6 characters long.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-
-                                <div class="space">
-                                    <button type="submit" class="btn btn-primary btn-lg"
-                                            [disabled]="loginForm.invalid">Login
-                                    </button>
-                                    <button type="button" class="btn btn-primary btn-lg"
-                                            (click)="toggleFlip()">Create Account
-                                    </button>
-                                </div>
-
-                            </form>
+                            <mat-form-field class="form-field">
+                                <mat-icon matPrefix>vpn_key</mat-icon>
+                                <input matInput placeholder="Password" formControlName="password"
+                                       [type]="hidePassword1 ? 'password': 'text'"
+                                       class="form-control" autocomplete="off">
+                                <button mat-icon-button matSuffix
+                                        [matTooltip]="(hidePassword1 ? 'Show' : 'Hide') + ' Password'"
+                                        (click)="hidePassword1 = !hidePassword1">
+                                    <mat-icon>{{hidePassword1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                                <mat-error *ngIf="loginForm.get('password')?.hasError('required')">This is
+                                    required.
+                                </mat-error>
+                                <mat-error *ngIf="loginForm.get('password')?.hasError('maxlength')">
+                                    The password must be maximum 40 characters long.
+                                </mat-error>
+                                <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+                                    The password must be at least 6 characters long.
+                                </mat-error>
+                            </mat-form-field>
                         </div>
-                    </div>
+
+                        <div class="space">
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                    [disabled]="loginForm.invalid">Login
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg"
+                                    (click)="toggleFlip()">Create Account
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
+            </div>
+        </div>
 
-                <div class="back-card">
-                    <h2 class="black">Create Account</h2>
-                    <br/>
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                            <form (ngSubmit)="onSubmitCreateAccount()" [formGroup]="createAccountForm"
-                                  autocomplete="off">
+        <div class="back-card">
+            <h2 class="black">Create Account</h2>
+            <br/>
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    <form (ngSubmit)="onSubmitCreateAccount()" [formGroup]="createAccountForm"
+                          autocomplete="off">
 
-                                <div class="form-group">
-                                    <mat-form-field class="form-field">
-                                        <mat-icon matPrefix>email</mat-icon>
-                                        <input matInput placeholder="Email" formControlName="email" type="email"
-                                               class="form-control" autocomplete="off">
-                                        <mat-error *ngIf="createAccountForm.get('email')?.hasError('required')">
-                                            This is required.
-                                        </mat-error>
-                                        <mat-error *ngIf="createAccountForm.get('email')?.hasError('email')">
-                                            Please enter a valid email address.
-                                        </mat-error>
-                                        <mat-error *ngIf="createAccountForm.get('email')?.hasError('maxlength')">
-                                            The email must be maximum 64 characters long.
-                                        </mat-error>
-                                    </mat-form-field>
+                        <div class="form-group">
+                            <mat-form-field class="form-field">
+                                <mat-icon matPrefix>email</mat-icon>
+                                <input matInput placeholder="Email" formControlName="email" type="email"
+                                       class="form-control" autocomplete="off">
+                                <mat-error *ngIf="createAccountForm.get('email')?.hasError('required')">
+                                    This is required.
+                                </mat-error>
+                                <mat-error *ngIf="createAccountForm.get('email')?.hasError('email')">
+                                    Please enter a valid email address.
+                                </mat-error>
+                                <mat-error *ngIf="createAccountForm.get('email')?.hasError('maxlength')">
+                                    The email must be maximum 64 characters long.
+                                </mat-error>
+                            </mat-form-field>
 
-                                    <mat-form-field class="form-field">
-                                        <mat-icon matPrefix>vpn_key</mat-icon>
-                                        <input matInput placeholder="Password" formControlName="password"
-                                               [type]="hidePassword2 ? 'password': 'text'"
-                                               class="form-control" autocomplete="off">
-                                        <button mat-icon-button matSuffix
-                                                [matTooltip]="(hidePassword2 ? 'Show' : 'Hide') + ' Password'"
-                                                (click)="hidePassword2 = !hidePassword2">
-                                            <mat-icon>{{hidePassword2 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                        </button>
-                                        <mat-error *ngIf="createAccountForm.get('password')?.hasError('required')">
-                                            This is required.
-                                        </mat-error>
-                                        <mat-error *ngIf="createAccountForm.get('password')?.hasError('maxlength')">
-                                            The password must be maximum 40 characters long.
-                                        </mat-error>
-                                        <mat-error *ngIf="createAccountForm.get('password')?.hasError('minlength')">
-                                            The password must be at least 6 characters long.
-                                        </mat-error>
-                                    </mat-form-field>
+                            <mat-form-field class="form-field">
+                                <mat-icon matPrefix>vpn_key</mat-icon>
+                                <input matInput placeholder="Password" formControlName="password"
+                                       [type]="hidePassword2 ? 'password': 'text'"
+                                       class="form-control" autocomplete="off">
+                                <button mat-icon-button matSuffix
+                                        [matTooltip]="(hidePassword2 ? 'Show' : 'Hide') + ' Password'"
+                                        (click)="hidePassword2 = !hidePassword2">
+                                    <mat-icon>{{hidePassword2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                                <mat-error *ngIf="createAccountForm.get('password')?.hasError('required')">
+                                    This is required.
+                                </mat-error>
+                                <mat-error *ngIf="createAccountForm.get('password')?.hasError('maxlength')">
+                                    The password must be maximum 40 characters long.
+                                </mat-error>
+                                <mat-error *ngIf="createAccountForm.get('password')?.hasError('minlength')">
+                                    The password must be at least 6 characters long.
+                                </mat-error>
+                            </mat-form-field>
 
-                                    <mat-form-field class="form-field">
-                                        <mat-icon matPrefix>vpn_key</mat-icon>
-                                        <input matInput placeholder="Repeat Password"
-                                               formControlName="repeatPassword"
-                                               [type]="hidePassword3 ? 'password': 'text'"
-                                               class="form-control" autocomplete="off"
-                                               [errorStateMatcher]="matcher">
-                                        <button mat-icon-button matSuffix
-                                                [matTooltip]="(hidePassword3 ? 'Show' : 'Hide') + ' Password'"
-                                                (click)="hidePassword3 = !hidePassword3">
-                                            <mat-icon>{{hidePassword3 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                        </button>
-                                        <mat-error *ngIf="createAccountForm.hasError('notSame')">
-                                            Passwords do not match
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-
-                                <div class="space">
-                                    <button type="submit" class="btn btn-primary btn-lg"
-                                            [disabled]="createAccountForm.invalid">Submit
-                                    </button>
-                                    <button type="button" class="btn btn-primary btn-lg"
-                                            (click)="toggleFlip()">Login
-                                    </button>
-                                </div>
-                            </form>
+                            <mat-form-field class="form-field">
+                                <mat-icon matPrefix>vpn_key</mat-icon>
+                                <input matInput placeholder="Repeat Password"
+                                       formControlName="repeatPassword"
+                                       [type]="hidePassword3 ? 'password': 'text'"
+                                       class="form-control" autocomplete="off"
+                                       [errorStateMatcher]="matcher">
+                                <button mat-icon-button matSuffix
+                                        [matTooltip]="(hidePassword3 ? 'Show' : 'Hide') + ' Password'"
+                                        (click)="hidePassword3 = !hidePassword3">
+                                    <mat-icon>{{hidePassword3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                                <mat-error *ngIf="createAccountForm.hasError('notSame')">
+                                    Passwords do not match
+                                </mat-error>
+                            </mat-form-field>
                         </div>
-                    </div>
+
+                        <div class="space">
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                    [disabled]="createAccountForm.invalid">Submit
+                            </button>
+                            <button type="button" class="btn btn-primary btn-lg"
+                                    (click)="toggleFlip()">Login
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<div [@showBar]="showSection">
-    <h3 class="middle-text black"><span>OR</span></h3>
-</div>
-
-<app-social-media-connection></app-social-media-connection>

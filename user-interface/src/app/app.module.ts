@@ -17,6 +17,7 @@ import {ItemDialogComponent} from './item-dialog/item-dialog.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {DateFormatPipe} from "./pipe/DateFormatPipe";
 import { SocialMediaConnectionComponent } from './social-media-connection/social-media-connection.component';
+import { AccountSectionComponent } from './account-section/account-section.component';
 
 @NgModule({
     imports: [
@@ -42,7 +43,8 @@ import { SocialMediaConnectionComponent } from './social-media-connection/social
         StatisticsComponent,
         ItemDialogComponent,
         DateFormatPipe,
-        SocialMediaConnectionComponent
+        SocialMediaConnectionComponent,
+        AccountSectionComponent
     ],
     bootstrap: [AppComponent],
     providers: [
