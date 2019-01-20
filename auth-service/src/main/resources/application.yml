@@ -8,6 +8,21 @@ spring:
       password: ${MONGODB_PASSWORD}
       database: money-management
       port: 27017
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: dev-user
+    password: dev-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+          ssl:
+            enable: true
   rabbitmq:
     host: rabbitmq
   main:
@@ -33,6 +48,13 @@ security:
   oauth2:
     resource:
       user-info-uri: http://auth-service:5000/uaa/users/current
+
+verification:
+  email:
+    subject: "Verification email"
+    text: "Hello, \n Bellow you have the email verification address. \n  {0} \r\n\r\nCheers,\r\nMoney Management team"
+    url: "http://localhost:80/uaa/verification?token="
+
 
 hystrix:
   command:
