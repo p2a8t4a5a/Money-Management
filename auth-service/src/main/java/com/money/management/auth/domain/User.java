@@ -23,6 +23,9 @@ public class User implements UserDetails {
     @Length(min = 6, max = 40)
     private String password;
 
+    @NotNull
+    private Boolean enabled;
+
     @Override
     public String getPassword() {
         return password;
@@ -63,6 +66,10 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
