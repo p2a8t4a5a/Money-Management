@@ -1,5 +1,26 @@
+verification:
+  email:
+    subject: "Verification email"
+    text: "Hello, \n Bellow you have the email verification address. \n  {0} \r\n\r\nCheers,\r\nMoney Management team"
+    url: "http://localhost:80/uaa/users/verification?token="
+
 spring:
   data:
     mongodb:
       database: money-management
       port: 0
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: test
+    password: test
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+          ssl:
+            enable: true

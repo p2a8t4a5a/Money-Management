@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.money.management.auth.AuthApplication;
 import com.money.management.auth.domain.User;
 import com.money.management.auth.service.UserService;
+import com.money.management.auth.service.VerificationTokenService;
 import com.money.management.auth.util.UserUtil;
 import com.sun.security.auth.UserPrincipal;
 import org.junit.Before;
@@ -18,11 +19,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = AuthApplication.class)
@@ -35,6 +36,9 @@ public class UserControllerTest {
 
     @Mock
     private UserService userService;
+
+    @Mock
+    private VerificationTokenService verificationTokenService;
 
     private MockMvc mockMvc;
 
@@ -70,4 +74,15 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.name").value("test"))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void shouldReturnConfirmationMessage() throws Exception {
+        String message = "The user was enabled, you can now login in the application !";
+        when(verificationTokenService.enableUser("12345")).thenReturn(message);
+
+        mockMvc.perform(get("/users/verification?token=12345"))
+                .andExpect(content().string(message))
+                .andExpect(status().isOk());
+    }
+
 }

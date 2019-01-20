@@ -8,6 +8,7 @@ public class UserUtil {
         User user = new User();
         user.setUsername("test@test.com");
         user.setPassword("password");
+        user.setEnabled(false);
 
         return user;
     }
