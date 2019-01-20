@@ -2,7 +2,7 @@ package com.money.management.auth.service;
 
 import com.money.management.auth.repository.UserRepository;
 import com.money.management.auth.domain.User;
-import com.money.management.auth.service.security.OnRegistrationCompleteEvent;
+import com.money.management.auth.event.OnRegistrationCompleteEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

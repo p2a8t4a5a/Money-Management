@@ -1,4 +1,4 @@
-package com.money.management.auth.service.security;
+package com.money.management.auth.event;
 
 import com.money.management.auth.domain.User;
 import org.springframework.context.ApplicationEvent;
