@@ -7,4 +7,5 @@ public interface VerificationTokenService {
 
     VerificationToken create(User user);
 
+    String enableUser(String token);
 }

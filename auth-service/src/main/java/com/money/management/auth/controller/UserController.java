@@ -2,12 +2,10 @@ package com.money.management.auth.controller;
 
 import com.money.management.auth.domain.User;
 import com.money.management.auth.service.UserService;
+import com.money.management.auth.service.VerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -17,6 +15,7 @@ import java.security.Principal;
 public class UserController {
 
     private UserService userService;
+    private VerificationTokenService verificationTokenService;
 
     @Autowired
     public UserController(UserService userService) {
@@ -27,6 +26,12 @@ public class UserController {
     public Principal getUser(Principal principal) {
         return principal;
     }
+
+    @RequestMapping(value = "/verification", method = RequestMethod.GET)
+    public String mailVerification(@RequestParam("token") String token) {
+        return verificationTokenService.enableUser(token);
+    }
+
 
     @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
