@@ -5,22 +5,20 @@ import com.money.management.auth.repository.UserRepository;
 import com.money.management.auth.domain.User;
 import com.money.management.auth.util.UserUtil;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = AuthApplication.class)
-@WebAppConfiguration
 public class UserServiceTest {
 
     @InjectMocks
@@ -31,6 +29,9 @@ public class UserServiceTest {
 
     @Mock
     private UserRepository repository;
+
+    @Mock
+    private ApplicationEventPublisher eventPublisher;
 
     private User user;
 

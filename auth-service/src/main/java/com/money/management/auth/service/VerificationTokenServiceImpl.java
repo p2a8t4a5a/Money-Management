@@ -51,7 +51,7 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
             return "Invalid Token !";
         }
 
-        if(verificationToken.getExpireDate().isAfter(LocalDateTime.now())) {
+        if(verificationToken.getExpireDate().isBefore(LocalDateTime.now())) {
             return "Verification toke has expired !";
         }
 
