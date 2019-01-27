@@ -70,8 +70,9 @@ export class AccountConnectionComponent extends AccountSection {
         user.password = this.createAccountForm.controls.password.value;
 
         this.authService.createUser(user).subscribe(
-            () => this.authService.obtainAccessToken(user),
-            error => this.displayMessage(error.error.message));
+            () => this.displaySuccessMessage("The user was created successfully ! \n \n A verification email has been sent to you, " +
+                "please confirm it before to login !"),
+            error => this.displayErrorMessage(error.error.message));
 
     }
 
@@ -82,7 +83,7 @@ export class AccountConnectionComponent extends AccountSection {
 
         this.authService.obtainAccessToken(user).subscribe(
             data => this.authService.saveCredentials(data, user.username),
-            error => this.displayMessage(error.error.error_description))
+            error => this.displayErrorMessage(error.error.error_description))
     }
 
     toggleFlip() {
@@ -96,7 +97,11 @@ export class AccountConnectionComponent extends AccountSection {
         return pass === confirmPass ? null : {notSame: true}
     }
 
-    private displayMessage(message: string) {
+    private displaySuccessMessage(message: string) {
+        this.toaster.success(message, 'Success');
+    }
+
+    private displayErrorMessage(message: string) {
         this.toaster.error(message, 'Error');
     }
 

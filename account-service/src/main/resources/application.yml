@@ -47,3 +47,10 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000

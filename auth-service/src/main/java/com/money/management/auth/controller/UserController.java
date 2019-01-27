@@ -18,8 +18,9 @@ public class UserController {
     private VerificationTokenService verificationTokenService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, VerificationTokenService verificationTokenService) {
         this.userService = userService;
+        this.verificationTokenService = verificationTokenService;
     }
 
     @RequestMapping(value = "/current", method = RequestMethod.GET)

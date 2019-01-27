@@ -23,7 +23,6 @@ public class User implements UserDetails {
     @Length(min = 6, max = 40)
     private String password;
 
-    @NotNull
     private Boolean enabled;
 
     @Override
