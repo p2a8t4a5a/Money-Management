@@ -1,4 +1,4 @@
-package com.money.management.auth.event;
+package com.money.management.auth.listener.event;
 
 import com.money.management.auth.domain.User;
 import org.springframework.context.ApplicationEvent;

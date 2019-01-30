@@ -1,9 +1,10 @@
-package com.money.management.auth.event;
+package com.money.management.auth.listener;
 
 import com.money.management.auth.AuthApplication;
 import com.money.management.auth.domain.EmailType;
 import com.money.management.auth.domain.User;
 import com.money.management.auth.domain.VerificationToken;
+import com.money.management.auth.listener.event.OnRegistrationCompleteEvent;
 import com.money.management.auth.service.EmailService;
 import com.money.management.auth.service.VerificationTokenService;
 import com.money.management.auth.util.UserUtil;

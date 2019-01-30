@@ -33,6 +33,10 @@ public class UserController {
         return verificationTokenService.enableUser(token);
     }
 
+    @RequestMapping(value = "/verification/resend", method = RequestMethod.POST)
+    public String resendMailVerification(@Valid @RequestBody String email) {
+        return verificationTokenService.resendMailVerification(email);
+    }
 
     @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
