@@ -33,8 +33,8 @@ public class UserController {
         return verificationTokenService.enableUser(token);
     }
 
-    @RequestMapping(value = "/verification/resend", method = RequestMethod.POST)
-    public String resendMailVerification(@Valid @RequestBody String email) {
+    @RequestMapping(value = "/verification/resend", method = RequestMethod.GET)
+    public String resendMailVerification(@RequestParam("email") String email) {
         return verificationTokenService.resendMailVerification(email);
     }
 

@@ -13,11 +13,13 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDateTime;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -38,6 +40,9 @@ public class VerificationTokenTest {
 
     @Captor
     private ArgumentCaptor<User> captor;
+
+    @Mock
+    private ApplicationEventPublisher eventPublisher;
 
     @Test
     public void shouldCreateUser() {
@@ -85,6 +90,43 @@ public class VerificationTokenTest {
         String message = executeEnableUser(verificationToken);
 
         assertThat(message, is("The user is already enabled !"));
+    }
+
+    @Test
+    public void resendVerificationTokenWhenUserNotExist() {
+        String email = "test@test.com";
+        when(userRepository.findUsersByUsername(email)).thenReturn(null);
+
+        String message = service.resendMailVerification(email);
+
+        assertThat(message, is("User doesn't exist, please register !"));
+    }
+
+    @Test
+    public void resendVerificationTokenWhenUserIsEnabled() {
+        String email = "test@test.com";
+        User user = UserUtil.getUser();
+        user.setEnabled(true);
+
+        when(userRepository.findUsersByUsername(email)).thenReturn(user);
+
+        String message = service.resendMailVerification(email);
+
+        assertThat(message, is("The user was already enabled !"));
+    }
+
+    @Test
+    public void resendVerificationToken() {
+        String email = "test@test.com";
+        User user = UserUtil.getUser();
+        VerificationToken verificationToken = getVerificationToken(LocalDateTime.now());
+
+        when(userRepository.findUsersByUsername(email)).thenReturn(user);
+        when(verificationTokenRepository.findByUserUsername(email)).thenReturn(verificationToken);
+
+        String message = service.resendMailVerification(email);
+
+        assertThat(message, is(nullValue()));
     }
 
     private String executeEnableUser(VerificationToken verificationToken) {

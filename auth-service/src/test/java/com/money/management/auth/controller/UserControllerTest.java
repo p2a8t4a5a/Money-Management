@@ -60,10 +60,6 @@ public class UserControllerTest {
 
     @Test
     public void shouldFailWhenUserIsNotValid() throws Exception {
-        User user = new User();
-        user.setUsername("t");
-        user.setPassword("p");
-
         mockMvc.perform(post("/users/create"))
                 .andExpect(status().isBadRequest());
     }
@@ -84,5 +80,18 @@ public class UserControllerTest {
                 .andExpect(content().string(message))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void shoudlResendVerificationEmail() throws Exception {
+        String message = "Test";
+        String email = "test@test.com";
+
+        when(verificationTokenService.resendMailVerification(email)).thenReturn(message);
+
+        mockMvc.perform(get("/users/verification/resend?email=" + email))
+                .andExpect(content().string(message))
+                .andExpect(status().isOk());
+    }
+
 
 }
