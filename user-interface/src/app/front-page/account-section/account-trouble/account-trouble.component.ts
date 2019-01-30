@@ -1,7 +1,9 @@
-import { ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountSection} from "../account-section";
+import {AuthenticationService} from "../../../service/authentication.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-account-trouble',
@@ -25,15 +27,18 @@ import {AccountSection} from "../account-section";
         ]),
     ]
 })
-export class AccountTroubleComponent extends AccountSection{
+export class AccountTroubleComponent extends AccountSection {
 
     public flip: String;
 
     public forgotPassword: FormGroup;
     public resendEmail: FormGroup;
 
-    constructor(private formBuilder: FormBuilder, cdr: ChangeDetectorRef) {
-        super(cdr);
+    constructor(private formBuilder: FormBuilder,
+                private authService: AuthenticationService,
+                toaster: ToastrService,
+                cdr: ChangeDetectorRef) {
+        super(cdr, toaster);
 
         this.flip = 'inactive';
 
@@ -51,7 +56,15 @@ export class AccountTroubleComponent extends AccountSection{
     }
 
     onResendEmailSubmit() {
+        let email = this.resendEmail.controls.email.value;
 
+        this.authService.resendVerificationEmail(email).subscribe(message => {
+            if (message == null || message == "") {
+                this.displaySuccessMessage("The verification email has been resent !");
+            } else {
+                this.displayErrorMessage(message.toString());
+            }
+        })
     }
 
     toggleFlip() {

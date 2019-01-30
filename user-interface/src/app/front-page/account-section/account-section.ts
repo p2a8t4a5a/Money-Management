@@ -1,4 +1,5 @@
 import {AfterViewInit, ChangeDetectorRef, HostListener, OnInit} from "@angular/core";
+import {ToastrService} from "ngx-toastr";
 
 export class AccountSection implements OnInit, AfterViewInit {
     public showSection: Boolean = false;
@@ -6,7 +7,7 @@ export class AccountSection implements OnInit, AfterViewInit {
     private windowHeight: number;
     private scrollPosition: number;
 
-    constructor(private cdr: ChangeDetectorRef) {
+    constructor(private cdr: ChangeDetectorRef, public toaster: ToastrService) {
     }
 
     ngOnInit() {
@@ -31,6 +32,14 @@ export class AccountSection implements OnInit, AfterViewInit {
         this.windowHeight = window.innerHeight;
 
         this.checkShowSection();
+    }
+
+    displaySuccessMessage(message: string) {
+        this.toaster.success(message, 'Success');
+    }
+
+    displayErrorMessage(message: string) {
+        this.toaster.error(message, 'Error');
     }
 
     private checkShowSection() {

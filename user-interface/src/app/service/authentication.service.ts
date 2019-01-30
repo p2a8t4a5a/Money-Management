@@ -12,6 +12,7 @@ export class AuthenticationService {
     private tokenRequest = 'api/uaa/oauth/token';
     private currentAccount = 'api/accounts/current';
     private createUserUrl = "api/accounts/create";
+    private resendVerificationEmailUrl = "api/uaa/users/verification/resend";
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
     }
@@ -26,6 +27,10 @@ export class AuthenticationService {
         };
 
         return this.http.post(this.tokenRequest, data, options);
+    }
+
+    public resendVerificationEmail(email: String): Observable<String> {
+        return this.http.get(this.resendVerificationEmailUrl + "?email=" + email, {responseType: 'text'});
     }
 
     public getCurrentAccount(): Observable<Account> {

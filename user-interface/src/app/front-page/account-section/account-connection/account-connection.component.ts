@@ -41,10 +41,12 @@ export class AccountConnectionComponent extends AccountSection {
 
     public matcher: PasswordErrorStateMatcher;
 
-    constructor(private fb: FormBuilder, private toaster: ToastrService, private authService: AuthenticationService,
+    constructor(private fb: FormBuilder,
+                private authService: AuthenticationService,
+                toaster: ToastrService,
                 cdr: ChangeDetectorRef) {
 
-        super(cdr);
+        super(cdr, toaster);
 
         this.flip = 'inactive';
         this.hidePassword1 = true;
@@ -96,15 +98,6 @@ export class AccountConnectionComponent extends AccountSection {
 
         return pass === confirmPass ? null : {notSame: true}
     }
-
-    private displaySuccessMessage(message: string) {
-        this.toaster.success(message, 'Success');
-    }
-
-    private displayErrorMessage(message: string) {
-        this.toaster.error(message, 'Error');
-    }
-
 }
 
 class PasswordErrorStateMatcher implements ErrorStateMatcher {
