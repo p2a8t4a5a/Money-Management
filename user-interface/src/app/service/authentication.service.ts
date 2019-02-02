@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Optional} from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {Observable} from "rxjs/internal/Observable";
 import {User} from "../domain/User";
+import {ResetPassword} from "../domain/ResetPassword";
 
 @Injectable({
     providedIn: 'root'
@@ -36,6 +37,11 @@ export class AuthenticationService {
 
     public forgotPassword(email: string): Observable<String> {
         return this.http.get(this.forgotPasswordUrl + "?email=" + email, {responseType: 'text'});
+    }
+
+
+    public resetPassword(resetPassword: ResetPassword): Observable<String> {
+        return this.http.put(this.forgotPasswordUrl, resetPassword, {responseType: 'text'});
     }
 
     public getCurrentAccount(): Observable<Account> {

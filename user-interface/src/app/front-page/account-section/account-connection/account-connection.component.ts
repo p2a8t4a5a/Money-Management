@@ -1,11 +1,11 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../../../domain/User';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from "@angular/forms";
-import {ErrorStateMatcher} from "@angular/material";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../service/authentication.service";
 import {ToastrService} from "ngx-toastr";
 import {AccountSection} from "../account-section";
+import {PasswordErrorStateMatcher} from "../../../util/password-error-state-matcher";
 
 @Component({
     selector: 'app-account-connection',
@@ -97,14 +97,5 @@ export class AccountConnectionComponent extends AccountSection {
         let confirmPass = group.controls.repeatPassword.value;
 
         return pass === confirmPass ? null : {notSame: true}
-    }
-}
-
-class PasswordErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-        const invalidCtrl = !!(control && control.invalid && control.parent.dirty);
-        const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
-
-        return (invalidCtrl || invalidParent);
     }
 }

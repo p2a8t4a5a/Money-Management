@@ -19,6 +19,7 @@ import {DateFormatPipe} from "./pipe/DateFormatPipe";
 import { SocialMediaConnectionComponent } from './front-page/account-section/social-media-connection/social-media-connection.component';
 import { AccountSectionComponent } from './front-page/account-section/account-section.component';
 import { AccountTroubleComponent } from './front-page/account-section/account-trouble/account-trouble.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
     imports: [
@@ -46,7 +47,8 @@ import { AccountTroubleComponent } from './front-page/account-section/account-tr
         DateFormatPipe,
         SocialMediaConnectionComponent,
         AccountSectionComponent,
-        AccountTroubleComponent
+        AccountTroubleComponent,
+        ForgotPasswordComponent
     ],
     bootstrap: [AppComponent],
     providers: [

@@ -59,7 +59,7 @@ forgot-password:
   email:
     subject: "Forgot Password email"
     text: "Hello, \n Bellow you have the link to reset your password, \n {0} \r\n\r\nCheers,\r\nMoney Management team"
-    url: "http://localhost:4000/reset-password?token="
+    url: "http://localhost:4200/reset-password?token="
 
 hystrix:
   command:
