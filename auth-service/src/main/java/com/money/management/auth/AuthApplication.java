@@ -52,7 +52,7 @@ public class AuthApplication {
 
         @Override
         public void configure(WebSecurity webSecurity) {
-            webSecurity.ignoring().antMatchers("/users/verification**", "/users/verification/resend**", "/password/forgot**");
+            webSecurity.ignoring().antMatchers("/users/verification**", "/users/verification/resend**", "/users/password/forgot**");
         }
 
         @Override

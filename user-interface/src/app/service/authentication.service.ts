@@ -13,6 +13,7 @@ export class AuthenticationService {
     private currentAccount = 'api/accounts/current';
     private createUserUrl = "api/accounts/create";
     private resendVerificationEmailUrl = "api/uaa/users/verification/resend";
+    private forgotPasswordUrl = "api/uaa/users/password/forgot";
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
     }
@@ -31,6 +32,10 @@ export class AuthenticationService {
 
     public resendVerificationEmail(email: String): Observable<String> {
         return this.http.get(this.resendVerificationEmailUrl + "?email=" + email, {responseType: 'text'});
+    }
+
+    public forgotPassword(email: string): Observable<String> {
+        return this.http.get(this.forgotPasswordUrl + "?email=" + email, {responseType: 'text'});
     }
 
     public getCurrentAccount(): Observable<Account> {
