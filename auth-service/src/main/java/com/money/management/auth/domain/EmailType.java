@@ -1,7 +1,8 @@
 package com.money.management.auth.domain;
 
 public enum EmailType {
-    VERIFICATION("verification.email.subject", "verification.email.text", "verification.email.url");
+    VERIFICATION("verification.email.subject", "verification.email.text", "verification.email.url"),
+    FORGOT_PASSWORD("forgot-password.email.subject", "forgot-password.email.text", "forgot-password.email.url");
 
     private String subject;
     private String text;
