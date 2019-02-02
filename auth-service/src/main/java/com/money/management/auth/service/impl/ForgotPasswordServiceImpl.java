@@ -1,6 +1,7 @@
 package com.money.management.auth.service.impl;
 
 import com.money.management.auth.domain.ForgotPasswordToken;
+import com.money.management.auth.domain.ResetPassword;
 import com.money.management.auth.domain.User;
 import com.money.management.auth.listener.event.OnForgotPasswordCompleteEvent;
 import com.money.management.auth.repository.ForgotPasswordTokenRepository;
@@ -8,9 +9,11 @@ import com.money.management.auth.repository.UserRepository;
 import com.money.management.auth.service.ForgotPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,14 +22,17 @@ public class ForgotPasswordServiceImpl implements ForgotPasswordService {
     private UserRepository userRepository;
     private ApplicationEventPublisher eventPublisher;
     private ForgotPasswordTokenRepository repository;
+    private PasswordEncoder encoder;
 
     @Autowired
     public ForgotPasswordServiceImpl(UserRepository userRepository,
                                      ApplicationEventPublisher eventPublisher,
+                                     PasswordEncoder encoder,
                                      ForgotPasswordTokenRepository repository) {
         this.userRepository = userRepository;
         this.eventPublisher = eventPublisher;
         this.repository = repository;
+        this.encoder = encoder;
     }
 
     @Override
@@ -55,6 +61,25 @@ public class ForgotPasswordServiceImpl implements ForgotPasswordService {
         return token;
     }
 
+    @Override
+    public String resetPassword(ResetPassword resetPassword) {
+        Optional<ForgotPasswordToken> optional = repository.findById(resetPassword.getToken());
+
+        if (optional.isEmpty()) {
+            return "The token is invalid !";
+        }
+
+        ForgotPasswordToken token = optional.get();
+
+        if (token.getExpireDate().isBefore(LocalDateTime.now())) {
+            return "Forgot password toke has expired !";
+        }
+
+        updateUserPassword(token.getUser(), resetPassword.getPassword());
+
+        return "The password was changed successfully !";
+    }
+
     private String verifyUser(User user) {
         if (user == null) {
             return "User doesn't exist, please register !";
@@ -65,6 +90,11 @@ public class ForgotPasswordServiceImpl implements ForgotPasswordService {
         }
 
         return null;
+    }
+
+    private void updateUserPassword(User user, String password) {
+        user.setPassword(encoder.encode(password));
+        userRepository.save(user);
     }
 
 }

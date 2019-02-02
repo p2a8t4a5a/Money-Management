@@ -2,6 +2,7 @@ package com.money.management.auth.service;
 
 import com.money.management.auth.AuthApplication;
 import com.money.management.auth.domain.ForgotPasswordToken;
+import com.money.management.auth.domain.ResetPassword;
 import com.money.management.auth.domain.User;
 import com.money.management.auth.repository.ForgotPasswordTokenRepository;
 import com.money.management.auth.repository.UserRepository;
@@ -13,9 +14,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -37,6 +40,9 @@ public class ForgotPasswordServiceTest {
 
     @Mock
     private ApplicationEventPublisher eventPublisher;
+
+    @Mock
+    private PasswordEncoder encoder;
 
     @Test
     public void shouldNotSendEmailForUnregisteredUser() {
@@ -75,6 +81,50 @@ public class ForgotPasswordServiceTest {
 
         assertThat(token.getUser(), is(user));
         assertThat(token.getExpireDate().getDayOfYear(), is(LocalDateTime.now().plusDays(1).getDayOfYear()));
+    }
+
+    @Test
+    public void shouldNotResetPasswordForInvalidToken() {
+        ResetPassword resetPassword = getResetPassword();
+
+        when(repository.findById(resetPassword.getToken())).thenReturn(Optional.empty());
+
+        assertThat(service.resetPassword(resetPassword), is("The token is invalid !"));
+    }
+
+    @Test
+    public void shouldNotResetPasswordForExpiredToken() {
+        ResetPassword resetPassword = getResetPassword();
+
+        ForgotPasswordToken token = new ForgotPasswordToken();
+        token.setExpireDate(LocalDateTime.now().plusDays(-1));
+
+        when(repository.findById(resetPassword.getToken())).thenReturn(Optional.of(token));
+
+        assertThat(service.resetPassword(resetPassword), is("Forgot password toke has expired !"));
+    }
+
+    @Test
+    public void shouldResetPassword() {
+        ResetPassword resetPassword = getResetPassword();
+        User user = UserUtil.getUser();
+
+        ForgotPasswordToken token = new ForgotPasswordToken();
+        token.setExpireDate(LocalDateTime.now().plusDays(1));
+        token.setUser(user);
+        token.setToken(resetPassword.getToken());
+
+        when(repository.findById(resetPassword.getToken())).thenReturn(Optional.of(token));
+
+        assertThat(service.resetPassword(resetPassword), is("The password was changed successfully !"));
+    }
+
+    private ResetPassword getResetPassword() {
+        ResetPassword resetPassword = new ResetPassword();
+        resetPassword.setToken("12345");
+        resetPassword.setPassword("12345");
+
+        return resetPassword;
     }
 
 }

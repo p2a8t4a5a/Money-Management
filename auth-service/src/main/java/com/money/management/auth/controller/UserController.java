@@ -1,5 +1,6 @@
 package com.money.management.auth.controller;
 
+import com.money.management.auth.domain.ResetPassword;
 import com.money.management.auth.domain.User;
 import com.money.management.auth.service.ForgotPasswordService;
 import com.money.management.auth.service.UserService;
@@ -46,6 +47,11 @@ public class UserController {
     @RequestMapping(value = "/password/forgot", method = RequestMethod.GET)
     public String sendForgotPasswordMail(@RequestParam("email") String email) {
         return forgotPasswordService.sendEmail(email);
+    }
+
+    @RequestMapping(value = "/password/forgot", method = RequestMethod.PUT)
+    public String resetPassword(@Valid @RequestBody ResetPassword resetPassword) {
+        return forgotPasswordService.resetPassword(resetPassword);
     }
 
     @PreAuthorize("#oauth2.hasScope('server')")

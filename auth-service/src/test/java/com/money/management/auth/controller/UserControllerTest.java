@@ -1,7 +1,9 @@
 package com.money.management.auth.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.money.management.auth.AuthApplication;
+import com.money.management.auth.domain.ResetPassword;
 import com.money.management.auth.domain.User;
 import com.money.management.auth.service.ForgotPasswordService;
 import com.money.management.auth.service.UserService;
@@ -22,8 +24,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -97,7 +98,6 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
-
     @Test
     public void shouldSendForgotPasswordUrl() throws Exception {
         when(forgotPasswordService.sendEmail(EMAIL)).thenReturn(MESSAGE);
@@ -107,4 +107,17 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void shouldResetPassword() throws Exception {
+        ResetPassword resetPassword = new ResetPassword();
+        resetPassword.setPassword("password01");
+        resetPassword.setToken("12345");
+
+        when(forgotPasswordService.resetPassword(resetPassword)).thenReturn(MESSAGE);
+
+        String json = mapper.writeValueAsString(resetPassword);
+
+        mockMvc.perform(put("/users/password/forgot").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk());
+    }
 }
