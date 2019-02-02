@@ -1,6 +1,7 @@
-package com.money.management.auth.service;
+package com.money.management.auth.service.impl;
 
 import com.money.management.auth.domain.EmailType;
+import com.money.management.auth.service.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

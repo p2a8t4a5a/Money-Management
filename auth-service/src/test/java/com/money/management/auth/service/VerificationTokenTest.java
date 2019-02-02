@@ -5,6 +5,7 @@ import com.money.management.auth.domain.User;
 import com.money.management.auth.domain.VerificationToken;
 import com.money.management.auth.repository.UserRepository;
 import com.money.management.auth.repository.VerificationTokenRepository;
+import com.money.management.auth.service.impl.VerificationTokenServiceImpl;
 import com.money.management.auth.util.UserUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;

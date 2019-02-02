@@ -1,6 +1,7 @@
 package com.money.management.auth.controller;
 
 import com.money.management.auth.domain.User;
+import com.money.management.auth.service.ForgotPasswordService;
 import com.money.management.auth.service.UserService;
 import com.money.management.auth.service.VerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,15 @@ public class UserController {
 
     private UserService userService;
     private VerificationTokenService verificationTokenService;
+    private ForgotPasswordService forgotPasswordService;
 
     @Autowired
-    public UserController(UserService userService, VerificationTokenService verificationTokenService) {
+    public UserController(UserService userService,
+                          VerificationTokenService verificationTokenService,
+                          ForgotPasswordService forgotPasswordService) {
         this.userService = userService;
         this.verificationTokenService = verificationTokenService;
+        this.forgotPasswordService = forgotPasswordService;
     }
 
     @RequestMapping(value = "/current", method = RequestMethod.GET)
@@ -36,6 +41,11 @@ public class UserController {
     @RequestMapping(value = "/verification/resend", method = RequestMethod.GET)
     public String resendMailVerification(@RequestParam("email") String email) {
         return verificationTokenService.resendMailVerification(email);
+    }
+
+    @RequestMapping(value = "/password/forgot", method = RequestMethod.GET)
+    public String sendForgotPasswordMail(@RequestParam("email") String email) {
+        return forgotPasswordService.sendEmail(email);
     }
 
     @PreAuthorize("#oauth2.hasScope('server')")

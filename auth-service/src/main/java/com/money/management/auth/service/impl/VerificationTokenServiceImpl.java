@@ -1,10 +1,11 @@
-package com.money.management.auth.service;
+package com.money.management.auth.service.impl;
 
 import com.money.management.auth.domain.User;
 import com.money.management.auth.domain.VerificationToken;
 import com.money.management.auth.listener.event.OnResendVerificationEmailCompleteEvent;
 import com.money.management.auth.repository.UserRepository;
 import com.money.management.auth.repository.VerificationTokenRepository;
+import com.money.management.auth.service.VerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;

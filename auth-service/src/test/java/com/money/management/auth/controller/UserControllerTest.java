@@ -3,6 +3,7 @@ package com.money.management.auth.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.money.management.auth.AuthApplication;
 import com.money.management.auth.domain.User;
+import com.money.management.auth.service.ForgotPasswordService;
 import com.money.management.auth.service.UserService;
 import com.money.management.auth.service.VerificationTokenService;
 import com.money.management.auth.util.UserUtil;
@@ -29,6 +30,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AuthApplication.class)
 @WebAppConfiguration
 public class UserControllerTest {
+
+    private static final String MESSAGE = "TEST";
+    private static final String EMAIL = "test@test.com";
+
     private static final ObjectMapper mapper = new ObjectMapper();
 
     @InjectMocks
@@ -39,6 +44,9 @@ public class UserControllerTest {
 
     @Mock
     private VerificationTokenService verificationTokenService;
+
+    @Mock
+    private ForgotPasswordService forgotPasswordService;
 
     private MockMvc mockMvc;
 
@@ -73,25 +81,30 @@ public class UserControllerTest {
 
     @Test
     public void shouldReturnConfirmationMessage() throws Exception {
-        String message = "The user was enabled, you can now login in the application !";
-        when(verificationTokenService.enableUser("12345")).thenReturn(message);
+        when(verificationTokenService.enableUser("12345")).thenReturn(MESSAGE);
 
         mockMvc.perform(get("/users/verification?token=12345"))
-                .andExpect(content().string(message))
+                .andExpect(content().string(MESSAGE))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void shoudlResendVerificationEmail() throws Exception {
-        String message = "Test";
-        String email = "test@test.com";
+    public void shouldResendVerificationEmail() throws Exception {
+        when(verificationTokenService.resendMailVerification(EMAIL)).thenReturn(MESSAGE);
 
-        when(verificationTokenService.resendMailVerification(email)).thenReturn(message);
-
-        mockMvc.perform(get("/users/verification/resend?email=" + email))
-                .andExpect(content().string(message))
+        mockMvc.perform(get("/users/verification/resend?email=" + EMAIL))
+                .andExpect(content().string(MESSAGE))
                 .andExpect(status().isOk());
     }
 
+
+    @Test
+    public void shouldSendForgotPasswordUrl() throws Exception {
+        when(forgotPasswordService.sendEmail(EMAIL)).thenReturn(MESSAGE);
+
+        mockMvc.perform(get("/users/password/forgot?email=" + EMAIL))
+                .andExpect(content().string(MESSAGE))
+                .andExpect(status().isOk());
+    }
 
 }

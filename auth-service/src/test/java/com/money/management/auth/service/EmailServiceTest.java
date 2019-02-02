@@ -2,6 +2,7 @@ package com.money.management.auth.service;
 
 import com.money.management.auth.AuthApplication;
 import com.money.management.auth.domain.EmailType;
+import com.money.management.auth.service.impl.EmailServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
