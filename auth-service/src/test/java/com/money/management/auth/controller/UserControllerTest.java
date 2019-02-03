@@ -120,4 +120,15 @@ public class UserControllerTest {
         mockMvc.perform(put("/users/password/forgot").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void shouldResetUserPassword() throws Exception {
+        String email = "test@test.com";
+        String password = "12345";
+
+        mockMvc.perform(post("/users/change/password").contentType(MediaType.TEXT_PLAIN_VALUE).content(password)
+                .principal(new UserPrincipal(email)))
+                .andExpect(status().isOk());
+    }
+
 }

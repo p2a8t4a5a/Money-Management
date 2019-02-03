@@ -53,4 +53,16 @@ public class UserServiceTest {
         when(repository.findUsersByUsername(user.getUsername())).thenReturn(new User());
         userService.create(user);
     }
+
+    @Test
+    public void shouldUpdateUserPassword() {
+        User user = UserUtil.getUser();
+
+        when(repository.findUsersByUsername(user.getUsername())).thenReturn(user);
+
+        userService.changePassword(user.getUsername(), "12345");
+
+        verify(repository, times(1)).save(user);
+    }
+
 }

@@ -40,6 +40,13 @@ public class UserServiceImpl implements UserService {
         sendVerificationEmail(user);
     }
 
+    @Override
+    public void changePassword(String name, String password) {
+        User user = repository.findUsersByUsername(name);
+        user.setPassword(encoder.encode(password));
+        repository.save(user);
+    }
+
     private void sendVerificationEmail(User user) {
         eventPublisher.publishEvent(new OnRegistrationCompleteEvent(user));
     }

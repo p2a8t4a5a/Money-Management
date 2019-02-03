@@ -54,6 +54,11 @@ public class UserController {
         return forgotPasswordService.resetPassword(resetPassword);
     }
 
+    @RequestMapping(value = "/change/password", method = RequestMethod.POST)
+    public void changePassword(Principal principal, @Valid @RequestBody String password) {
+        userService.changePassword(principal.getName(), password);
+    }
+
     @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public void createUser(@Valid @RequestBody User user) {
