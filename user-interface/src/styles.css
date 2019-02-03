@@ -1023,7 +1023,7 @@ input.mat-input-element {
     height: 190px;
 }
 
-#bottomsavingsline {
+#bottomsavingsline, #remembermediv {
     position: relative;
     display: block;
     width: 100%;
@@ -1063,7 +1063,7 @@ mat-icon.savingsvalue {
 }
 
 /* TOGGLES */
-#deposit + label.button {
+#deposit + label.button, #rememberme + label.button {
     position: absolute;
     top: 16px;
 }
@@ -1073,23 +1073,23 @@ mat-icon.savingsvalue {
     bottom: -100px;
 }
 
-input#deposit, input#capitalization {
+input.checkbox {
     max-height: 0;
     max-width: 0;
     display: none;
 }
 
-input#deposit + label.button, input#capitalization + label.button {
+input.checkbox + label.button {
     display: block;
     position: absolute;
     right: 32px;
-    box-shadow: inset 0 0 0px 1px #e3e3e3;
+    box-shadow: inset 0 0 0 1px #e3e3e3;
     height: 21px;
     width: 33px;
     border-radius: 15px;
 }
 
-input#deposit + label.button:before, input#capitalization + label.button:before {
+input.checkbox + label.button:before {
     content: "";
     position: absolute;
     display: block;
@@ -1105,7 +1105,7 @@ input#deposit + label.button:before, input#capitalization + label.button:before 
     transition: 0.2s ease-out;
 }
 
-input#deposit + label.button:after, input#capitalization + label.button:after {
+input.checkbox + label.button:after {
     content: "";
     position: absolute;
     display: block;
@@ -1115,7 +1115,7 @@ input#deposit + label.button:after, input#capitalization + label.button:after {
     left: 0px;
     border-radius: 15px;
     background: white;
-    box-shadow: inset 0 0 0 1px #e0e0e0, 1px 1px 2px #ebebeb;
+    box-shadow: inset 0 0 0 1px #1E90FF, 1px 1px 2px #1E90FF;
     -moz-transition: 0.2s ease-out;
     -o-transition: 0.2s ease-out;
     -ms-transition: 0.2s ease-out;
@@ -1125,14 +1125,14 @@ input#deposit + label.button:after, input#capitalization + label.button:after {
 
 /* END OF TOGGLES */
 
-input#deposit:checked + label.button:before, input#capitalization:checked + label.button:before {
+input.checkbox:checked + label.button:before {
     width: 33px;
     height: 21px;
-    background: gainsboro;
+    background: #1E90FF;
     box-shadow: inset 0 0 0 1px black;
 }
 
-input#deposit:checked + label.button:after, input#capitalization:checked + label.button:after {
+input.checkbox:checked + label.button:after {
     left: 13px;
     box-shadow: inset 0 0 0 1px black, 1px 1px 1px black;
 }
@@ -1163,6 +1163,12 @@ input#deposit:checked + label.button:after, input#capitalization:checked + label
     position: absolute;
     left: 25px;
     top: 20px;
+}
+
+.rememberme-label {
+    position: absolute;
+    bottom: 40px;
+    left: 25px;
 }
 
 .savingscapital, .savingspercent {

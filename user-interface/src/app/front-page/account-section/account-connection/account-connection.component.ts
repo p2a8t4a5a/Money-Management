@@ -6,6 +6,7 @@ import {AuthenticationService} from "../../../service/authentication.service";
 import {ToastrService} from "ngx-toastr";
 import {AccountSection} from "../account-section";
 import {PasswordErrorStateMatcher} from "../../../util/password-error-state-matcher";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-account-connection',
@@ -43,27 +44,15 @@ export class AccountConnectionComponent extends AccountSection {
 
     constructor(private fb: FormBuilder,
                 private authService: AuthenticationService,
+                private router: Router,
                 toaster: ToastrService,
                 cdr: ChangeDetectorRef) {
 
         super(cdr, toaster);
 
-        this.flip = 'inactive';
-        this.hidePassword1 = true;
-        this.hidePassword2 = true;
-        this.hidePassword3 = true;
-        this.matcher = new PasswordErrorStateMatcher();
-
-        this.loginForm = fb.group({
-            email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
-            password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]]
-        });
-
-        this.createAccountForm = fb.group({
-            email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
-            password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
-            repeatPassword: ['']
-        }, {validator: this.checkPasswords});
+        this.checkIfUserISLogin();
+        this.initVariables();
+        this.initForms();
     }
 
     onSubmitCreateAccount() {
@@ -83,8 +72,10 @@ export class AccountConnectionComponent extends AccountSection {
         user.username = this.loginForm.controls.email.value;
         user.password = this.loginForm.controls.password.value;
 
+        console.log(this.loginForm.controls.rememberMe.value);
+
         this.authService.obtainAccessToken(user).subscribe(
-            data => this.authService.saveCredentials(data, user.username),
+            data => this.authService.saveCredentials(data, user.username, this.loginForm.controls.rememberMe.value),
             error => this.displayErrorMessage(error.error.error_description))
     }
 
@@ -98,4 +89,33 @@ export class AccountConnectionComponent extends AccountSection {
 
         return pass === confirmPass ? null : {notSame: true}
     }
+
+    private initVariables() {
+        this.flip = 'inactive';
+        this.hidePassword1 = true;
+        this.hidePassword2 = true;
+        this.hidePassword3 = true;
+        this.matcher = new PasswordErrorStateMatcher();
+    }
+
+    private initForms() {
+        this.loginForm = this.fb.group({
+            email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
+            password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
+            rememberMe: [false]
+        });
+
+        this.createAccountForm = this.fb.group({
+            email: ['', [Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(64)]],
+            password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]],
+            repeatPassword: ['']
+        }, {validator: this.checkPasswords});
+    }
+
+    private checkIfUserISLogin() {
+        if (this.authService.isUserLogin()) {
+            this.router.navigate(['/statistics'])
+        }
+    }
+
 }

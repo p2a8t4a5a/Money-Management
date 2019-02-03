@@ -13,7 +13,8 @@ import {
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule
 } from '@angular/material';
 
 const MATERIAL_MODULES = [
@@ -29,7 +30,8 @@ const MATERIAL_MODULES = [
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule
 ];
 
 @NgModule({

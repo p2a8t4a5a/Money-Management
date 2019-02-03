@@ -121,7 +121,7 @@
                 </mat-form-field>
             </div>
             <div id="bottomsavingsline">
-                <input type="checkbox" name="deposit" id="deposit" [(ngModel)]="account.saving.deposit">
+                <input type="checkbox" name="deposit" id="deposit" class="checkbox" [(ngModel)]="account.saving.deposit">
                 <label for="deposit" class="button"></label>
                 <label for="deposit" class="savingsdeposit">Accumulation account</label>
                 <span class="savingspercent">Interest</span>
@@ -134,7 +134,7 @@
                            [(ngModel)]="account.saving.interest" data-a-sign=" %" data-w-empty="sign" data-p-sign="s"
                            data-a-pad="false"/>
                 </mat-form-field>
-                <input type="checkbox" name="capitalization" id="capitalization"
+                <input type="checkbox" name="capitalization" id="capitalization" class="checkbox"
                        [(ngModel)]="account.saving.capitalization">
                 <label for="capitalization" class="button"></label>
                 <label for="capitalization" class="savingscapital">Monthly capitalization</label>

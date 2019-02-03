@@ -28,7 +28,7 @@
                                 <input matInput placeholder="Password" formControlName="password"
                                        [type]="hidePassword1 ? 'password': 'text'"
                                        class="form-control" autocomplete="off">
-                                <button mat-icon-button matSuffix
+                                <button mat-icon-button matSuffix type="button"
                                         [matTooltip]="(hidePassword1 ? 'Show' : 'Hide') + ' Password'"
                                         (click)="hidePassword1 = !hidePassword1">
                                     <mat-icon>{{hidePassword1 ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -44,7 +44,11 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-
+                        <div id="remembermediv">
+                            <input type="checkbox" formControlName="rememberMe" id="rememberme" class="checkbox">
+                            <label for="rememberme" class="button"></label>
+                            <h3 class="rememberme-label">Remember Me</h3>
+                        </div>
                         <div class="space">
                             <button type="submit" class="btn btn-primary btn-lg"
                                     [disabled]="loginForm.invalid">Login
@@ -88,7 +92,7 @@
                                 <input matInput placeholder="Password" formControlName="password"
                                        [type]="hidePassword2 ? 'password': 'text'"
                                        class="form-control" autocomplete="off">
-                                <button mat-icon-button matSuffix
+                                <button mat-icon-button matSuffix type="button"
                                         [matTooltip]="(hidePassword2 ? 'Show' : 'Hide') + ' Password'"
                                         (click)="hidePassword2 = !hidePassword2">
                                     <mat-icon>{{hidePassword2 ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -111,7 +115,7 @@
                                        [type]="hidePassword3 ? 'password': 'text'"
                                        class="form-control" autocomplete="off"
                                        [errorStateMatcher]="matcher">
-                                <button mat-icon-button matSuffix
+                                <button mat-icon-button matSuffix type="button"
                                         [matTooltip]="(hidePassword3 ? 'Show' : 'Hide') + ' Password'"
                                         (click)="hidePassword3 = !hidePassword3">
                                     <mat-icon>{{hidePassword3 ? 'visibility_off' : 'visibility'}}</mat-icon>

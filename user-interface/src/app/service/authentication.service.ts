@@ -1,4 +1,4 @@
-import {Injectable, Optional} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
@@ -84,8 +84,14 @@ export class AuthenticationService {
         localStorage.clear();
     }
 
-    public saveCredentials(token, username) {
-        let expireDate = new Date().getTime() + (1000 * token.expires_in);
+    public saveCredentials(token, username, rememberMe: Boolean) {
+        let expireDate;
+
+        if(rememberMe) {
+            expireDate = new Date(Date.now() + (1000 * token.expires_in));
+        } else {
+            expireDate = Date.now();
+        }
 
         this.cookieService.set("access_token", token.access_token, expireDate);
         this.cookieService.set("username", username, expireDate);
