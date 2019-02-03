@@ -50,6 +50,10 @@ export class StatisticsComponent implements OnInit {
         this.router.navigate(['/account']);
     }
 
+    public navigateToSettings() {
+        this.router.navigate(['/settings']);
+    }
+
     public onSelect(event) {
         this.datePoints.forEach(point => {
             let date = this.dateFormatPipe.transform(point.id.date);

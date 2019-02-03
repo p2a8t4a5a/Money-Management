@@ -15,6 +15,7 @@ export class AuthenticationService {
     private createUserUrl = "api/accounts/create";
     private resendVerificationEmailUrl = "api/uaa/users/verification/resend";
     private forgotPasswordUrl = "api/uaa/users/password/forgot";
+    private changePasswordUrl = "api/uaa/users/change/password";
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
     }
@@ -29,6 +30,17 @@ export class AuthenticationService {
         };
 
         return this.http.post(this.tokenRequest, data, options);
+    }
+
+    public updatePassword(password: String): Observable<void> {
+        let token = this.getOauthToken();
+
+        let headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+        let options = {
+            headers: headers
+        };
+
+        return this.http.post<void>(this.changePasswordUrl, password, options);
     }
 
     public resendVerificationEmail(email: String): Observable<String> {
@@ -87,7 +99,7 @@ export class AuthenticationService {
     public saveCredentials(token, username, rememberMe: Boolean) {
         let expireDate;
 
-        if(rememberMe) {
+        if (rememberMe) {
             expireDate = new Date(Date.now() + (1000 * token.expires_in));
         } else {
             expireDate = Date.now();

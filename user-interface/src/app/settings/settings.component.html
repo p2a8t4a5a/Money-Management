@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="sidenav">
+        <div class="add" (click)="navigateToAccount()">
+            <img src="../../assets/img/add.svg">
+            <div class="add-text">
+                ADD
+            </div>
+        </div>
+        <div class="statistics" (click)="navigateToStatistics()">
+            <img src="../../assets/img/statistics.svg">
+            <div class="statistics-text">
+                STATISTICS
+            </div>
+        </div>
+        <div class="logout" (click)="logout()">
+            <img src="../../assets/img/logout.svg">
+            <div class="logout-text">
+                OUT
+            </div>
+        </div>
+    </div>
+
+    <h2 class="black">Reset Password</h2>
+    <br/>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 pad-sig-in">
+            <form (ngSubmit)="onSubmitChangePassword()" [formGroup]="changePasswordForm"
+                  autocomplete="off">
+
+                <div class="form-group">
+                    <mat-form-field class="form-field">
+                        <mat-icon matPrefix>vpn_key</mat-icon>
+                        <input matInput placeholder="Password" formControlName="password"
+                               [type]="hidePassword1 ? 'password': 'text'"
+                               class="form-control" autocomplete="off">
+                        <button mat-icon-button matSuffix
+                                [matTooltip]="(hidePassword1 ? 'Show' : 'Hide') + ' Password'"
+                                (click)="hidePassword1 = !hidePassword1">
+                            <mat-icon>{{hidePassword1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="changePasswordForm.get('password')?.hasError('required')">
+                            This is required.
+                        </mat-error>
+                        <mat-error *ngIf="changePasswordForm.get('password')?.hasError('maxlength')">
+                            The password must be maximum 40 characters long.
+                        </mat-error>
+                        <mat-error *ngIf="changePasswordForm.get('password')?.hasError('minlength')">
+                            The password must be at least 6 characters long.
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
+                        <mat-icon matPrefix>vpn_key</mat-icon>
+                        <input matInput placeholder="Repeat Password"
+                               formControlName="repeatPassword"
+                               [type]="hidePassword2 ? 'password': 'text'"
+                               class="form-control" autocomplete="off"
+                               [errorStateMatcher]="matcher">
+                        <button mat-icon-button matSuffix
+                                [matTooltip]="(hidePassword2 ? 'Show' : 'Hide') + ' Password'"
+                                (click)="hidePassword2 = !hidePassword2">
+                            <mat-icon>{{hidePassword2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="changePasswordForm.hasError('notSame')">
+                            Passwords do not match
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="space">
+                    <button type="submit" class="btn btn-primary btn-lg"
+                            [disabled]="changePasswordForm.invalid">Submit
+                    </button>
+                    <button type="button" class="btn btn-primary btn-lg"
+                            (click)="goToLogin()">Login
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

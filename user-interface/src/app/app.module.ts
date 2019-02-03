@@ -20,6 +20,7 @@ import { SocialMediaConnectionComponent } from './front-page/account-section/soc
 import { AccountSectionComponent } from './front-page/account-section/account-section.component';
 import { AccountTroubleComponent } from './front-page/account-section/account-trouble/account-trouble.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
     imports: [
@@ -48,7 +49,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
         SocialMediaConnectionComponent,
         AccountSectionComponent,
         AccountTroubleComponent,
-        ForgotPasswordComponent
+        ForgotPasswordComponent,
+        SettingsComponent
     ],
     bootstrap: [AppComponent],
     providers: [

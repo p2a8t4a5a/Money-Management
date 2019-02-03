@@ -1681,3 +1681,29 @@ ngx-charts-legend {
     padding-right: 70px;
     padding-left: 70px;
 }
+
+.settings, .statistics {
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    right: 19px;
+    top: 40%;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.settings:hover, .statistics:hover {
+    opacity: 1;
+}
+
+.settings-text {
+    font-size: 15px;
+    right: 10px;
+    position: relative;
+}
+
+.statistics-text {
+    font-size: 15px;
+    right: 15px;
+    position: relative;
+}
